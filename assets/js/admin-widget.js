@@ -93,6 +93,8 @@ function otwAutoComplete() {
         minLength: 2,
 
         source: function (request, response) {
+
+					console.log(request.term);
             // delegate back to autocomplete, but extract the last term
             response(jQuery.ui.autocomplete.filter(
                 citiesJSON.cities, extractLast(request.term)));

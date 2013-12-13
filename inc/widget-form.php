@@ -60,11 +60,10 @@
         <input class="widefat otw-auto-complete-2" id="<?php echo $this->get_field_id('restaurant_names'); ?>" name="<?php echo $this->get_field_name('restaurant_names'); ?>" type="text" placeholder="<?php _e('Type Restaurant Name', 'otw'); ?>"/>
     </p>
 
-
     <!-- Restaurant IDs -->
     <p style="margin:0;padding:0;">
         <label for="<?php echo $this->get_field_id('restaurant_ids'); ?>"><?php _e('Open Table Restaurants:', 'otw'); ?>
-            <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e('Use the Restaurant ID lookup field above to find restaurants and their corresponding IDs. Drag-and-drop the restaurants below to order how they appear in the widget select.', 'otw'); ?>" class="tooltip-info" width="16" height="16"/></label>
+            <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e('Use the Restaurant ID lookup field above to find restaurants and their corresponding IDs. Drag-and-drop the restaurants below to order how they appear in the widget select. Use this field to fine tune as needed.', 'otw'); ?>" class="tooltip-info" width="16" height="16"/></label>
     </p>
 
 
@@ -100,7 +99,7 @@
 
     <!-- Lookup City -->
     <p>
-        <label for="<?php echo $this->get_field_id('lookup_city'); ?>"><?php _e('City', 'otw'); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e('Add user lookup based on Open Table restaurant cities.', 'otw'); ?>" class="tooltip-info" width="16" height="16"/></label>
+        <label for="<?php echo $this->get_field_id('lookup_city'); ?>"><?php _e('City', 'otw'); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e('Add a user restaurant lookup based on Open Table restaurant cities. Type the name of the cities you wish to display below separated by commas.', 'otw'); ?>" class="tooltip-info" width="16" height="16"/></label>
         <input class="widefat otw-auto-complete-3" id="<?php echo $this->get_field_id('lookup_city'); ?>" name="<?php echo $this->get_field_name('lookup_city'); ?>" type="text" placeholder="<?php _e('Type City Name', 'otw'); ?>" value="<?php echo $lookupCity; ?>"/>
     </p>
 
@@ -118,7 +117,7 @@
         <label for="<?php echo $this->get_field_id('widget_style'); ?>"><?php _e('Widget Theme'); ?>:</label>
         <select name="<?php echo $this->get_field_name('widget_style'); ?>" id="#" class="widefat profield">
             <?php
-            $options = array(__('Bare Bones', 'otw'), __('Minimal Light', 'otw'), __('Minimal Dark', 'otw'));
+            $options = array(__('Bare Bones', 'otw'), __('Minimal Light', 'otw'), __('Minimal Dark', 'otw'), __('Shadow Light', 'otw'), __('Shadow Dark', 'otw'), __('Inset Light', 'otw'), __('Inset Dark', 'otw'));
             //Counter for Option Values
             $counter = 0;
 
