@@ -173,7 +173,7 @@ function otw_handle_api_restaurant_autocomplete(request, response) {
 
 	//Replace Characters for Autocomplete
 	request.term = request.term.split(', ').pop();
-	request.term = request.term.replace("'", "%27"); // replace globally
+//	request.term = request.term.replace("'", "%27"); // replace apostrophes globally
 	request.term = request.term.replace(/\s/g, "%20"); // replace spaces
 
 	var data = {
@@ -186,7 +186,7 @@ function otw_handle_api_restaurant_autocomplete(request, response) {
 
 	// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 	jQuery.post(ajaxurl, data, function (jsonResponse) {
-		console.log(jsonResponse);
+
 		jsonResponse = jQuery.parseJSON(jsonResponse);
 
 		if (jsonResponse !== null) {

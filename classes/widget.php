@@ -74,8 +74,9 @@ class Open_Table_Widget extends WP_Widget {
 	function otw_widget_request_open_table_api() {
 
 		//get restaurant name
-		$restaurant = empty( $_POST['restaurant'] ) ? '' : urlencode( $_POST['restaurant'] );
-		$city       = empty( $_POST['city'] ) ? '' : urlencode( $_POST['city'] );
+		$restaurant = empty( $_POST['restaurant'] ) ? '' : stripslashes(htmlentities($_POST['restaurant'], ENT_QUOTES));
+		$city       = empty( $_POST['city'] ) ? '' : stripslashes(htmlentities( $_POST['city'], ENT_QUOTES));
+
 
 		if ( $_POST['restaurant'] && empty( $city ) ) {
 			// Send API Call using WP's HTTP API
