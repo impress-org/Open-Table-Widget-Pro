@@ -24,6 +24,9 @@ $action = 'http://www.opentable.com/restaurant-search.aspx';
 $dateFormat = 'mm/dd/yyyy';
 $timeFormat = 'g:i a';
 $timeFormatVal = 'g:ia';
+$args['widget_id'] = empty($args['widget_id']) ? rand(1, 9999) : $args['widget_id'];
+
+
 switch ( $widgetLanguage ) {
 	case 'ca-eng':
 		$action = 'http://www.opentable.com/restaurant-search.aspx';
@@ -68,7 +71,7 @@ switch ( $widgetLanguage ) {
 		 * Display Multiple Restaurants in Select
 		 * if option set in widget
 		 */
-		if ( $displayOption == 1 ) {
+		if ( $displayOption === 1 ) {
 
 			if ( ! empty( $restaurantIDs ) ) {
 				$restaurantIDs = explode( ',', $restaurantIDs );
@@ -101,7 +104,7 @@ switch ( $widgetLanguage ) {
 			<?php } ?>
 		<?php
 		} //User Select List from City Options
-		elseif ( $displayOption == 2 ) {
+		elseif ( $displayOption === 2 ) {
 
 			//Compare selected cities list with transient
 			$otwSelectedCityTransients = get_transient( 'otw_selected_cities' );

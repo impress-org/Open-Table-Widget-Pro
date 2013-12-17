@@ -1,10 +1,9 @@
 <?php
 /**
- * Class Yelp_Shortcode
+ * Class Open_Table_Widget_Shortcode
  *
- * @description: Yelp Main Shortcode Class
- * @since      : 1.2
- * @created    : 3/20/13
+ * @description: Open Table Shortcode Class
+ * @since      : 1.0
  */
 
 class Open_Table_Widget_Shortcode extends Open_Table_Widget {
@@ -23,19 +22,18 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 		//Only Load scripts when widget or shortcode is active
 		$open_table_widget->add_otw_widget_scripts();
 
-
+		//Defaults shortcode vals
 		$defaults = array(
 			'title'          => 'Open Table Reservations',
 			'display_option' => '1',
 			'restaurant_id'  => '106672',
+			'restaurant_ids' => '106672',
+			'widget_style'   => 'minimal-light',
 		);
 
 		//extract shortcode arguments
 		extract( shortcode_atts( $defaults, $atts ) );
 
-		echo "<pre>";
-		var_dump( $atts );
-		echo "</pre>";
 
 		$args = array();
 
@@ -54,6 +52,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 				'title'          => $atts['title'],
 				'display_option' => $atts['display_option'],
 				'restaurant_id'  => $atts['restaurant_id'],
+				'widget_style'   => $atts['widget_style'],
 
 			);
 
@@ -65,14 +64,15 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 			);
 
-		} //DEFAULTS (User has no args)
-		elseif ( empty( $atts ) ) {
+		} //DEFAULTS (User has not properly set args)
+		elseif ( empty( $atts ) || empty( $atts['display_option'] ) ) {
 
 			$instance = $defaults;
 
 		}
-
+//
 		echo "<pre>";
+		var_dump( $atts );
 		var_dump( $instance );
 		echo "</pre>";
 

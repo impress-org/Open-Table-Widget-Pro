@@ -74,8 +74,8 @@ class Open_Table_Widget extends WP_Widget {
 	function otw_widget_request_open_table_api() {
 
 		//get restaurant name
-		$restaurant = urlencode( $_POST['restaurant'] );
-		$city       = urlencode( $_POST['city'] );
+		$restaurant = empty( $_POST['restaurant'] ) ? '' : urlencode( $_POST['restaurant'] );
+		$city       = empty( $_POST['city'] ) ? '' : urlencode( $_POST['city'] );
 
 		if ( $_POST['restaurant'] && empty( $city ) ) {
 			// Send API Call using WP's HTTP API
@@ -194,12 +194,16 @@ class Open_Table_Widget extends WP_Widget {
 		/* Add the width from $widget_width to the class from the $before widget
 		http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
 		*/
+
 		// no 'class' attribute - add one with the value of width
-		if ( isset( $before_widget ) && strpos( $before_widget, 'class' ) === false ) {
+		if ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) === false ) {
 			$before_widget = str_replace( '>', 'class="' . $style . '"', $before_widget );
 		} // there is 'class' attribute - append width value to it
+		elseif ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) !== false ) {
+			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
+		} //no 'before_widget' at all so wrap widget with div
 		else {
-			$before_widget = '';
+			$before_widget = '<div class="open-table-widget">';
 			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
 		}
 
@@ -212,14 +216,18 @@ class Open_Table_Widget extends WP_Widget {
 		 http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
 		 */
 			// no 'class' attribute - add one with the value of width
-			if ( isset( $before_title ) && strpos( $before_title, 'class' ) === false ) {
+			if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
 				$before_title = str_replace( '>', 'class="otw-widget-title"', $before_title );
-			} // there is 'class' attribute - append width value to it
+			} elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
+				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
+
+			} //no 'title' at all so wrap widget with div
 			else {
-				$before_title = '';
+				$before_title = '<h3 class="">';
 				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
 			}
-			$after_title = empty( $after_title ) ? '' : $after_title;
+			$after_title = empty( $after_title ) ? '</h3>' : $after_title;
+
 			echo $before_title . $title . $after_title;
 		}
 		?>
@@ -231,9 +239,8 @@ class Open_Table_Widget extends WP_Widget {
 		</div>
 		<?php
 
-		if ( isset( $after_widget ) ) {
-			echo $after_widget;
-		}
+		//after widget
+		echo ! empty( $after_widget ) ? $after_widget : '</div>';
 
 	}
 

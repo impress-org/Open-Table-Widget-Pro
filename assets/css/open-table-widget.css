@@ -23,7 +23,6 @@
 	color: #B94A48 !important;
 }
 
-
 /*----------------------------------------
 Bootstrap Necessities
 ------------------------------------------*/
@@ -262,7 +261,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, input.otw-submit-btn:hover, input.otw-submit-btn:focus {
 	color: #ffffff;
-	background-color: #3276b1;
+	background: #3276b1;
 	border-color: #285e8e;
 }
 
@@ -501,6 +500,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 
 .open-table-widget .bootstrap-select.btn-group .dropdown-menu li {
 	position: relative;
+	margin: 0 !important;
 }
 
 .open-table-widget .bootstrap-select.btn-group .dropdown-menu li > a.opt {
