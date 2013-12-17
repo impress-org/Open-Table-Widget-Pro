@@ -32,7 +32,7 @@ class WordImpress_Licensing {
 		$this->transient_timeout   = 60 * 60 * 12;
 
 
-		if ( is_admin() ) {
+		if ( is_admin() && ! $this->is_licence_expired() ) {
 
 			// Checks for software updates
 			require_once( plugin_dir_path( __FILE__ ) . 'classes/class-wc-plugin-update.php' );
@@ -69,15 +69,18 @@ class WordImpress_Licensing {
 	 */
 	function wordimpress_prevent_wordpress_update_check( $r, $url ) {
 
-		if ( 0 !== strpos( $url, 'http://api.wordpress.org/plugins/update-check' ) ) {
-			return $r; // Not a plugin update request. Bail immediately.
+		if ( 0 !== strpos( $url, 'https://api.wordpress.org/plugins/' ) ) {
+			return $r;
 		}
 		$my_plugin = OTW_PLUGIN_NAME_PLUGIN;
-		$plugins   = unserialize( $r['body']['plugins'] );
-		unset( $plugins->plugins[$my_plugin] );
-		unset( $plugins->active[array_search( $my_plugin, $plugins->active )] );
-		$r['body']['plugins'] = serialize( $plugins );
 
+		$plugins = unserialize( $r['body']['plugins'] );
+
+		unset(
+		$my_plugin,
+		$plugins->active[array_search( $my_plugin, $plugins->active )]
+		);
+		$r['body']['plugins'] = serialize( $plugins );
 
 		return $r;
 
