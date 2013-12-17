@@ -308,7 +308,15 @@ class WordImpress_Licensing {
 	 * @return mixed
 	 */
 	function get_licence_key() {
-		return $this->is_licence_constant() ? OPEN_TABLE_LICENCE : $this->settings['licence_key'];
+
+		$licence_key = false;
+
+		if ( $this->is_licence_constant() ) {
+			$licence_key = OPEN_TABLE_LICENCE;
+		} elseif ( isset( $this->settings['licence_key'] ) ) {
+			$licence_key = $this->settings['licence_key'];
+		}
+		return $licence_key;
 	}
 
 	/**
@@ -371,26 +379,15 @@ class WordImpress_Licensing {
 	function plugin_row() {
 		$licence          = $this->get_licence_key();
 		$licence_response = $this->is_licence_expired();
-		$licence_problem  = isset( $licence_response['errors'] );
 
 
 		if ( empty( $licence ) ) {
 			$settings_link = sprintf( '<a href="%s">%s</a>', network_admin_url( $this->plugin_base ) . '#settings', __( 'Settings', $this->textdomain ) );
 			$message       = 'To finish activating the plugin please go to ' . $settings_link . ' and enter your licence key.';
-		} elseif ( $licence_problem ) {
-			$message = array_shift( $licence_response['errors'] ) . ' <a href="#" class="check-my-licence-again">Check my licence again</a>';
 		} else {
 			return;
 		} ?>
 
-		<tr class="plugin-update-tr wpmdbpro-custom">
-			<td colspan="3" class="plugin-update">
-				<div class="update-message">
-					<div class="wpmdb-new-version-notice"><?php echo $new_version; ?></div>
-					<div class="wpmdb-licence-error-notice"><?php echo $message; ?></div>
-				</div>
-			</td>
-		</tr>
 
 	<?php
 
@@ -409,7 +406,7 @@ class WordImpress_Licensing {
 			<?php
 			//do licensing
 			$licence = $this->get_licence_key();
-			$licenceEmail = $this->settings['licence_email'];
+			$licenceEmail = empty($this->settings['licence_email']) ? '' : $this->settings['licence_email'];
 
 			if ( $this->is_licence_constant() ) {
 				?>

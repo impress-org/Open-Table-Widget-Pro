@@ -9,7 +9,7 @@
 jQuery(document).ready(function ($) {
 
 	var doing_licence_registration_ajax = false;
-	var admin_url = ajaxurl.replace('/admin-ajax.php', ''), spinner_url = admin_url + '/images/wpspin_light';
+	var admin_url = ajaxurl.replace('/admin-ajax.php', ''), spinner_url = admin_url + '/images/spinner';
 
 	if (window.devicePixelRatio >= 2) {
 		spinner_url += '-2x';
