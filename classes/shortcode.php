@@ -29,39 +29,36 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'restaurant_id'  => '106672',
 			'restaurant_ids' => '106672',
 			'widget_style'   => 'minimal-light',
+			'hide_labels'    => 'false',
 		);
 
 		//extract shortcode arguments
 		extract( shortcode_atts( $defaults, $atts ) );
 
 
-		$args = array();
+		//declare variables
+		$args = $instance = array();
 
 
 		//Handle No Follow
-//		$no_follow = check_shortcode_value( $no_follow );
+		$hideLabels = check_shortcode_value( $hide_labels );
 
 
 		/*
 		 * Set up our Widget instance array
 		 */
 		//Single Restaurant Reservations
-		if ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '1' ) {
+		if ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '0' ) {
 
 			$instance = array(
-				'title'          => $atts['title'],
-				'display_option' => $atts['display_option'],
 				'restaurant_id'  => $atts['restaurant_id'],
-				'widget_style'   => $atts['widget_style'],
-
 			);
 
-		} //Search API
-		elseif ( ! empty( $atts['term'] ) ) {
+		} //Predefined Restaurants List
+		elseif ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '1' ) {
 
 			$instance = array(
-				'term' => empty( $atts['term'] ) ? '' : $atts['term'],
-
+				'restaurant_ids'  => $atts['restaurant_ids'],
 			);
 
 		} //DEFAULTS (User has not properly set args)
@@ -70,14 +67,26 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			$instance = $defaults;
 
 		}
-//
+
+		//Global Options (non-dependant on display_option)
+		$globals = array(
+			'display_option' => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'],
+			'title'        => empty( $atts['title'] ) ? $title : $atts['title'],
+			'hide_labels'  => $hideLabels,
+			'widget_style' => empty( $atts['widget_style'] ) ? $widget_style : $atts['widget_style'],
+		);
+
+		//merge instance with globals
+		$instance = array_merge( $instance, $globals );
+
+
 		echo "<pre>";
 		var_dump( $atts );
 		var_dump( $instance );
 		echo "</pre>";
 
 		// actual shortcode handling here
-		//Using ob_start to output shortcode within content appropriatly
+		//Using ob_start to output shortcode within content appropriately
 		ob_start();
 		parent::widget( $args, $instance );
 		$shortcode = ob_get_contents();
@@ -90,7 +99,6 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 }
 
-//Open_Table_Widget_Shortcode::init();
 
 /*
  * Check Value

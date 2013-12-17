@@ -71,7 +71,7 @@ switch ( $widgetLanguage ) {
 		 * Display Multiple Restaurants in Select
 		 * if option set in widget
 		 */
-		if ( $displayOption === 1 ) {
+		if ( $displayOption === '1' ) {
 
 			if ( ! empty( $restaurantIDs ) ) {
 				$restaurantIDs = explode( ',', $restaurantIDs );
@@ -104,10 +104,13 @@ switch ( $widgetLanguage ) {
 			<?php } ?>
 		<?php
 		} //User Select List from City Options
-		elseif ( $displayOption === 2 ) {
+		elseif ( $displayOption === '2' ) {
 
 			//Compare selected cities list with transient
 			$otwSelectedCityTransients = get_transient( 'otw_selected_cities' );
+
+
+
 			//Check match and reset transient if not equal
 			if ( $otwSelectedCityTransients !== $displayOption ) {
 				//set selected cities transient
@@ -118,7 +121,7 @@ switch ( $widgetLanguage ) {
 
 			//Get Admin selected Cities
 			$cities          = explode( ', ', $lookupCity );
-			$restaurantArray = array();
+//			$restaurantArray = array();
 			?>
 			<div class="otw-input-wrap">
 				<?php if ( $hideLabels !== '1' ) { ?>
@@ -136,11 +139,11 @@ switch ( $widgetLanguage ) {
 					<?php
 					//loop through cities and query available restaurants
 					foreach ( $cities as $city ) {
-
+//						$city = stripslashes(htmlentities($city, ENT_QUOTES));
 						//query API with city
-						$apiQuery = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?city=' . $city );
+//						$apiQuery = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?city=' . $city );
 						//add to Restaurants Array
-						array_push( $restaurantArray, $apiQuery['body'] );
+//						array_push( $restaurantArray, $apiQuery['body'] );
 						if ( $city ) {
 							?>
 							<option value="<?php echo $city; ?>"><?php echo $city; ?></option>
