@@ -27,10 +27,13 @@ class WordImpress_Licensing {
 
 	function __construct() {
 
+
 		$this->settings            = get_option( 'opentablewidget_options' );
 		$this->wordimpress_api_url = $this->wordimpress_api_base . '?wc-api=am-software-api';
 		$this->transient_timeout   = 60 * 60 * 12;
 		$this->textdomain          = 'otw';
+		$this->plugin_base         = OTW_PLUGIN_NAME_PLUGIN;
+
 
 		if ( is_admin() && ! $this->is_licence_expired() ) {
 
@@ -313,9 +316,11 @@ class WordImpress_Licensing {
 
 		if ( $this->is_licence_constant() ) {
 			$licence_key = OPEN_TABLE_LICENCE;
-		} elseif ( isset( $this->settings['licence_key'] ) ) {
+		} elseif ( isset( $this->settings['licence_key'] ) && ! empty( $this->settings['licence_key'] ) ) {
+
 			$licence_key = $this->settings['licence_key'];
 		}
+
 		return $licence_key;
 	}
 
@@ -380,13 +385,22 @@ class WordImpress_Licensing {
 		$licence          = $this->get_licence_key();
 		$licence_response = $this->is_licence_expired();
 
+		global $open_table_widget;
 
-		if ( empty( $licence ) ) {
-			$settings_link = sprintf( '<a href="%s">%s</a>', network_admin_url( $this->plugin_base ) . '#settings', __( 'Settings', $this->textdomain ) );
+		if ( $licence === false ) {
+			$settings_link = sprintf( '<a href="%s">%s</a>', $open_table_widget->admin_url, __( 'Settings', $this->textdomain ) );
 			$message       = 'To finish activating the plugin please go to ' . $settings_link . ' and enter your licence key.';
 		} else {
 			return;
 		} ?>
+
+		<tr class="plugin-update-tr <?php echo $this->textdomain . '-plugin-custom'; ?>">
+			<td colspan="3" class="plugin-update" style="background:#FFF;">
+				<div style="background-color: #FCF3EF; border: 0; font-size: 13px;font-weight: 400;margin: 6px 12px 8px;padding: 6px 12px;">
+					<div class="<?php echo $this->textdomain . 'licence-error-notice'; ?>"><?php echo $message; ?></div>
+				</div>
+			</td>
+		</tr>
 
 
 	<?php
@@ -406,7 +420,7 @@ class WordImpress_Licensing {
 			<?php
 			//do licensing
 			$licence = $this->get_licence_key();
-			$licenceEmail = empty($this->settings['licence_email']) ? '' : $this->settings['licence_email'];
+			$licenceEmail = empty( $this->settings['licence_email'] ) ? '' : $this->settings['licence_email'];
 
 			if ( $this->is_licence_constant() ) {
 				?>

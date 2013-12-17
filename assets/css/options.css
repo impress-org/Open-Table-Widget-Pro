@@ -29,6 +29,12 @@ Custom OTW Option Styles
 	cursor: default;
 }
 
+/* Social Media */
+
+.social-items-wrap > div {
+	display: inline-block;
+}
+
 .google-plus {
 	margin-left: 20px;
 	display: inline;
