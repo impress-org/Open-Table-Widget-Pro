@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Open Table Widget
+Plugin Name: Open Table Widget Pro
 Plugin URI: http://wordimpress.com/plugins/open-table-widget/
-Description: Display an Open Table reservation widget for your restaurant, bar, nightclub, hotel or eatery.
+Description: Pro version of Open Table Widget: Display an Open Table reservation widget for your restaurant, bar, nightclub, hotel or eatery.
 Version: 1.0
 Author: Devin Walker
 Author URI: http://imdev.in/
@@ -63,7 +63,7 @@ add_action( 'admin_enqueue_scripts', 'otw_options_scripts' );
 
 function otw_options_scripts( $hook ) {
 
-	if ( 'settings_page_opentablewidget' != $hook ) {
+	if ( 'settings_page_opentablewidgetpro' != $hook ) {
 		return;
 	} else {
 		wp_register_style( 'otw_custom_options_styles', plugin_dir_url( __FILE__ ) . '/assets/css/options.css' );

@@ -1,5 +1,6 @@
 	</table>
-	<?php if ( $option['actions'] !== false ) { ?>
+	<?php
+	if (!isset($option['actions']) || isset($option['actions']) && $option['actions'] !== false) { ?>
 	<div class="sunrise-plugin-actions-bar">
 		<input type="submit" value="<?php _e( 'Save changes', $this->textdomain ); ?>" class="sunrise-plugin-submit button-primary" />
 		<span class="sunrise-plugin-spin"><img src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>" alt="" /> <?php _e( 'Saving', $this->textdomain ); ?>&hellip;</span>

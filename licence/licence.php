@@ -12,7 +12,7 @@ class WordImpress_Licensing {
 
 	private $product_id = 'Open Table Widget'; //used to target specific product
 
-	private $settings_page = 'settings_page_opentablewidget'; //used to enqueue JS only for that page
+	private $settings_page = 'settings_page_opentablewidgetpro'; //used to enqueue JS only for that page
 
 	/**
 	 * @var string
@@ -30,7 +30,7 @@ class WordImpress_Licensing {
 		$this->settings            = get_option( 'opentablewidget_options' );
 		$this->wordimpress_api_url = $this->wordimpress_api_base . '?wc-api=am-software-api';
 		$this->transient_timeout   = 60 * 60 * 12;
-
+		$this->textdomain          = 'otw';
 
 		if ( is_admin() && ! $this->is_licence_expired() ) {
 
@@ -54,7 +54,7 @@ class WordImpress_Licensing {
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_licence_assets' ) );
 
 		//prevent WordPress.org license checks
-		add_filter( 'http_request_args', array( $this, 'wordimpress_prevent_wordpress_update_check' ), 10, 2 );
+//		add_filter( 'http_request_args', array( $this, 'wordimpress_prevent_wordpress_update_check' ), 10, 2 );
 
 
 	}
@@ -73,8 +73,7 @@ class WordImpress_Licensing {
 			return $r;
 		}
 		$my_plugin = OTW_PLUGIN_NAME_PLUGIN;
-
-		$plugins = unserialize( $r['body']['plugins'] );
+		$plugins   = unserialize( $r['body']['plugins'] );
 
 		unset(
 		$my_plugin,
@@ -137,9 +136,13 @@ class WordImpress_Licensing {
 		$API_Manager_Example_Password_Management = new API_Manager_Example_Password_Management();
 
 		// Generate a unique installation $instance id
-		$this->settings['instance'] = $API_Manager_Example_Password_Management->generate_password( 12, false );
-
+		if ( empty( $this->settings['instance'] ) ) {
+			$this->settings['instance'] = $API_Manager_Example_Password_Management->generate_password( 12, false );
+		}
+//		echo $this->settings['instance'];
 		//set initial args array
+//		$this->settings['instance'] =  'N8HtoKBhiHcf';
+
 		$args = array(
 			'request'     => 'activation',
 			'licence_key' => urlencode( $_POST['licence_key'] ),

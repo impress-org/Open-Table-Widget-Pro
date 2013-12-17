@@ -6,7 +6,7 @@
 </div>
 <?php
 	// Options reseted
-	if ( $_GET['message'] == 1 ) {
+	if ( isset($_GET['message']) && $_GET['message'] == 1 ) {
 		?>
 		<div class="updated sunrise-plugin-notification">
 			<p><?php echo $notifications['reseted']; ?><small class="hide-if-no-js"><?php _e( 'Click to close', $this->textdomain ); ?></small></p>
@@ -14,7 +14,7 @@
 		<?php
 	}
 	// Options not reseted
-	if ( $_GET['message'] == 2 ) {
+	if ( isset($_GET['message']) && $_GET['message'] == 2 ) {
 		?>
 		<div class="error sunrise-plugin-notification">
 			<p><?php echo $notifications['not-reseted']; ?><small class="hide-if-no-js"><?php _e( 'Click to close', $this->textdomain ); ?></small></p>
@@ -22,7 +22,7 @@
 		<?php
 	}
 	// Saved
-	if ( $_GET['message'] == 3 ) {
+	if ( isset($_GET['message']) && $_GET['message'] == 3 ) {
 		?>
 		<div class="updated sunrise-plugin-notification">
 			<p><?php echo $notifications['saved']; ?><small class="hide-if-no-js"><?php _e( 'Click to close', $this->textdomain ); ?></small></p>
@@ -30,7 +30,7 @@
 		<?php
 	}
 	// No changes
-	if ( $_GET['message'] == 4 ) {
+	if ( isset($_GET['message']) && $_GET['message'] == 4 ) {
 		?>
 		<div class="error sunrise-plugin-notification">
 			<p><?php echo $notifications['not-saved']; ?><small class="hide-if-no-js"><?php _e( 'Click to close', $this->textdomain ); ?></small></p>

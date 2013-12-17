@@ -1,5 +1,5 @@
 <?php
-	$triggable = ( $option['triggable'] ) ? ' data-triggable="' . $option['triggable'] . '" class="sunrise-plugin-triggable hide-if-js"' : '';
+	$triggable = !empty( $option['triggable'] ) ? ' data-triggable="' . $option['triggable'] . '" class="sunrise-plugin-triggable hide-if-js"' : '';
 	$checked = ( $settings[$option['id']] == 'on' ) ? ' checked="checked"' : '';
 ?>
 <tr<?php echo $triggable; ?>>

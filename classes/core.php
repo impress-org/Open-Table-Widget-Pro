@@ -144,7 +144,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				$defaults = array();
 				// Loop through available options
 				foreach ( (array) $this->options as $value ) {
-					$defaults[$value['id']] = $value['std'];
+					$defaults[$value['id']] = empty($value['std']) ? '' : $value['std'];
 				}
 				// Insert default options
 				update_option( $this->option, $defaults );
@@ -198,7 +198,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				return;
 			}
 			// ACTION: RESET
-			if ( $_GET['action'] == 'reset' ) {
+			if ( isset($_GET['action']) && $_GET['action'] == 'reset' ) {
 				// Prepare variables
 				$new_options = array();
 				// Prepare data
@@ -217,7 +217,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 					exit;
 				}
 			} // ACTION: SAVE
-			elseif ( $_POST['action'] == 'save' ) {
+			elseif ( isset($_POST['action']) &&  $_POST['action'] == 'save' ) {
 				// Prepare vars
 				$new_options = array();
 				// Prepare data
@@ -249,7 +249,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			// Save options
 			$this->options = $options;
 			// Prepare defaults
-			$defaults = array( 'parent'     => 'options-general.php', 'menu_title' => $this->name,
+			$defaults = array( 'parent'     => 'options-general.php', 'menu_title' => 'Open Table Widget',
 												 'page_title' => $this->name, 'capability' => 'manage_options', 'link' => true );
 			// Parse args
 			$this->settings = wp_parse_args( $args, $defaults );
