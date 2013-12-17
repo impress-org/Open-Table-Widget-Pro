@@ -249,7 +249,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			// Save options
 			$this->options = $options;
 			// Prepare defaults
-			$defaults = array( 'parent'     => 'options-general.php', 'menu_title' => $this->name,
+			$defaults = array( 'parent'     => 'options-general.php', 'menu_title' => 'Open Table Widget',
 												 'page_title' => $this->name, 'capability' => 'manage_options', 'link' => true );
 			// Parse args
 			$this->settings = wp_parse_args( $args, $defaults );

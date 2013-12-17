@@ -22,7 +22,7 @@ function init_open_table_widget() {
 
 	// Include Licensing
 	require_once 'licence/licence.php';
-global $open_table_widget;
+	global $open_table_widget;
 	// Create plugin instance
 	$open_table_widget = new WordImpress_Plugin_Framework( __FILE__ );
 
@@ -40,6 +40,7 @@ global $open_table_widget;
 	//Include the widget
 	if ( ! class_exists( 'Open_Table_Widget' ) ) {
 		require 'classes/widget.php';
+		require 'classes/shortcode.php';
 
 	}
 
