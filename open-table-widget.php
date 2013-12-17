@@ -41,6 +41,8 @@ function init_open_table_widget() {
 	if ( ! class_exists( 'Open_Table_Widget' ) ) {
 		require 'classes/widget.php';
 		require 'classes/shortcode.php';
+		$otw_shortcode = new Open_Table_Widget_Shortcode();
+
 
 	}
 

@@ -159,22 +159,22 @@ class Open_Table_Widget extends WP_Widget {
 		if ( isset( $instance['title'] ) ) {
 			$title = apply_filters( 'widget_title', $instance['title'] );
 		}
-		$displayOption  = $instance['display_option'];
-		$widgetStyle    = $instance['widget_style'];
-		$restaurantName = $instance['restaurant_name'];
-		$restaurantID   = $instance['restaurant_id'];
-		$restaurantIDs  = $instance['restaurant_ids'];
-		$hideLabels     = $instance['hide_labels'];
-		$preContent     = $instance['pre_content'];
-		$postContent    = $instance['post_content'];
-		$labelMultiple  = $instance['label_multiple'];
-		$labelCity      = $instance['label_city'];
-		$labelDate      = $instance['label_date'];
-		$labelTime      = $instance['label_time'];
-		$labelParty     = $instance['label_party'];
-		$inputSubmit    = $instance['input_submit'];
-		$widgetLanguage = $instance['widget_language'];
-		$lookupCity     = $instance['lookup_city'];
+		$displayOption  = empty( $instance['display_option'] ) ? '' : $instance['display_option'];
+		$widgetStyle    = empty( $instance['widget_style'] ) ? '' : $instance['widget_style'];
+		$restaurantName = empty( $instance['restaurant_name'] ) ? '' : $instance['restaurant_name'];
+		$restaurantID   = empty( $instance['restaurant_id'] ) ? '' : $instance['restaurant_id'];
+		$restaurantIDs  = empty( $instance['restaurant_ids'] ) ? '' : $instance['restaurant_ids'];
+		$hideLabels     = empty( $instance['hide_labels'] ) ? '' : $instance['hide_labels'];
+		$preContent     = empty( $instance['pre_content'] ) ? '' : $instance['pre_content'];
+		$postContent    = empty( $instance['post_content'] ) ? '' : $instance['post_content'];
+		$labelMultiple  = empty( $instance['label_multiple'] ) ? '' : $instance['label_multiple'];
+		$labelCity      = empty( $instance['label_city'] ) ? '' : $instance['label_city'];
+		$labelDate      = empty( $instance['label_date'] ) ? '' : $instance['label_date'];
+		$labelTime      = empty( $instance['label_time'] ) ? '' : $instance['label_time'];
+		$labelParty     = empty( $instance['label_party'] ) ? '' : $instance['label_party'];
+		$inputSubmit    = empty( $instance['input_submit'] ) ? '' : $instance['input_submit'];
+		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : $instance['widget_language'];
+		$lookupCity     = empty( $instance['lookup_city'] ) ? '' : $instance['lookup_city'];
 
 
 		//Determine widget display option
@@ -195,10 +195,11 @@ class Open_Table_Widget extends WP_Widget {
 		http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
 		*/
 		// no 'class' attribute - add one with the value of width
-		if ( strpos( $before_widget, 'class' ) === false ) {
+		if ( isset( $before_widget ) && strpos( $before_widget, 'class' ) === false ) {
 			$before_widget = str_replace( '>', 'class="' . $style . '"', $before_widget );
 		} // there is 'class' attribute - append width value to it
 		else {
+			$before_widget = '';
 			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
 		}
 
@@ -211,13 +212,14 @@ class Open_Table_Widget extends WP_Widget {
 		 http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
 		 */
 			// no 'class' attribute - add one with the value of width
-			if ( strpos( $before_title, 'class' ) === false ) {
+			if ( isset( $before_title ) && strpos( $before_title, 'class' ) === false ) {
 				$before_title = str_replace( '>', 'class="otw-widget-title"', $before_title );
 			} // there is 'class' attribute - append width value to it
 			else {
+				$before_title = '';
 				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
 			}
-
+			$after_title = empty( $after_title ) ? '' : $after_title;
 			echo $before_title . $title . $after_title;
 		}
 		?>
