@@ -8,7 +8,9 @@
 class WordImpress_Licensing {
 
 
-	private $wordimpress_api_base = 'http://wordimpress.dev/'; //used to query API
+	private $wordimpress_api_base = 'http://wordimpress.com/'; //used to query API
+
+	private $wordimpress_user_account_page = 'http://wordimpress.com/my-account/'; //used to query API
 
 	private $product_id = 'Open Table Widget'; //used to target specific product
 
@@ -117,7 +119,7 @@ class WordImpress_Licensing {
 		$product_id        = 'Open Table Widget'; // Software Title
 		$api_key           = $this->get_licence_key(); // API License Key
 		$activation_email  = $this->settings['licence_email']; // License Email
-		$renew_license_url = 'https://wordimpress.dev/my-account'; // URL to renew a license
+		$renew_license_url = $this->wordimpress_user_account_page; // URL to renew a license
 		$instance          = $this->settings['instance']; // Instance ID (unique to each blog activation)
 		$domain            = site_url(); // blog domain name
 		$software_version  = get_option( $this->wordimpress_version_name ); // The software version
