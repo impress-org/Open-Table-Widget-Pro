@@ -51,7 +51,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 
 		//Handle No Follow
-		$hide_labels = check_shortcode_value( $hide_labels );
+		$hide_labels = $this->check_shortcode_value( $hide_labels );
 
 
 		/*
@@ -118,22 +118,21 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 	}
 
-}
+	/*
+	 * Check Value
+	 *
+	 * Helper Function
+	 */
+	function check_shortcode_value( $attr ) {
 
+		if ( $attr === "true" || $attr === "1" ) {
+			$attr = "1";
+		} else {
+			$attr = '0';
+		}
 
-/*
- * Check Value
- *
- * Helper Function
- */
-function check_shortcode_value( $attr ) {
+		return $attr;
 
-	if ( $attr === "true" || $attr === "1" ) {
-		$attr = "1";
-	} else {
-		$attr = '0';
 	}
-
-	return $attr;
 
 }
