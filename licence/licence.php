@@ -12,7 +12,7 @@ class WordImpress_Licensing {
 
 	private $wordimpress_user_account_page = 'http://wordimpress.com/my-account/'; //used to query API
 
-	private $product_id = 'Open Table Widget'; //used to target specific product
+	private $product_id = 'Open Table Widget Pro'; //used to target specific product
 
 	private $settings_page = 'settings_page_opentablewidgetpro'; //used to enqueue JS only for that page
 
@@ -116,7 +116,7 @@ class WordImpress_Licensing {
 
 		$upgrade_url       = $this->wordimpress_api_base; // URL to access the Update API Manager.
 		$plugin_name       = OTW_PLUGIN_NAME_PLUGIN; // same as plugin slug. if a theme use a theme name like 'twentyeleven'
-		$product_id        = 'Open Table Widget'; // Software Title
+		$product_id        = $this->product_id; // Software Title
 		$api_key           = $this->get_licence_key(); // API License Key
 		$activation_email  = $this->settings['licence_email']; // License Email
 		$renew_license_url = $this->wordimpress_user_account_page; // URL to renew a license
@@ -144,10 +144,8 @@ class WordImpress_Licensing {
 		if ( empty( $this->settings['instance'] ) ) {
 			$this->settings['instance'] = $API_Manager_Example_Password_Management->generate_password( 12, false );
 		}
-//		echo $this->settings['instance'];
-		//set initial args array
-//		$this->settings['instance'] =  'N8HtoKBhiHcf';
 
+		//set initial args array
 		$args = array(
 			'request'     => 'activation',
 			'licence_key' => urlencode( $_POST['licence_key'] ),
