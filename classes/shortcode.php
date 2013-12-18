@@ -24,12 +24,22 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 		//Defaults shortcode vals
 		$defaults = array(
-			'title'          => 'Open Table Reservations',
-			'display_option' => '1',
-			'restaurant_id'  => '106672',
-			'restaurant_ids' => '106672',
-			'widget_style'   => 'minimal-light',
-			'hide_labels'    => 'false',
+			'title'           => 'Open Table Reservations',
+			'display_option'  => '1',
+			'restaurant_id'   => '49051',
+			'restaurant_ids'  => '49051',
+			'widget_style'    => 'minimal-light',
+			'hide_labels'     => 'false',
+			'lookup_city'     => 'San Diego',
+			'widget_language' => 'ca-eng',
+			'pre_content'     => '',
+			'post_content'    => '',
+			'label_multiple'  => '',
+			'label_city'      => '',
+			'label_date'      => '',
+			'label_time'      => '',
+			'label_party'     => '',
+			'input_submit'    => '',
 		);
 
 		//extract shortcode arguments
@@ -41,24 +51,32 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 
 		//Handle No Follow
-		$hideLabels = check_shortcode_value( $hide_labels );
+		$hide_labels = check_shortcode_value( $hide_labels );
 
 
 		/*
 		 * Set up our Widget instance array
 		 */
 		//Single Restaurant Reservations
-		if ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '0' ) {
+		if ( isset( $atts['display_option'] ) && $atts['display_option'] === '0' ) {
 
 			$instance = array(
-				'restaurant_id'  => $atts['restaurant_id'],
+				'restaurant_id' => $atts['restaurant_id'],
 			);
+
 
 		} //Predefined Restaurants List
 		elseif ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '1' ) {
 
 			$instance = array(
-				'restaurant_ids'  => $atts['restaurant_ids'],
+				'restaurant_ids' => $atts['restaurant_ids'],
+			);
+
+		} //City Lookup
+		elseif ( ! empty( $atts['display_option'] ) && $atts['display_option'] === '2' ) {
+
+			$instance = array(
+				'lookup_city' => $atts['lookup_city'],
 			);
 
 		} //DEFAULTS (User has not properly set args)
@@ -70,20 +88,23 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 		//Global Options (non-dependant on display_option)
 		$globals = array(
-			'display_option' => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'],
-			'title'        => empty( $atts['title'] ) ? $title : $atts['title'],
-			'hide_labels'  => $hideLabels,
-			'widget_style' => empty( $atts['widget_style'] ) ? $widget_style : $atts['widget_style'],
+			'display_option'  => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'], //default is 0
+			'title'           => empty( $atts['title'] ) ? $title : $atts['title'],
+			'hide_labels'     => $hide_labels,
+			'widget_style'    => empty( $atts['widget_style'] ) ? $widget_style : $atts['widget_style'],
+			'widget_language' => empty( $atts['widget_language'] ) ? $widget_language : $atts['widget_language'],
+			'pre_content'     => empty( $atts['pre_content'] ) ? $pre_content : $atts['pre_content'],
+			'post_content'    => empty( $atts['post_content'] ) ? $post_content : $atts['post_content'],
+			'label_multiple'  => empty( $atts['label_multiple'] ) ? $label_multiple : $atts['label_multiple'],
+			'label_city'      => empty( $atts['label_city'] ) ? $label_multiple : $atts['label_city'],
+			'label_date'      => empty( $atts['label_date'] ) ? $label_date : $atts['label_date'],
+			'label_time'      => empty( $atts['label_time'] ) ? $label_time : $atts['label_time'],
+			'label_party'     => empty( $atts['label_party'] ) ? $label_party : $atts['label_party'],
+			'input_submit'    => empty( $atts['input_submit'] ) ? $input_submit : $atts['input_submit'],
 		);
 
 		//merge instance with globals
 		$instance = array_merge( $instance, $globals );
-
-
-		echo "<pre>";
-		var_dump( $atts );
-		var_dump( $instance );
-		echo "</pre>";
 
 		// actual shortcode handling here
 		//Using ob_start to output shortcode within content appropriately

@@ -123,7 +123,7 @@ Bootstrap Necessities
 /* Autocomplete */
 
 .open-table-widget input[type="text"].ui-autocomplete-loading {
-	background: rgba(0, 0, 0, 0) url('../images/loading.gif') no-repeat 97% center;
+	background: #FFF url('../images/loading.gif') no-repeat 97% center;
 }
 
 .otw-item-val {

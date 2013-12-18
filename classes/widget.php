@@ -74,8 +74,8 @@ class Open_Table_Widget extends WP_Widget {
 	function otw_widget_request_open_table_api() {
 
 		//get restaurant name
-		$restaurant = empty( $_POST['restaurant'] ) ? '' : stripslashes(htmlentities($_POST['restaurant'], ENT_QUOTES));
-		$city       = empty( $_POST['city'] ) ? '' : stripslashes(htmlentities( $_POST['city'], ENT_QUOTES));
+		$restaurant = empty( $_POST['restaurant'] ) ? '' : stripslashes( htmlentities( $_POST['restaurant'], ENT_QUOTES ) );
+		$city       = empty( $_POST['city'] ) ? '' : stripslashes( htmlentities( $_POST['city'], ENT_QUOTES ) );
 
 
 		if ( $_POST['restaurant'] && empty( $city ) ) {
@@ -179,7 +179,7 @@ class Open_Table_Widget extends WP_Widget {
 
 
 		//Determine widget display option
-		if ( $displayOption == 2 ) {
+		if ( $displayOption == '2' ) {
 			//widget needs autocomplete scripts
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
 			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom.min.css', dirname( __FILE__ ) ) );
