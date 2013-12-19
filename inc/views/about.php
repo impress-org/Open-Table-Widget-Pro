@@ -16,7 +16,6 @@
 	/**
 	 * Output Licensing Fields
 	 */
-	$wordimpress_licensing = new WordImpress_Licensing();
-	$wordimpress_licensing->licence_fields(); ?>
+	$this->licencing->licence_fields(); ?>
 
 </div>

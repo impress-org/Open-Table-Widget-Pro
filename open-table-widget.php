@@ -19,12 +19,15 @@ function init_open_table_widget() {
 
 	// Include Core Framework class
 	require_once 'classes/core.php';
-
 	// Include Licensing
 	require_once 'licence/licence.php';
+
 	global $open_table_widget;
 	// Create plugin instance
 	$open_table_widget = new WordImpress_Plugin_Framework( __FILE__ );
+
+
+
 
 	// Include options set
 	include_once 'inc/options.php';

@@ -86,6 +86,24 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			$this->assets     = trim( $this->args['assets'], '/' );
 			// Make plugin available for translation
 			load_plugin_textdomain( $this->textdomain, false, trailingslashit( path_join( dirname( $this->basename ), trim( $this->meta['DomainPath'], '/' ) ) ) );
+
+			//Licence Args
+			$licence_args = array(
+
+				'version'                       => $this->version, //Base URL for Website container WooCommerce API
+				'wordimpress_api_base'          => 'http://wordimpress.com/', //Base URL for Website container WooCommerce API
+				'wordimpress_user_account_page' => 'http://wordimpress.com/my-account/', //used to query API
+				'product_id'                    => 'Open Table Widget Pro', //name of product; used to target specific product in WooCommerce
+				'settings_page'                 => 'settings_page_opentablewidgetpro', //used to enqueue JS only for that page
+				'settings_options'              => get_option( 'opentablewidget_options' ), //plugin options settings
+				'transient_timeout'             => 60 * 60 * 12, //used to perform plugin update checks
+				'textdomain'                    => $this->textdomain, //used for translations
+				'pluginbase'                    => OTW_PLUGIN_NAME_PLUGIN, //used for updates API
+			);
+
+			$this->licencing = new WordImpress_Licensing( $licence_args );
+
+
 		}
 
 		function debug() {
@@ -105,7 +123,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		 * Register assets
 		 */
 		function register_assets() {
-			wp_register_style( 'core-plugin-framework', plugins_url('assets/css/core.css', dirname(__FILE__)), false, $this->version, 'all' );
+			wp_register_style( 'core-plugin-framework', plugins_url( 'assets/css/core.css', dirname( __FILE__ ) ), false, $this->version, 'all' );
 			wp_register_script( 'core-plugin-framework-form', $this->assets( 'js', 'form.js' ), array( 'jquery' ), $this->version, false );
 			wp_register_script( 'core-plugin-framework', $this->assets( 'js', 'core.js' ), array( 'core-plugin-framework-form' ), $this->version, false );
 		}
@@ -144,7 +162,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				$defaults = array();
 				// Loop through available options
 				foreach ( (array) $this->options as $value ) {
-					$defaults[$value['id']] = empty($value['std']) ? '' : $value['std'];
+					$defaults[$value['id']] = empty( $value['std'] ) ? '' : $value['std'];
 				}
 				// Insert default options
 				update_option( $this->option, $defaults );
@@ -198,7 +216,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				return;
 			}
 			// ACTION: RESET
-			if ( isset($_GET['action']) && $_GET['action'] == 'reset' ) {
+			if ( isset( $_GET['action'] ) && $_GET['action'] == 'reset' ) {
 				// Prepare variables
 				$new_options = array();
 				// Prepare data
@@ -217,7 +235,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 					exit;
 				}
 			} // ACTION: SAVE
-			elseif ( isset($_POST['action']) &&  $_POST['action'] == 'save' ) {
+			elseif ( isset( $_POST['action'] ) && $_POST['action'] == 'save' ) {
 				// Prepare vars
 				$new_options = array();
 				// Prepare data

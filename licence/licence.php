@@ -8,18 +8,18 @@
 class WordImpress_Licensing {
 
 
-	private $wordimpress_api_base = 'http://wordimpress.com/'; //used to query API
+	private $wordimpress_api_base; //used to query API
 
-	private $wordimpress_user_account_page = 'http://wordimpress.com/my-account/'; //used to query API
+	private $wordimpress_user_account_page; //used to provide user link to 'my account' page
 
-	private $product_id = 'Open Table Widget Pro'; //used to target specific product
+	private $product_id; //used to target specific product
 
-	private $settings_page = 'settings_page_opentablewidgetpro'; //used to enqueue JS only for that page
+	private $settings_page; //used to enqueue JS only for that page
 
 	/**
 	 * @var string
 	 */
-	public $version = '1.0';
+	public $version;
 
 	/**
 	 * @var string
@@ -27,14 +27,18 @@ class WordImpress_Licensing {
 	public $wordimpress_version_name = 'open_table_widget_version_name';
 
 
-	function __construct() {
+	function __construct( $licence_args ) {
 
-
-		$this->settings            = get_option( 'opentablewidget_options' );
-		$this->wordimpress_api_url = $this->wordimpress_api_base . '?wc-api=am-software-api';
-		$this->transient_timeout   = 60 * 60 * 12;
-		$this->textdomain          = 'otw';
-		$this->plugin_base         = OTW_PLUGIN_NAME_PLUGIN;
+		$this->version                       = $licence_args['version'];
+		$this->wordimpress_api_base          = $licence_args['wordimpress_api_base'];
+		$this->wordimpress_user_account_page = $licence_args['wordimpress_user_account_page'];
+		$this->product_id                    = $licence_args['product_id'];
+		$this->settings_page                 = $licence_args['settings_page'];
+		$this->settings                      = $licence_args['settings_options'];
+		$this->wordimpress_api_url           = $licence_args['wordimpress_api_base'] . '?wc-api=am-software-api';
+		$this->transient_timeout             = $licence_args['transient_timeout'];
+		$this->textdomain                    = $licence_args['textdomain'];
+		$this->plugin_base                   = $licence_args['pluginbase'];
 
 
 		if ( is_admin() && ! $this->is_licence_expired() ) {
@@ -454,5 +458,3 @@ class WordImpress_Licensing {
 	}
 
 }
-
-$wordimpress_licensing = new WordImpress_Licensing();
