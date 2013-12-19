@@ -1,0 +1,3 @@
+[submodule "licence"]
+	path = licence
+	url = git@flashbang.beanstalkapp.com:/flashbang/wordimpress-licencing.git
