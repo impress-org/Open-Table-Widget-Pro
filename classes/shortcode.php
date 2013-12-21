@@ -12,8 +12,11 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 	 * Init shortcode
 	 */
 	function __construct() {
+
 		parent::__construct();
+
 		add_shortcode( 'open-table-widget', array( __CLASS__, 'handle_shortcode' ) );
+
 
 	}
 
@@ -49,9 +52,10 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 		//declare variables
 		$args = $instance = array();
 
-
+		//reintiate class
+		$open_table_shortcode = new Open_Table_Widget_Shortcode();
 		//Handle No Follow
-		$hide_labels = $this->check_shortcode_value( $hide_labels );
+		$hide_labels = $open_table_shortcode->check_shortcode_value( $hide_labels );
 
 
 		/*

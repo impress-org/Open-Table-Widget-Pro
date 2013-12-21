@@ -2,6 +2,5 @@
 node_modules
 .jshintrc
 package.json
-.gitignore
 Gruntfile.js
 licence/*
