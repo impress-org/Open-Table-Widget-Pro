@@ -120,7 +120,7 @@ function otw_frontend_api_restaurant_autocomplete(request, response, city) {
 	var restaurantsNameArray = [];
 
 	// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-	jQuery.post(ajaxurl, data, function (jsonResponse) {
+	jQuery.post(otwParams.ajaxurl, data, function (jsonResponse) {
 
 		jsonResponse = jQuery.parseJSON(jsonResponse);
 
