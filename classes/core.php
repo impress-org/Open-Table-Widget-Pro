@@ -95,7 +95,8 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				'wordimpress_user_account_page' => 'http://wordimpress.com/my-account/', //used to query API
 				'product_id'                    => 'Open Table Widget Pro', //name of product; used to target specific product in WooCommerce
 				'settings_page'                 => 'settings_page_opentablewidgetpro', //used to enqueue JS only for that page
-				'settings_options'              => get_option( 'opentablewidget_options' ), //plugin options settings
+				'settings_options_val'          => 'opentablewidget_options', //plugin options value used to save data
+				'settings_options'              => get_option( 'opentablewidget_options' ), //plugin options settings data used to query
 				'transient_timeout'             => 60 * 60 * 12, //used to perform plugin update checks
 				'textdomain'                    => $this->textdomain, //used for translations
 				'pluginbase'                    => OTW_PLUGIN_NAME_PLUGIN, //used for updates API
