@@ -295,24 +295,24 @@ class Open_Table_Widget extends WP_Widget {
 	 * @see WP_Widget::form()
 	 */
 	function form( $instance ) {
-		$title          = esc_attr( $instance['title'] );
-		$displayOption  = $instance['display_option'];
-		$align          = $instance['align'];
-		$widgetStyle    = esc_attr( $instance['widget_style'] );
-		$restaurantName = esc_attr( $instance['restaurant_name'] );
-		$restaurantID   = esc_attr( $instance['restaurant_id'] );
-		$restaurantIDs  = $instance['restaurant_ids'];
-		$hideLabels     = esc_attr( $instance['hide_labels'] );
-		$preContent     = esc_attr( $instance['pre_content'] );
-		$postContent    = esc_attr( $instance['post_content'] );
-		$labelMultiple  = esc_attr( $instance['label_multiple'] );
-		$labelCity      = esc_attr( $instance['label_city'] );
-		$labelDate      = esc_attr( $instance['label_date'] );
-		$labelTime      = esc_attr( $instance['label_time'] );
-		$labelParty     = esc_attr( $instance['label_party'] );
-		$inputSubmit    = esc_attr( $instance['input_submit'] );
-		$widgetLanguage = esc_attr( $instance['widget_language'] );
-		$lookupCity     = esc_attr( $instance['lookup_city'] );
+		$title          = empty( $instance['title'] ) ? '' : esc_attr( $instance['title'] );
+		$displayOption  = empty( $instance['display_option'] ) ? '' : $instance['display_option'];
+		$align          = empty( $instance['align'] ) ? '' : $instance['align'];
+		$widgetStyle    = empty( $instance['widget_style'] ) ? '' : esc_attr( $instance['widget_style'] );
+		$restaurantName = empty( $instance['restaurant_name'] ) ? '' : esc_attr( $instance['restaurant_name'] );
+		$restaurantID   = empty( $instance['restaurant_id'] ) ? '' : esc_attr( $instance['restaurant_id'] );
+		$restaurantIDs  = empty( $instance['restaurant_ids'] ) ? '' : esc_attr( $instance['restaurant_ids'] );
+		$hideLabels     = empty( $instance['hide_labels'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$preContent     = empty( $instance['pre_content'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$postContent    = empty( $instance['post_content'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$labelMultiple  = empty( $instance['label_multiple'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$labelCity      = empty( $instance['label_city'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$labelDate      = empty( $instance['label_date'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$labelTime      = empty( $instance['label_time'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$labelParty     = empty( $instance['label_party'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$inputSubmit    = empty( $instance['input_submit'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$lookupCity     = empty( $instance['lookup_city'] ) ? '' : esc_attr( $instance['lookup_city'] );
 		//Get the widget form
 		$widgetPath = OTW_PLUGIN_PATH . '/inc/widget-form.php';
 		if ( file_exists( $widgetPath ) ) {
