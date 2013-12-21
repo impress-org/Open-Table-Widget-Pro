@@ -141,6 +141,7 @@ class Open_Table_Widget extends WP_Widget {
 		wp_register_script( 'otw-widget-js', plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ), array( 'jquery' ) ) );
 		wp_enqueue_script( 'otw-widget-js' );
 		$jsParams = array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'restaurant_id' => ''
 		);
 		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
