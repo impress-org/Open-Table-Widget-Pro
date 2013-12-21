@@ -141,7 +141,7 @@ class Open_Table_Widget extends WP_Widget {
 		wp_register_script( 'otw-widget-js', plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ), array( 'jquery' ) ) );
 		wp_enqueue_script( 'otw-widget-js' );
 		$jsParams = array(
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'ajax_url'      => admin_url( 'admin-ajax.php' ),
 			'restaurant_id' => ''
 		);
 		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
@@ -161,6 +161,8 @@ class Open_Table_Widget extends WP_Widget {
 		if ( isset( $instance['title'] ) ) {
 			$title = apply_filters( 'widget_title', $instance['title'] );
 		}
+		$align          = empty( $instance['align'] ) ? '' : $instance['align'];
+		$maxWidth       = empty( $instance['max_width'] ) ? '' : $instance['max_width'];
 		$displayOption  = empty( $instance['display_option'] ) ? '' : $instance['display_option'];
 		$widgetStyle    = empty( $instance['widget_style'] ) ? '' : $instance['widget_style'];
 		$restaurantName = empty( $instance['restaurant_name'] ) ? '' : $instance['restaurant_name'];
@@ -209,6 +211,16 @@ class Open_Table_Widget extends WP_Widget {
 			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
 		}
 
+
+		/* Alignment (adds class) */
+		if ( ! empty( $align ) ) {
+			$before_widget = str_replace( 'class="', 'class="otw-widget-align-' . $align . ' ', $before_widget );
+		}
+		/* Max Width (adds inline style) */
+		if ( ! empty( $maxWidth ) ) {
+			$before_widget = str_replace( '">', '" style="max-width:' . $maxWidth . ';">', $before_widget );
+		}
+
 		/* Before widget */
 		echo $before_widget;
 
@@ -232,6 +244,7 @@ class Open_Table_Widget extends WP_Widget {
 
 			echo $before_title . $title . $after_title;
 		}
+
 		?>
 
 		<div class="otw-<?php echo sanitize_title( $widgetStyle ); ?>">
@@ -254,6 +267,8 @@ class Open_Table_Widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance                    = $old_instance;
 		$instance['title']           = strip_tags( $new_instance['title'] );
+		$instance['align']           = strip_tags( $new_instance['align'] );
+		$instance['max_width']       = strip_tags( $new_instance['max_width'] );
 		$instance['display_option']  = strip_tags( $new_instance['display_option'] );
 		$instance['widget_style']    = strip_tags( $new_instance['widget_style'] );
 		$instance['restaurant_name'] = strip_tags( $new_instance['restaurant_name'] );
@@ -282,6 +297,7 @@ class Open_Table_Widget extends WP_Widget {
 	function form( $instance ) {
 		$title          = esc_attr( $instance['title'] );
 		$displayOption  = $instance['display_option'];
+		$align          = $instance['align'];
 		$widgetStyle    = esc_attr( $instance['widget_style'] );
 		$restaurantName = esc_attr( $instance['restaurant_name'] );
 		$restaurantID   = esc_attr( $instance['restaurant_id'] );

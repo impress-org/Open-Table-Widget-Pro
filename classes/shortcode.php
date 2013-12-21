@@ -28,6 +28,8 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 		//Defaults shortcode vals
 		$defaults = array(
 			'title'           => 'Open Table Reservations',
+			'align'           => '',
+			'max_width'       => '250px',
 			'display_option'  => '1',
 			'restaurant_id'   => '49051',
 			'restaurant_ids'  => '49051',
@@ -94,6 +96,8 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 		$globals = array(
 			'display_option'  => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'], //default is 0
 			'title'           => empty( $atts['title'] ) ? $title : $atts['title'],
+			'align'           => empty( $atts['align'] ) ? $align : $atts['align'],
+			'max_width'       => empty( $atts['max_width'] ) ? $max_width : $atts['max_width'],
 			'hide_labels'     => $hide_labels,
 			'widget_style'    => empty( $atts['widget_style'] ) ? $widget_style : $atts['widget_style'],
 			'widget_language' => empty( $atts['widget_language'] ) ? $widget_language : $atts['widget_language'],
