@@ -72,21 +72,3 @@ function otw_options_scripts( $hook ) {
 
 
 }
-
-/**
- * Filter Update Checks
- *
- * Adds licence key to params
- *
- * @param $queryArgs
- *
- * @return mixed
- */
-function wsh_filter_update_checks( $queryArgs ) {
-	$options = get_option( 'yelp_widget_settings' );
-	if ( ! empty( $options['yelp_widget_premium_licence'] ) ) {
-		$queryArgs['licence_key'] = $options['yelp_widget_premium_licence'];
-	}
-
-	return $queryArgs;
-}
