@@ -163,7 +163,7 @@ class Open_Table_Widget extends WP_Widget {
 		}
 		$align          = empty( $instance['align'] ) ? '' : $instance['align'];
 		$maxWidth       = empty( $instance['max_width'] ) ? '' : $instance['max_width'];
-		$displayOption  = empty( $instance['display_option'] ) ? '' : $instance['display_option'];
+		$displayOption  = ! isset( $instance['display_option'] ) ? '' : $instance['display_option'];
 		$widgetStyle    = empty( $instance['widget_style'] ) ? '' : $instance['widget_style'];
 		$restaurantName = empty( $instance['restaurant_name'] ) ? '' : $instance['restaurant_name'];
 		$restaurantID   = empty( $instance['restaurant_id'] ) ? '' : $instance['restaurant_id'];
@@ -296,7 +296,7 @@ class Open_Table_Widget extends WP_Widget {
 	 */
 	function form( $instance ) {
 		$title          = empty( $instance['title'] ) ? '' : esc_attr( $instance['title'] );
-		$displayOption  = empty( $instance['display_option'] ) ? '' : $instance['display_option'];
+		$displayOption  = ! isset( $instance['display_option'] ) ? '' : $instance['display_option'];
 		$align          = empty( $instance['align'] ) ? '' : $instance['align'];
 		$widgetStyle    = empty( $instance['widget_style'] ) ? '' : esc_attr( $instance['widget_style'] );
 		$restaurantName = empty( $instance['restaurant_name'] ) ? '' : esc_attr( $instance['restaurant_name'] );
