@@ -89,7 +89,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 
 			//Licence Args
 			// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
-			define( 'WORDIMPRESS_STORE_URL', 'http://wordimpress.dev' );
+			define( 'WORDIMPRESS_STORE_URL', 'http://wordimpress.com' );
 
 			// the name of your product. This should match the download name in EDD exactly
 			define( 'WORDIMPRESS_ITEM_NAME', 'Open Table Widget' );
