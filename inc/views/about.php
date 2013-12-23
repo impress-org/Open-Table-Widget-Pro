@@ -10,12 +10,3 @@
 
 	</div>
 </div>
-<div class="wordimpress-section">
-
-	<?php
-	/**
-	 * Output Licensing Fields
-	 */
-	$this->licencing->licence_fields(); ?>
-
-</div>

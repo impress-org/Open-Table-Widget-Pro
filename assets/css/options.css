@@ -81,3 +81,9 @@ Labels
 	border-color: #5AAD34;
 	background-color: #78CD51;
 }
+
+.edd-wordimpress-license-wrap {
+	border-top: 1px solid #CCC;
+	margin: -30px 0 0;
+	padding: 10px 0 0;
+}

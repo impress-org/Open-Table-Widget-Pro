@@ -7,6 +7,7 @@ jQuery(document).ready(function ($) {
 	// ########## Tabs ##########
 	// Nav tab click
 	$('#sunrise-plugin-tabs span').click(function (event) {
+
 		// Hide tips
 		$('.sunrise-plugin-spin, .sunrise-plugin-success-tip').hide();
 		// Remove active class from all tabs
@@ -19,6 +20,14 @@ jQuery(document).ready(function ($) {
 		$('.sunrise-plugin-pane:eq(' + $(this).index() + ')').show();
 		// Save tab to cookies
 		sunriseCreateCookie(pagenow + '_last_tab', $(this).index(), 365);
+
+		//Licencing hide/show
+		if($(this).index() !== 0){
+			$('.edd-wordimpress-license-wrap').hide();
+		} else {
+			$('.edd-wordimpress-license-wrap').show();
+		}
+
 	});
 
 	// Auto-open tab by link with hash

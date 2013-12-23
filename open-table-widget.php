@@ -19,8 +19,13 @@ function init_open_table_widget() {
 
 	// Include Core Framework class
 	require_once 'classes/core.php';
+
 	// Include Licensing
-	require_once 'licence/licence.php';
+	if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
+		// load our custom updater
+		include( dirname( __FILE__ ) . '/licence/licence.php' );
+		include( dirname( __FILE__ ) . '/licence/classes/EDD_SL_Plugin_Updater.php' );
+	}
 
 	global $open_table_widget;
 	// Create plugin instance

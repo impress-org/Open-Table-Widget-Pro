@@ -88,18 +88,21 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			load_plugin_textdomain( $this->textdomain, false, trailingslashit( path_join( dirname( $this->basename ), trim( $this->meta['DomainPath'], '/' ) ) ) );
 
 			//Licence Args
-			$licence_args = array(
+			// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
+			define( 'WORDIMPRESS_STORE_URL', 'http://wordimpress.dev' );
 
-				'version'                       => $this->version, //Base URL for Website container WooCommerce API
-				'wordimpress_api_base'          => 'http://wordimpress.com/', //Base URL for Website container WooCommerce API
-				'wordimpress_user_account_page' => 'http://wordimpress.com/my-account/', //used to query API
-				'product_id'                    => 'Open Table Widget Pro', //name of product; used to target specific product in WooCommerce
-				'settings_page'                 => 'settings_page_opentablewidgetpro', //used to enqueue JS only for that page
-				'settings_options_val'          => 'opentablewidget_options', //plugin options value used to save data
-				'settings_options'              => get_option( 'opentablewidget_options' ), //plugin options settings data used to query
-				'transient_timeout'             => 60 * 60 * 12, //used to perform plugin update checks
-				'textdomain'                    => $this->textdomain, //used for translations
-				'pluginbase'                    => OTW_PLUGIN_NAME_PLUGIN, //used for updates API
+			// the name of your product. This should match the download name in EDD exactly
+			define( 'WORDIMPRESS_ITEM_NAME', 'Open Table Widget' );
+
+			add_action( 'admin_init', array( $this, 'edd_sl_wordimpress_updater' ) );
+
+
+			//Licence Args
+			$licence_args = array(
+				'settings_page'       => 'settings_page_opentablewidgetpro', //Name of License Option in DB
+				'licence_key_setting' => 'otw_licence_setting', //Name of License Option in DB
+				'licence_key_option'  => 'edd_open_table_license_key', //Name of License Option in DB
+				'licence_key_status'  => 'edd_open_table_license_key_status', //Name of License Option in DB
 			);
 
 			$this->licencing = new WordImpress_Licensing( $licence_args );
@@ -107,6 +110,28 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 
 		}
 
+
+		function edd_sl_wordimpress_updater() {
+
+			// retrieve our license key from the DB
+			$license_key = trim( get_option( 'edd_open_table_license_key' ) );
+
+			// setup the updater
+			$edd_updater = new EDD_SL_Plugin_Updater( WORDIMPRESS_STORE_URL, __FILE__, array(
+					'version'   => '1.0', // current version number
+					'license'   => $license_key, // license key (used get_option above to retrieve from DB)
+					'item_name' => WORDIMPRESS_ITEM_NAME, // name of this plugin
+					'author'    => 'Devin Walker' // author of this plugin
+				)
+			);
+
+		}
+
+		/**
+		 * Debug
+		 *
+		 * Desc: Helper function
+		 */
 		function debug() {
 			die( '<pre>' . print_r( $this, true ) . '</pre>' );
 		}
