@@ -92,7 +92,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			define( 'WORDIMPRESS_STORE_URL', 'http://wordimpress.com' );
 
 			// the name of your product. This should match the download name in EDD exactly
-			define( 'WORDIMPRESS_ITEM_NAME', 'Open Table Widget' );
+			define( 'WORDIMPRESS_ITEM_NAME', 'Open Table Widget Pro' );
 
 
 			//Licence Args
