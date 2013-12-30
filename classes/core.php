@@ -88,7 +88,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			load_plugin_textdomain( $this->textdomain, false, trailingslashit( path_join( dirname( $this->basename ), trim( $this->meta['DomainPath'], '/' ) ) ) );
 
 			//Licence Args
-			$this->store_url = 'http://wordimpress.dev';
+			$this->store_url = 'http://wordimpress.com';
 			$this->item_name = 'Open Table Widget Pro';
 
 			//Licence Args
