@@ -16,15 +16,15 @@
 	<label for="<?php echo $this->get_field_id( 'display_option' ); ?>"><?php _e( 'Display Option', 'otw' ); ?>:</label><br />
 
     <span class="otw-method-span single-option-wrap">
-        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> search-api-option" value="0" <?php checked( '0', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Single Restaurant Reservation', 'otw' ); ?>
+        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-0" value="0" <?php checked( '0', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Single Restaurant Reservation', 'otw' ); ?>
 				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will only allow reservations for a single selected restaurant.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span><br />
     <span class="otw-method-span multiple-option-wrap">
-    <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> business-api-option" value="1" <?php checked( '1', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Predefined Restaurants', 'otw' ); ?>
+    <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-1" value="1" <?php checked( '1', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Predefined Restaurants', 'otw' ); ?>
 				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow reservations for multiple predefined restaurants.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span><br />
     <span class="otw-method-span user-option-wrap">
-        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> search-api-option" value="2" <?php checked( '2', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'User Lookup Reservations', 'otw' ); ?>
+        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-2" value="2" <?php checked( '2', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'User Lookup Reservations', 'otw' ); ?>
 				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow the user to select a city and then lookup restaurants for reservations within their chosen city.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span>
 </p>

@@ -30,7 +30,7 @@
 	/**
 	 * Output Licensing Fields
 	 */
-	if ( class_exists( 'WordImpress_Licensing' ) ) {
+	if ( class_exists( 'PluginOpenTableWidgetPro\WordImpress_Licensing' ) ) {
 		$this->licencing->edd_wordimpress_license_page();
 	}
 	?>

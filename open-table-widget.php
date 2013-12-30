@@ -3,7 +3,7 @@
 Plugin Name: Open Table Widget Pro
 Plugin URI: http://wordimpress.com/plugins/open-table-widget-pro/
 Description: Pro version of Open Table Widget: Display an Open Table reservation widget for your restaurant, bar, nightclub, hotel or eatery.
-Version: 1.2
+Version: 1.2.1
 Author: Devin Walker
 Author URI: http://imdev.in/
 Text Domain: otw
@@ -20,11 +20,12 @@ function init_open_table_widget() {
 	// Include Core Framework class
 	require_once 'classes/core.php';
 
+	include_once( dirname( __FILE__ ) . '/licence/licence.php' );
+
 	// Include Licensing
 	if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 		// load our custom updater
-		include( dirname( __FILE__ ) . '/licence/licence.php' );
-		include( dirname( __FILE__ ) . '/licence/classes/EDD_SL_Plugin_Updater.php' );
+		include_once( dirname( __FILE__ ) . '/licence/classes/EDD_SL_Plugin_Updater.php' );
 	}
 
 	global $open_table_widget;

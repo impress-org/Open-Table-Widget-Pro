@@ -88,22 +88,21 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			load_plugin_textdomain( $this->textdomain, false, trailingslashit( path_join( dirname( $this->basename ), trim( $this->meta['DomainPath'], '/' ) ) ) );
 
 			//Licence Args
-			// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
-			define( 'WORDIMPRESS_STORE_URL', 'http://wordimpress.com' );
-
-			// the name of your product. This should match the download name in EDD exactly
-			define( 'WORDIMPRESS_ITEM_NAME', 'Open Table Widget Pro' );
-
+			$this->store_url = 'http://wordimpress.dev';
+			$this->item_name = 'Open Table Widget Pro';
 
 			//Licence Args
 			$licence_args      = array(
+				'plugin_basename'     => OTW_PLUGIN_NAME_PLUGIN, //Name of License Option in DB
 				'settings_page'       => 'settings_page_opentablewidgetpro', //Name of License Option in DB
+				'store_url'           => $this->store_url, //Name of License Option in DB
+				'item_name'           => $this->item_name, //Name of License Option in DB
 				'licence_key_setting' => 'otw_licence_setting', //Name of License Option in DB
 				'licence_key_option'  => 'edd_open_table_license_key', //Name of License Option in DB
 				'licence_key_status'  => 'edd_open_table_license_key_status', //Name of License Option in DB
 			);
 			$this->licence_key = trim( get_option( $licence_args['licence_key_option'] ) );
-			$this->licencing   = new WordImpress_Licensing( $licence_args );
+			$this->licencing   = new PluginOpenTableWidgetPro\WordImpress_Licensing( $licence_args );
 			add_action( 'admin_init', array( $this, 'edd_sl_wordimpress_updater' ) );
 
 
@@ -113,10 +112,10 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		function edd_sl_wordimpress_updater() {
 
 			// setup the updater
-			$edd_updater = new EDD_SL_Plugin_Updater( WORDIMPRESS_STORE_URL, OTW_PLUGIN_NAME_PLUGIN, array(
+			$edd_updater = new EDD_SL_Plugin_Updater( $this->store_url, OTW_PLUGIN_NAME_PLUGIN, array(
 					'version'   => $this->version, // current version number
 					'license'   => $this->licence_key, // license key (used get_option above to retrieve from DB)
-					'item_name' => WORDIMPRESS_ITEM_NAME, // name of this plugin
+					'item_name' => $this->item_name, // name of this plugin
 					'author'    => 'Devin Walker' // author of this plugin
 				)
 			);
@@ -138,7 +137,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		function is_settings() {
 			global $pagenow;
 
-			return is_admin() && $pagenow == $this->settings['parent'] && $_GET['page'] == $this->slug;
+			return is_admin() && $pagenow == $this->settings['parent'] && isset($_GET['page']) && $_GET['page'] == $this->slug;
 		}
 
 		/**
