@@ -1,3 +1,4 @@
 [submodule "licence"]
 	path = licence
+	branch = opentable
 	url = git@flashbang.beanstalkapp.com:/flashbang/wordimpress-licencing.git
