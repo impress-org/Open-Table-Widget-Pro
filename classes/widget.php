@@ -24,7 +24,7 @@ class Open_Table_Widget extends WP_Widget {
 			)
 		);
 
-		$this->options = get_option( 'opentablewidget_options' );
+		$this->options = get_option( 'opentablewidgetpro_options' );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'add_otw_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_otw_admin_widget_scripts' ) );
@@ -106,11 +106,26 @@ class Open_Table_Widget extends WP_Widget {
 
 	function add_otw_widget_scripts() {
 
+		//Determine whether to display minified scripts/css or not (debugging true sets it)
+		if ( OTW_DEBUG == true ) {
+			$otw_css                 = plugins_url( 'assets/css/open-table-widget.css', dirname( __FILE__ ) );
+			$otw_datepicker          = plugins_url( 'assets/js/jquery.bootstrap-datepicker.js', dirname( __FILE__ ) );
+			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.js', dirname( __FILE__ ) );
+			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
+			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.js', dirname( __FILE__ ) );
+		} else {
+			$otw_css                 = plugins_url( 'assets/css/open-table-widget.min.css', dirname( __FILE__ ) );
+			$otw_datepicker          = plugins_url( 'assets/js/jquery.bootstrap-datepicker.min.js', dirname( __FILE__ ) );
+			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.min.js', dirname( __FILE__ ) );
+			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
+			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ) );
+		}
+
 		/**
 		 * CSS
 		 */
 		if ( $this->options["disable_css"] !== "on" ) {
-			wp_register_style( 'otw_widget', plugins_url( 'assets/css/open-table-widget.min.css', dirname( __FILE__ ) ) );
+			wp_register_style( 'otw_widget', $otw_css );
 			wp_enqueue_style( 'otw_widget' );
 		}
 		/**
@@ -119,26 +134,27 @@ class Open_Table_Widget extends WP_Widget {
 		wp_enqueue_script( 'jquery' );
 
 		//Datepicker
-		wp_register_script( 'otw_datepicker_js', plugins_url( 'assets/js/jquery.datepicker.min.js', dirname( __FILE__ ), array( 'jquery' ) ) );
+		wp_register_script( 'otw_datepicker_js', $otw_datepicker, array( 'jquery' ) );
 		wp_enqueue_script( 'otw_datepicker_js' );
 
 
 		//Select Menus
 		if ( $this->options["disable_bootstrap_select"] !== "on" ) {
 
-			wp_register_script( 'otw_select_js', plugins_url( 'assets/js/jquery.bootstrap-select.min.js', dirname( __FILE__ ), array( 'jquery' ) ) );
+			wp_register_script( 'otw_select_js', $otw_select_js, array( 'jquery' ) );
 			wp_enqueue_script( 'otw_select_js' );
 
 		}
 
+		//bootstrap dropdowns
 		if ( $this->options["disable_bootstrap_dropdown"] !== "on" && $this->options["disable_bootstrap_select"] !== "on" ) {
-			wp_register_script( 'otw_dropdown_js', plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) ) );
+			wp_register_script( 'otw_dropdown_js', $otw_bootstrap_dropdowns );
 			wp_enqueue_script( 'otw_dropdown_js' );
 		}
 
 
 		//Open Table Widget Specific Scripts
-		wp_register_script( 'otw-widget-js', plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ), array( 'jquery' ) ) );
+		wp_register_script( 'otw-widget-js', $otw_widget_js, array( 'jquery' ) );
 		wp_enqueue_script( 'otw-widget-js' );
 		$jsParams = array(
 			'ajax_url'      => admin_url( 'admin-ajax.php' ),
@@ -231,7 +247,7 @@ class Open_Table_Widget extends WP_Widget {
 		 */
 			// no 'class' attribute - add one with the value of width
 			if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
-				$before_title = str_replace( '>', 'class="otw-widget-title"', $before_title );
+				$before_title = str_replace( '>', ' class="otw-widget-title">', $before_title );
 			} elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
 				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
 
@@ -311,7 +327,7 @@ class Open_Table_Widget extends WP_Widget {
 		$labelTime      = empty( $instance['label_time'] ) ? '' : esc_attr( $instance['hide_labels'] );
 		$labelParty     = empty( $instance['label_party'] ) ? '' : esc_attr( $instance['hide_labels'] );
 		$inputSubmit    = empty( $instance['input_submit'] ) ? '' : esc_attr( $instance['hide_labels'] );
-		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : esc_attr( $instance['hide_labels'] );
+		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : esc_attr( $instance['widget_language'] );
 		$lookupCity     = empty( $instance['lookup_city'] ) ? '' : esc_attr( $instance['lookup_city'] );
 		//Get the widget form
 		$widgetPath = OTW_PLUGIN_PATH . '/inc/widget-form.php';

@@ -13,10 +13,11 @@ jQuery(document).ready(function ($) {
 	$('.otw-reservation-date').datepicker({
 		dateFormat    : $(this).attr('data-date-format'),
 		autoclose     : true,
+		startDate     : '0',
 		todayHighlight: true
 	});
 
-	$(".otw-reservation-date").datepicker("setValue", '');
+	$('.otw-reservation-date').datepicker('update', new Date());
 
 	//Selects (only if loaded)
 	if (typeof $.fn.selectpicker == 'function') {
@@ -50,51 +51,54 @@ jQuery(document).ready(function ($) {
 
 
 	//Frontend Autocomplete functionality
-	jQuery(".otw-restaurant-autocomplete").autocomplete({
-
-		minLength: 2,
-
-		source: function (request, response) {
-			var element = this.element; // <-- this.element is the input the widget is bound to.
-			var city = jQuery(element).parents('.otw-wrapper').find('.otw-reservation-city').val();
-			city = city.replace(/\s/g, "%20"); // replace spaces
-
-			otw_frontend_api_restaurant_autocomplete(request, response, city);
-
-		},
-
-		select: function (event, ui) {
-
-			//Set Restaurant ID field when clicked
-			jQuery(this).parents('.otw-wrapper').children('.RestaurantID, .RestaurantReferralID, .rid').val(ui.item.id);
-
-		}
+	if (jQuery('.otw-restaurant-autocomplete').length !== 0) {
 
 
-	});
+		jQuery(".otw-restaurant-autocomplete").autocomplete({
 
-	//Custom Autocomplete Return Values
-	jQuery.ui.autocomplete.prototype._renderItem = function (ul, item) {
+			minLength: 2,
 
-		var itemAddress = '';
-		if (typeof(item.address) !== 'undefined' && item.address.length > 0) {
-			itemAddress = item.address;
-		}
-		return jQuery("<li />")
-				.data("item.autocomplete", item)
-				.append("<a>" + "<span class='otw-item-val'>" + item.value + "</span><span class='otw-item-address'>" + itemAddress + "</span>" + "</a>")
-				.appendTo(ul);
+			source: function (request, response) {
+				var element = this.element; // <-- this.element is the input the widget is bound to.
+				var city = jQuery(element).parents('.otw-wrapper').find('select.otw-reservation-city').val();
+				city = city.replace(/\s/g, "%20"); // replace spaces
+				otw_frontend_api_restaurant_autocomplete(request, response, city);
 
-	};
+			},
 
-	//Ensure width doesn't overlap the widget
-	jQuery.ui.autocomplete.prototype._resizeMenu = function () {
-		var ul = this.menu.element;
+			select: function (event, ui) {
+
+				//Set Restaurant ID field when clicked
+				jQuery(this).parents('.otw-wrapper').children('.RestaurantID, .RestaurantReferralID, .rid').val(ui.item.id);
+
+			}
+
+
+		});
+
+		//Custom Autocomplete Return Values
+		jQuery.ui.autocomplete.prototype._renderItem = function (ul, item) {
+
+			var itemAddress = '';
+			if (typeof(item.address) !== 'undefined' && item.address.length > 0) {
+				itemAddress = item.address;
+			}
+			return jQuery("<li />")
+					.data("item.autocomplete", item)
+					.append("<a>" + "<span class='otw-item-val'>" + item.value + "</span><span class='otw-item-address'>" + itemAddress + "</span>" + "</a>")
+					.appendTo(ul);
+
+		};
+
+		//Ensure width doesn't overlap the widget
+		jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+			var ul = this.menu.element;
 //        this.menu.element.outerWidth();
-		ul.outerWidth(this.element.outerWidth());
+			ul.outerWidth(this.element.outerWidth());
 
-	}
+		}
 
+	}//endif element exists
 
 });
 

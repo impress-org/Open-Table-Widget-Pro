@@ -41,7 +41,6 @@ Bootstrap Necessities
 	width: 100%;
 	border: 1px solid #CCC;
 	background-color: #FFF;
-	height: 30px;
 	line-height: 30px;
 }
 
@@ -1332,7 +1331,7 @@ OTW Minimal Themes
 	margin-right: 3%;
 }
 
-.otw-minimal-light-style .otw-reservation-date, .otw-minimal-dark-style .otw-reservation-date {
+.otw-reservation-date {
 	width: 100%;
 	background: url('../images/calendar-icon.png') no-repeat 96% center #FFF;
 	padding: 6px;
