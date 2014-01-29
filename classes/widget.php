@@ -242,15 +242,16 @@ class Open_Table_Widget extends WP_Widget {
 
 		// if the title is set & the user hasn't disabled title output
 		if ( ! empty( $title ) ) {
-			/* Add the width from $widget_width to the class from the $before widget
+			/* Add class to before_widget from within a custom widget
 		 http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
 		 */
 			// no 'class' attribute - add one with the value of width
 			if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
 				$before_title = str_replace( '>', ' class="otw-widget-title">', $before_title );
-			} elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
+			}
+			//widget title has 'class' attribute
+			elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
 				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
-
 			} //no 'title' at all so wrap widget with div
 			else {
 				$before_title = '<h3 class="">';

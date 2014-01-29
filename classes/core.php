@@ -92,16 +92,19 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			$this->item_name = 'Open Table Widget Pro';
 
 			//Licence Args
-			$licence_args      = array(
+			$licence_args = array(
 				'plugin_basename'     => OTW_PLUGIN_NAME_PLUGIN, //Name of License Option in DB
 				'settings_page'       => 'settings_page_opentablewidgetpro', //Name of License Option in DB
 				'store_url'           => $this->store_url, //Name of License Option in DB
 				'item_name'           => $this->item_name, //Name of License Option in DB
 				'licence_key_setting' => 'otw_licence_setting', //Name of License Option in DB
 				'licence_key_option'  => 'edd_open_table_license_key', //Name of License Option in DB
-				'licence_key_status'  => 'edd_open_table_license_key_status', //Name of License Option in DB
+				'licence_key_status'  => 'edd_open_table_license_status', //Name of License Option in DB
 			);
-			$this->licence_key = trim( get_option( $licence_args['licence_key_option'] ) );
+
+			$current_options = get_option( $licence_args['licence_key_option'] );
+			$this->licence_key = ! empty( $current_options ) ? trim( $current_options['license_key'] ) : '';
+
 			$this->licencing   = new PluginOpenTableWidgetPro\WordImpress_Licensing( $licence_args );
 			add_action( 'admin_init', array( $this, 'edd_sl_wordimpress_updater' ) );
 
@@ -137,7 +140,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		function is_settings() {
 			global $pagenow;
 
-			return is_admin() && $pagenow == $this->settings['parent'] && isset($_GET['page']) && $_GET['page'] == $this->slug;
+			return is_admin() && $pagenow == $this->settings['parent'] && isset( $_GET['page'] ) && $_GET['page'] == $this->slug;
 		}
 
 		/**

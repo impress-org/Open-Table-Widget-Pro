@@ -128,7 +128,15 @@
 		<label for="<?php echo $this->get_field_id( 'widget_style' ); ?>"><?php _e( 'Widget Theme' ); ?>:</label>
 		<select name="<?php echo $this->get_field_name( 'widget_style' ); ?>" id="#" class="widefat profield">
 			<?php
-			$options = array( __( 'Bare Bones', 'otw' ), __( 'Minimal Light', 'otw' ), __( 'Minimal Dark', 'otw' ), __( 'Shadow Light', 'otw' ), __( 'Shadow Dark', 'otw' ), __( 'Inset Light', 'otw' ), __( 'Inset Dark', 'otw' ) );
+			$options = array(
+				__( 'Bare Bones', 'otw' ),
+				__( 'Minimal Light', 'otw' ),
+				__( 'Minimal Dark', 'otw' ),
+				__( 'Shadow Light', 'otw' ),
+				__( 'Shadow Dark', 'otw' ),
+				__( 'Inset Light', 'otw' ),
+				__( 'Inset Dark', 'otw' )
+			);
 			//Counter for Option Values
 			$counter = 0;
 
