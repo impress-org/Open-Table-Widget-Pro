@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
 
 	//Restaurant Change
 	$('.otw-reservation-restaurant').on('change', function () {
-		$('.RestaurantID, .RestaurantReferralID, .rid').val($(this).val());
+		$(this).parentsUntil('.otw-widget-form').find('.RestaurantID, .RestaurantReferralID, .rid').val($(this).val());
 	});
 
 

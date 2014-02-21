@@ -82,6 +82,7 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 * New: Reservation default time field
 * New: Shortcode options for new time fields
 * Updated: Shortcode documentation in the plugin docs
+* Fixed: Issue with multiple widgets on page and conflicting restaurant selections
 
 = 1.4 =
 * New: Debug constant added for easier script and css debugging by developers
