@@ -37,20 +37,23 @@ class Open_Table_Widget extends WP_Widget {
 
 		if ( $hook == 'widgets.php' ) {
 
+			$suffix = defined( 'OTW_DEBUG' ) && OTW_DEBUG ? '' : '.min';
+
 			//Enqueue
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-widget' );
+			wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
 
-			wp_enqueue_script( 'otw_widget_admin_scripts', plugins_url( 'assets/js/admin-widget.min.js', dirname( __FILE__ ) ), array( 'jquery' ) );
+			wp_enqueue_script( 'otw_widget_admin_scripts', plugins_url( 'assets/js/admin-widget' . $suffix . '.js', dirname( __FILE__ ) ), array( 'jquery' ) );
 
 			// in javascript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
 			wp_localize_script( 'otw_widget_admin_scripts', 'ajax_object',
 				array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'city_array' => $this->otw_get_cities() ) );
 
-			wp_enqueue_style( 'otw_widget_admin_css', plugins_url( 'assets/css/admin-widget.min.css', dirname( __FILE__ ) ) );
-			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom.min.css', dirname( __FILE__ ) ) );
+			wp_enqueue_style( 'otw_widget_admin_css', plugins_url( 'assets/css/admin-widget' . $suffix . '.css', dirname( __FILE__ ) ) );
+			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom' . $suffix . '.css', dirname( __FILE__ ) ) );
 
 		} else {
 			return;
@@ -195,6 +198,10 @@ class Open_Table_Widget extends WP_Widget {
 		$inputSubmit    = empty( $instance['input_submit'] ) ? '' : $instance['input_submit'];
 		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : $instance['widget_language'];
 		$lookupCity     = empty( $instance['lookup_city'] ) ? '' : $instance['lookup_city'];
+		$timeStart      = empty( $instance['time_start'] ) ? '' : $instance['time_start'];
+		$timeEnd        = empty( $instance['time_end'] ) ? '' : $instance['time_end'];
+		$timeDefault    = empty( $instance['time_default'] ) ? '' : $instance['time_default'];
+		$timeIncrement  = empty( $instance['time_increment'] ) ? '' : $instance['time_increment'];
 
 
 		//Determine widget display option
@@ -248,8 +255,7 @@ class Open_Table_Widget extends WP_Widget {
 			// no 'class' attribute - add one with the value of width
 			if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
 				$before_title = str_replace( '>', ' class="otw-widget-title">', $before_title );
-			}
-			//widget title has 'class' attribute
+			} //widget title has 'class' attribute
 			elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
 				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
 			} //no 'title' at all so wrap widget with div
@@ -302,6 +308,10 @@ class Open_Table_Widget extends WP_Widget {
 		$instance['input_submit']    = strip_tags( $new_instance['input_submit'] );
 		$instance['widget_language'] = strip_tags( $new_instance['widget_language'] );
 		$instance['lookup_city']     = strip_tags( $new_instance['lookup_city'] );
+		$instance['time_start']      = strip_tags( $new_instance['time_start'] );
+		$instance['time_end']        = strip_tags( $new_instance['time_end'] );
+		$instance['time_default']    = strip_tags( $new_instance['time_default'] );
+		$instance['time_increment']  = strip_tags( $new_instance['time_increment'] );
 
 		return $instance;
 	}
@@ -330,6 +340,12 @@ class Open_Table_Widget extends WP_Widget {
 		$inputSubmit    = empty( $instance['input_submit'] ) ? '' : esc_attr( $instance['hide_labels'] );
 		$widgetLanguage = empty( $instance['widget_language'] ) ? '' : esc_attr( $instance['widget_language'] );
 		$lookupCity     = empty( $instance['lookup_city'] ) ? '' : esc_attr( $instance['lookup_city'] );
+		$timeStart      = empty( $instance['time_start'] ) ? '7:00pm' : esc_attr( $instance['time_start'] );
+		$timeEnd        = empty( $instance['time_end'] ) ? '11:45pm' : esc_attr( $instance['time_end'] );
+		$timeDefault    = empty( $instance['time_default'] ) ? '7:00pm' : esc_attr( $instance['time_default'] );
+		$timeIncrement  = empty( $instance['time_increment'] ) ? '30' : esc_attr( $instance['time_increment'] );
+
+
 		//Get the widget form
 		$widgetPath = OTW_PLUGIN_PATH . '/inc/widget-form.php';
 		if ( file_exists( $widgetPath ) ) {
@@ -338,6 +354,101 @@ class Open_Table_Widget extends WP_Widget {
 
 
 	} //end form function
+
+
+	/**
+	 * Time Function
+	 */
+	function open_table_reservaton_times( $start, $end, $defaultTime, $timeFormat, $timeFormatVal, $increment ) {
+
+		//Time Loop
+		//@SEE: http://stackoverflow.com/questions/6530836/php-time-loop-time-one-and-half-of-hour
+		$inc   = ! empty( $increment ) ? intval( $increment ) * 60 : 15 * 60;
+		$start = ! empty( $start ) ? strtotime( $start ) : ( strtotime( '12AM' ) ); // 6  AM
+		$end   = ! empty( $end ) ? strtotime( $end ) : ( strtotime( '11:59PM' ) ); // 10 PM
+
+		//default time
+		$defaultTime = ! empty( $defaultTime ) ? strtotime( $defaultTime ) : strtotime( "7:00pm" );
+		$defaultTime = date( $timeFormatVal, $defaultTime );
+
+		for ( $i = $start; $i <= $end; $i += $inc ) {
+			// to the standard format
+			$time      = date( $timeFormat, $i );
+			$timeValue = date( $timeFormatVal, $i );
+
+			echo "<option value=\"$timeValue\" " . ( ( $timeValue == $defaultTime ) ? ' selected="selected" ' : "" ) . ">$time</option>" . PHP_EOL;
+
+		}
+
+
+	}
+
+
+	function open_table_get_res_data( $widgetLanguage ) {
+
+		$action = $dateFormat = $timeFormat = $timeFormatVal = '';
+
+		switch ( $widgetLanguage ) {
+			case 'ca-eng':
+				$action        = 'http://www.opentable.com/restaurant-search.aspx';
+				$dateFormat    = 'mm/dd/yyyy';
+				$timeFormat    = 'g:i a';
+				$timeFormatVal = 'g:ia';
+				break;
+			case 'ger-eng':
+				$action        = 'http://www.opentable.de/en-GB/restaurant-search.aspx';
+				$dateFormat    = 'mm/dd/yyyy';
+				$timeFormat    = 'g:i a';
+				$timeFormatVal = 'g:ia';
+				break;
+			case 'ger-ger':
+				$action     = 'http://www.opentable.de/restaurant-search.aspx';
+				$dateFormat = 'dd.mm.yyyy';
+				$timeFormat = $timeFormatVal = 'G:i';
+				break;
+			case 'uk':
+				$action     = 'http://www.toptable.co.uk/restaurant-search.aspx';
+				$dateFormat = 'dd/mm/yyyy';
+				$timeFormat = $timeFormatVal = 'G:i';
+				break;
+			case 'mx-mx':
+				$action        = 'http://www.opentable.com.mx/restaurant-search.aspx';
+				$dateFormat    = 'dd/mm/yyyy';
+				$timeFormat    = 'g:i a';
+				$timeFormatVal = 'g:ia';
+				break;
+			case 'mx-eng':
+				$action        = 'http://www.opentable.com.mx/en-US/restaurant-search.aspx';
+				$dateFormat    = 'mm/dd/yyyy';
+				$timeFormat    = 'g:i a';
+				$timeFormatVal = 'g:ia';
+				break;
+			case 'jp-jp':
+				$action     = 'http://www.opentable.jp/restaurant-search.aspx';
+				$dateFormat = 'yyyy/mm/dd';
+				$timeFormat = $timeFormatVal = 'G:i';
+				break;
+			case 'jp-eng':
+				$action     = 'http://www.opentable.jp/en-GB/single.aspx';
+				$dateFormat = 'yyyy/mm/dd';
+				$timeFormat = $timeFormatVal = 'G:i';
+				break;
+			//usa
+			default:
+				$action        = 'http://www.opentable.com/restaurant-search.aspx';
+				$dateFormat    = 'mm/dd/yyyy';
+				$timeFormat    = 'g:i a';
+				$timeFormatVal = 'g:ia';
+		}
+
+		return array(
+			'action'          => $action,
+			'date_format'     => $dateFormat,
+			'time_format'     => $timeFormat,
+			'time_format_val' => $timeFormatVal
+		);
+
+	}
 
 
 } //end Open_Table_Widget Class

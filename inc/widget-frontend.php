@@ -16,53 +16,15 @@ if ( ! empty( $preContent ) ) {
 	<div class="otw-pre-form-content">
 		<?php echo wpautop( $preContent ); ?>
 	</div>
-<?php } ?>
+<?php }
+$open_table_widget = new Open_Table_Widget();
+//Widget ID
+$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
 
-<?php
-//Action
-$action = 'http://www.opentable.com/restaurant-search.aspx';
-$dateFormat = 'mm/dd/yyyy';
-$timeFormat = 'g:i a';
-$timeFormatVal = 'g:ia';
-$args['widget_id'] = empty($args['widget_id']) ? rand(1, 9999) : $args['widget_id'];
+//Get Widget Res Data
+$reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage); ?>
 
-
-switch ( $widgetLanguage ) {
-	case 'ca-eng':
-		$action = 'http://www.opentable.com/restaurant-search.aspx';
-		break;
-	case 'ger-eng':
-		$action = 'http://www.opentable.de/en-GB/restaurant-search.aspx';
-		break;
-	case 'ger-ger':
-		$action     = 'http://www.opentable.de/restaurant-search.aspx';
-		$dateFormat = 'dd.mm.yyyy';
-		$timeFormat = $timeFormatVal = 'G:i';
-		break;
-	case 'uk':
-		$action     = 'http://www.toptable.co.uk/restaurant-search.aspx';
-		$dateFormat = 'dd/mm/yyyy';
-		$timeFormat = $timeFormatVal = 'G:i';
-		break;
-	case 'mx-mx':
-		$action     = 'http://www.opentable.com.mx/restaurant-search.aspx';
-		$dateFormat = 'dd/mm/yyyy';
-		break;
-	case 'mx-eng':
-		$action = 'http://www.opentable.com.mx/en-US/restaurant-search.aspx';
-		break;
-	case 'jp-jp':
-		$action     = 'http://www.opentable.jp/restaurant-search.aspx';
-		$dateFormat = 'yyyy/mm/dd';
-		$timeFormat = $timeFormatVal = 'G:i';
-		break;
-	case 'jp-eng':
-		$action     = 'http://www.opentable.jp/en-GB/single.aspx';
-		$dateFormat = 'yyyy/mm/dd';
-		$timeFormat = $timeFormatVal = 'G:i';
-		break;
-} ?>
-<form method="get" class="otw-widget-form" action="<?php echo $action; ?>" target="_blank">
+<form method="get" class="otw-widget-form" action="<?php echo $reservationData['action']; ?>" target="_blank">
 	<div class="otw-wrapper">
 
 		<?php
@@ -110,7 +72,6 @@ switch ( $widgetLanguage ) {
 			$otwSelectedCityTransients = get_transient( 'otw_selected_cities' );
 
 
-
 			//Check match and reset transient if not equal
 			if ( $otwSelectedCityTransients !== $displayOption ) {
 				//set selected cities transient
@@ -120,7 +81,7 @@ switch ( $widgetLanguage ) {
 
 
 			//Get Admin selected Cities
-			$cities          = explode( ', ', $lookupCity );
+			$cities = explode( ', ', $lookupCity );
 //			$restaurantArray = array();
 			?>
 			<div class="otw-input-wrap">
@@ -139,11 +100,7 @@ switch ( $widgetLanguage ) {
 					<?php
 					//loop through cities and query available restaurants
 					foreach ( $cities as $city ) {
-//						$city = stripslashes(htmlentities($city, ENT_QUOTES));
-						//query API with city
-//						$apiQuery = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?city=' . $city );
-						//add to Restaurants Array
-//						array_push( $restaurantArray, $apiQuery['body'] );
+
 						if ( $city ) {
 							?>
 							<option value="<?php echo $city; ?>"><?php echo $city; ?></option>
@@ -177,7 +134,7 @@ switch ( $widgetLanguage ) {
 					}
 					?></label>
 			<?php } ?>
-			<input id="date-<?php echo $args["widget_id"]; ?>" name="startDate" class="otw-reservation-date" type="text" value="" autocomplete="off" data-date-format="<?php echo $dateFormat; ?>">
+			<input id="date-<?php echo $args["widget_id"]; ?>" name="startDate" class="otw-reservation-date" type="text" value="" autocomplete="off" data-date-format="<?php echo $reservationData['date_format']; ?>">
 		</div>
 		<div class="otw-time-wrap otw-input-wrap">
 			<?php if ( $hideLabels !== '1' ) { ?>
@@ -187,26 +144,14 @@ switch ( $widgetLanguage ) {
 						echo $labelTime;
 					} ?></label>
 			<?php } ?>
+			<?php
+			//Time Select
+			$timeDefault = !empty($timeDefault) ? $timeDefault : '7:00PM';	?>
+
 			<select id="time-<?php echo $args["widget_id"]; ?>" name="ResTime" class="otw-reservation-time selectpicker">
 				<?php
-				//Time Loop
-				//@SEE: http://stackoverflow.com/questions/6530836/php-time-loop-time-one-and-half-of-hour
-				$inc = 30 * 60;
-				$start = ( strtotime( '5PM' ) ); // 6  AM
-				$end = ( strtotime( '11:59PM' ) ); // 10 PM
-
-
-				for ( $i = $start;
-							$i <= $end;
-							$i += $inc ) {
-					// to the standart format
-					$time      = date( $timeFormat, $i );
-					$timeValue = date( $timeFormatVal, $i );
-					$default   = "7:00pm";
-					echo "<option value=\"$timeValue\" " . ( ( $timeValue == $default ) ? ' selected="selected" ' : "" ) . ">$time</option>" . PHP_EOL;
-				}
-
-				?>
+				//Time Options output
+				$open_table_widget->open_table_reservaton_times( $timeStart, $timeEnd, $timeDefault, $reservationData['time_format'], $reservationData['time_format_val'], $timeIncrement); ?>
 			</select>
 
 		</div>
@@ -243,7 +188,7 @@ switch ( $widgetLanguage ) {
 		<input type="hidden" name="RestaurantID" class="RestaurantID" value="<?php echo $restaurantID; ?>">
 		<input type="hidden" name="rid" class="rid" value="<?php echo $restaurantID; ?>">
 		<input type="hidden" name="GeoID" class="GeoID" value="0">
-		<input type="hidden" name="txtDateFormat" class="txtDateFormat" value="<?php echo $dateFormat; ?>">
+		<input type="hidden" name="txtDateFormat" class="txtDateFormat" value="<?php echo $reservationData['date_format']; ?>">
 		<input type="hidden" name="RestaurantReferralID" class="RestaurantReferralID" value="<?php echo $restaurantID; ?>">
 	</div>
 </form>

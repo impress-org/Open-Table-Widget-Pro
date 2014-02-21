@@ -582,6 +582,26 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 }
 
 /*----------------------------------------
+Time Picker
+-------------------------------------------*/
+
+.time-range-wrap {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.time-range-wrap .time-range-left {
+	float: left;
+	width: 48%;
+	margin-right: 4%;
+}
+
+.time-range-wrap .time-range-right {
+	float: left;
+	width: 48%;
+}
+
+/*----------------------------------------
 Tipsy
 -------------------------------------------*/
 

@@ -3,4 +3,3 @@ node_modules
 .jshintrc
 package.json
 Gruntfile.js
-licence/*

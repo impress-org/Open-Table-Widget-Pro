@@ -126,7 +126,7 @@
 	<!-- Widget Theme -->
 	<p>
 		<label for="<?php echo $this->get_field_id( 'widget_style' ); ?>"><?php _e( 'Widget Theme' ); ?>:</label>
-		<select name="<?php echo $this->get_field_name( 'widget_style' ); ?>" id="#" class="widefat profield">
+		<select name="<?php echo $this->get_field_name( 'widget_style' ); ?>" class="widefat profield">
 			<?php
 			$options = array(
 				__( 'Bare Bones', 'otw' ),
@@ -148,6 +148,102 @@
 		</select>
 	</p>
 
+	<!-- Time Range -->
+
+	<div class="time-range-wrap clearfix">
+		<div class="time-range-left">
+			<label for="<?php echo $this->get_field_id( 'time_start' ); ?>"><?php _e( 'Time Start' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select start value. Please ensure this value is before the Time End value.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+			<?php
+			//Time loop
+			$start = '12AM';
+			$end = '11:45PM';
+
+			//Get language set in widget and in global options
+			$language = 'us';
+			if ( ! empty( $widgetLanguage ) ) {
+				$language = $widgetLanguage;
+			} elseif ( ! empty( $this->options['default-location'] ) ) {
+				$language = $this->options['default-location'];
+			}
+			$reservationData = $this->open_table_get_res_data( $language );
+
+			//Set Time Format according to options
+			$timeFormat = $timeFormatVal = 'g:ia';
+			if ( ! empty( $reservationData['time_format'] ) ) {
+				$timeFormat = $reservationData['time_format'];
+			}
+			if ( ! empty( $reservationData['time_format_val'] ) ) {
+				$timeFormat = $reservationData['time_format_val'];
+			}
+			//Output time select
+			?>
+			<select name="<?php echo $this->get_field_name( 'time_start' ); ?>" class="widefat profield">
+				<?php
+				$this->open_table_reservaton_times( $start, $end, $timeStart, $timeFormat, $timeFormatVal, $timeIncrement );
+				?>
+			</select>
+		</div>
+
+		<div class="time-range-right">
+			<label for="<?php echo $this->get_field_id( 'time_end' ); ?>"><?php _e( 'Time End' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select end value. Please ensure this value is after the Time Start value.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+			<?php
+			//Time loop
+			$start = !empty($timeStart) ? $timeStart : '12AM';
+			$end = '11:00PM';
+
+			?>
+			<select name="<?php echo $this->get_field_name( 'time_end' ); ?>" class="widefat profield">
+				<?php
+				$this->open_table_reservaton_times( $start, $end, $timeEnd, $timeFormat, $timeFormatVal, $timeIncrement );
+				?>
+			</select>
+		</div>
+	</div>
+
+	<!-- Time Range 2 -->
+	<div class="time-range-wrap clearfix">
+		<div class="time-range-left">
+			<label for="<?php echo $this->get_field_id( 'time_default' ); ?>"><?php _e( 'Default Time' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is the default reservation time selected.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+			<?php
+			//Time loop
+			$start = ! empty( $timeStart ) ? $timeStart : '12AM';
+			$end = ! empty( $timeEnd ) ? $timeEnd : '11:59PM';
+			//Output time select
+			?>
+			<select name="<?php echo $this->get_field_name( 'time_default' ); ?>" class="widefat profield">
+				<?php
+				$this->open_table_reservaton_times( $start, $end, $timeDefault, $timeFormat, $timeFormatVal, $timeIncrement );
+				?>
+			</select>
+		</div>
+
+		<div class="time-range-right">
+			<label for="<?php echo $this->get_field_id( 'time_increment' ); ?>"><?php _e( 'Time Increment' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option effects many reservations per hour are displayed within the reservation time select.', 'otw' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+
+			<select name="<?php echo $this->get_field_name( 'time_increment' ); ?>" class="widefat profield">
+				<?php
+				$options = array(
+					array(
+						__( '15', 'otw' ),
+						__( '15 Minutes', 'otw' ),
+					),
+					array(
+						__( '30', 'otw' ),
+						__( '30 Minutes', 'otw' ),
+					),
+					array(
+						__( '60', 'otw' ),
+						__( '1 Hour', 'otw' ),
+					),
+				);
+				foreach ( $options as $option ) {
+					echo '<option value="' . $option[0] . '" id="' . $option[0] . '"', $timeIncrement == $option[0] ? ' selected="selected"' : '', '>', $option[1], '</option>';
+				}
+				?>
+			</select>
+
+		</div>
+	</div>
 
 	<!-- Hide Form Labels -->
 	<p>
@@ -174,11 +270,6 @@
 					__( 'ca-eng', 'otw' ),
 					__( 'Canada - English', 'otw' )
 				),
-//              Can't find any restaurants using French Canada
-//                array(
-//                    __('ca-fre', 'otw'),
-//                    __('Canada - French', 'otw')
-//                ),
 				array(
 					__( 'ger-eng', 'otw' ),
 					__( 'Germany - English', 'otw' )

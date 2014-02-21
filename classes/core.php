@@ -105,7 +105,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			$current_options = get_option( $licence_args['licence_key_option'] );
 			$this->licence_key = ! empty( $current_options ) ? trim( $current_options['license_key'] ) : '';
 
-			$this->licencing   = new PluginOpenTableWidgetPro\WordImpress_Licensing( $licence_args );
+			$this->licencing   = new Open_Table_License( $licence_args );
 			add_action( 'admin_init', array( $this, 'edd_sl_wordimpress_updater' ) );
 
 

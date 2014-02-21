@@ -45,6 +45,10 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'label_time'      => '',
 			'label_party'     => '',
 			'input_submit'    => '',
+			'time_start'      => '7:00pm',
+			'time_end'        => '11:45pm',
+			'time_default'    => '7:00pm',
+			'time_increment'  => '30',
 		);
 
 		//extract shortcode arguments
@@ -109,10 +113,15 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'label_time'      => empty( $atts['label_time'] ) ? $label_time : $atts['label_time'],
 			'label_party'     => empty( $atts['label_party'] ) ? $label_party : $atts['label_party'],
 			'input_submit'    => empty( $atts['input_submit'] ) ? $input_submit : $atts['input_submit'],
+			'time_start'      => empty( $atts['time_start'] ) ? $time_start : $atts['time_start'],
+			'time_end'        => empty( $atts['time_end'] ) ? $time_end : $atts['time_end'],
+			'time_default'    => empty( $atts['time_default'] ) ? $time_default : $atts['time_default'],
+			'time_increment'  => empty( $atts['time_increment'] ) ? $time_increment : $atts['time_increment'],
 		);
 
 		//merge instance with globals
 		$instance = array_merge( $instance, $globals );
+
 
 		// actual shortcode handling here
 		//Using ob_start to output shortcode within content appropriately

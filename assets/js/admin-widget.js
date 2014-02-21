@@ -18,9 +18,84 @@ jQuery(document).ready(function ($) {
 	otwWidgetToggles();
 	otwWidgetTooltips();
 
+	$("#slider-range").slider({
+		range : true,
+		min   : 0,
+		max   : 1439,
+		values: [540, 1020],
+		slide : slideTime
+	});
+
+
+	/**
+	 * Time Slider
+	 */
+	function slideTime(event, ui) {
+		var val0 = $("#slider-range").slider("values", 0),
+				val1 = $("#slider-range").slider("values", 1),
+				minutes0 = parseInt(val0 % 60, 10),
+				hours0 = parseInt(val0 / 60 % 24, 10),
+				minutes1 = parseInt(val1 % 60, 10),
+				hours1 = parseInt(val1 / 60 % 24, 10);
+		startTime = getTime(hours0, minutes0);
+		endTime = getTime(hours1, minutes1);
+		$("#time").text(startTime + ' - ' + endTime);
+	}
+
+	function getTime(hours, minutes) {
+		var time = null;
+		minutes = minutes + "";
+		if (hours < 12) {
+			time = "AM";
+		}
+		else {
+			time = "PM";
+		}
+		if (hours == 0) {
+			hours = 12;
+		}
+		if (hours > 12) {
+			hours = hours - 12;
+		}
+		if (minutes.length == 1) {
+			minutes = "0" + minutes;
+		}
+		return hours + ":" + minutes + " " + time;
+	}
+
+	function checkMax() {
+		var size = $("#slider-range").slider("values", 1) - $("#slider-range").slider("values", 0);
+		if (size >= 1435) {
+			$("#slider-range div")
+					.addClass("ui-state-error")
+					.removeClass("ui-widget-header");
+			$("#scheduleSubmit")
+					.attr("disabled", "disabled")
+					.addClass("ui-state-disabled")
+					.removeClass("ui-state-default");
+			$("#SlideMax").text("Cannot be more than 24 hours");
+		}
+		else {
+			$("#slider-range div")
+					.addClass("ui-widget-header")
+					.removeClass("ui-state-error");
+			$("#scheduleSubmit")
+					.removeAttr("disabled")
+					.addClass("ui-state-default")
+					.removeClass("ui-state-disabled");
+			$("#SlideMax").text("");
+		}
+	}
+
+	$("#scheduleSubmit").on('click', function () {
+		$('#Schedule tbody').append('<tr>' +
+				'<td>' + startTime + '</td>' +
+				'<td>' + endTime + '</td>' +
+				'</tr>');
+	});
+
 
 });
-
 
 function otwAutoComplete() {
 
