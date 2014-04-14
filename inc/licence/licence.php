@@ -7,7 +7,6 @@
 
 class Open_Table_License {
 
-
 	function __construct( $licence_args ) {
 
 		$this->plugin_basename     = $licence_args['plugin_basename'];
