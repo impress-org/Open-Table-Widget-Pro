@@ -76,6 +76,10 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 
 == Changelog ==
 
+= 1.5.1 =
+* Fix: Widget admin JS toggle now works with "accessibility mode" enabled
+* Minor improvements to licensing code
+
 = 1.5 =
 * New: Reservation start time and end fields
 * New: Reservation time increment field

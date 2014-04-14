@@ -158,6 +158,7 @@ class Open_Table_License {
 					'license_name'       => $license_data->customer_name,
 					'license_email'      => $license_data->customer_email,
 					'license_payment_id' => $license_data->payment_id,
+					'license_error'      => isset( $license_data->error ) ? $license_data->error : '',
 				)
 			);
 
@@ -271,31 +272,16 @@ class Open_Table_License {
 
 		$license = get_option( $this->licence_key_option );
 		$status  = isset( $license["license_status"] ) ? $license["license_status"] : 'invalid';
-
-		//Legacy license holder support
-		$legacySupport       = false;
-		$legacyLicenseStatus = get_option( $this->licence_key_status );
-		if ( ! empty( $legacyLicenseStatus ) ) {
-			$legacySupport = true;
-			$status        = get_option( $this->licence_key_status );
-			$license       = array(
-				'license'     => $license,
-				'license_key' => $license
-			);
-		} else {
-			$status = isset( $license["license_status"] ) ? $license["license_status"] : 'invalid';
-		}
-
 		?>
 
 		<div class="edd-wordimpress-license-wrap">
-		<h2><?php _e( 'Plugin License' ); ?></h2>
+			<h2><?php _e( 'Plugin License' ); ?></h2>
 
-		<?php
+			<?php
+			//valid license
+			if ( $status !== false && $status == 'valid' ) {
+				?>
 
-		if ( $status !== false && $status == 'valid' ) { ?>
-
-			<?php if ( $legacySupport != true ) { ?>
 				<div class="license-stats">
 					<p><strong><?php _e( 'License Status:' ); ?></strong>
 						<span style="color: #468847;"><?php echo strtoupper( $license['license_status'] ); ?></span>
@@ -310,18 +296,17 @@ class Open_Table_License {
 
 					<p><strong><?php _e( 'License Payment ID:' ); ?></strong> <?php echo $license['license_payment_id']; ?></p>
 				</div>
-			<?php } ?>
 
-			<p class="alert alert-success license-status"><?php _e( 'Your license is active and you are receiving updates.' ); ?></p>
+				<p class="alert alert-success license-status"><?php _e( 'Your license is active and you are receiving updates.' ); ?></p>
 
-		<?php
-		} //Reached Activation?
-		elseif ( $status == 'invalid' && isset( $license['license_error'] ) && $license['license_error'] == 'no_activations_left' ) {
-			?>
+			<?php
+			} //Reached Activation?
+			elseif ( $status == 'invalid' && isset( $license['license_error'] ) && $license['license_error'] == 'no_activations_left' ) {
+				?>
 
-			<p class="alert alert-red license-status"><?php _e( 'The license you entered has reached the activation limit. To purchase more licenses please visit WordImpress.', 'wqc' ); ?></p>
+				<p class="alert alert-red license-status"><?php _e( 'The license you entered has reached the activation limit. To purchase more licenses please visit WordImpress.', 'wqc' ); ?></p>
 
-			<?php }	elseif ( $status == 'invalid' &&  $license["license_error"] == 'missing' ) { 	?>
+			<?php } elseif ( $status == 'invalid' && $license["license_error"] == 'missing' ) { ?>
 
 				<p class="alert alert-red license-status"><?php _e( 'There was a problem with the license you entered. Please check that your license key is active and valid then reenter it below. If you are having trouble please contact support for assistance.' ); ?></p>
 
@@ -360,92 +345,92 @@ class Open_Table_License {
 
 			</form>
 
-			</div>
-		<?php
-		}
-
-
-		/**
-		 * Registers the Settings
-		 */
-		function edd_wordimpress_register_option() {
-			// creates our settings in the options table
-			register_setting( $this->licence_key_setting, $this->licence_key_option['license_key'] );
-		}
-
-		/**
-		 * Returns Remaining Number of Days License is Active
-		 *
-		 * @param $exp_date
-		 *
-		 * @return float
-		 */
-		function time_left_on_license( $exp_date ) {
-			$now       = time(); // or your date as well
-			$your_date = strtotime( $exp_date );
-			$datediff  = abs( $now - $your_date );
-
-			return floor( $datediff / ( 60 * 60 * 24 ) );
-		}
-
-
-		/************************************
-		 * this illustrates how to check if
-		 * a license key is still valid
-		 * the updater does this for you,
-		 * so this is only needed if you
-		 * want to do something custom
-		 *************************************/
-
-		function edd_sample_check_license() {
-
-			global $wp_version;
-
-			$license = trim( get_option( $this->licence_key_option ) );
-
-			$api_params = array(
-				'edd_action' => 'check_license',
-				'license'    => $license,
-				'item_name'  => urlencode( $this->item_name )
-			);
-
-			// Call the custom API.
-			$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
-
-
-			if ( is_wp_error( $response ) ) {
-				return false;
-			}
-
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-			if ( $license_data->license == 'valid' ) {
-				echo 'valid';
-				exit;
-				// this license is still valid
-			} else {
-				echo 'invalid';
-				exit;
-				// this license is no longer valid
-			}
-		}
-
-		/**
-		 * Disable license on deactivation
-		 *
-		 * @see: http://wordpress.stackexchange.com/questions/25910/uninstall-activate-deactivate-a-plugin-typical-features-how-to/25979#25979
-		 */
-		public
-		function plugin_deactivated() {
-			// This will run when the plugin is deactivated, use to delete the database
-			if ( ! current_user_can( 'activate_plugins' ) ) {
-				return;
-			}
-			$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
-			check_admin_referer( "deactivate-plugin_{$plugin}" );
-
-			return $this->edd_wordimpress_deactivate_license( $plugin_deactivate = true );
-		}
-
-
+		</div>
+	<?php
 	}
+
+
+	/**
+	 * Registers the Settings
+	 */
+	function edd_wordimpress_register_option() {
+		// creates our settings in the options table
+		register_setting( $this->licence_key_setting, $this->licence_key_option['license_key'] );
+		}
+
+	/**
+	 * Returns Remaining Number of Days License is Active
+	 *
+	 * @param $exp_date
+	 *
+	 * @return float
+	 */
+	function time_left_on_license( $exp_date ) {
+		$now       = time(); // or your date as well
+		$your_date = strtotime( $exp_date );
+		$datediff  = abs( $now - $your_date );
+
+		return floor( $datediff / ( 60 * 60 * 24 ) );
+	}
+
+
+	/************************************
+	 * this illustrates how to check if
+	 * a license key is still valid
+	 * the updater does this for you,
+	 * so this is only needed if you
+	 * want to do something custom
+	 *************************************/
+
+	function edd_sample_check_license() {
+
+		global $wp_version;
+
+		$license = trim( get_option( $this->licence_key_option ) );
+
+		$api_params = array(
+			'edd_action' => 'check_license',
+			'license'    => $license,
+			'item_name'  => urlencode( $this->item_name )
+		);
+
+		// Call the custom API.
+		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+		if ( $license_data->license == 'valid' ) {
+			echo 'valid';
+			exit;
+			// this license is still valid
+		} else {
+			echo 'invalid';
+			exit;
+			// this license is no longer valid
+		}
+	}
+
+	/**
+	 * Disable license on deactivation
+	 *
+	 * @see: http://wordpress.stackexchange.com/questions/25910/uninstall-activate-deactivate-a-plugin-typical-features-how-to/25979#25979
+	 */
+	public
+	function plugin_deactivated() {
+		// This will run when the plugin is deactivated, use to delete the database
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+		check_admin_referer( "deactivate-plugin_{$plugin}" );
+
+		return $this->edd_wordimpress_deactivate_license( $plugin_deactivate = true );
+	}
+
+
+}

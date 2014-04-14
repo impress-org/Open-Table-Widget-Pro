@@ -9,10 +9,10 @@ Author URI: http://imdev.in/
 Text Domain: otw
 */
 
-define( 'OTW_PLUGIN_NAME', 'open-table-widget-pro' );
+define( 'OTW_PLUGIN_NAME', 'open-table-widget' );
 define( 'OTW_PLUGIN_NAME_PLUGIN', plugin_basename( __FILE__ ) );
-define( 'OTW_PLUGIN_PATH', WP_PLUGIN_DIR . '/' . OTW_PLUGIN_NAME );
-define( 'OTW_PLUGIN_URL', WP_PLUGIN_URL . '/' . OTW_PLUGIN_NAME );
+define( 'OTW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+define( 'OTW_PLUGIN_URL', plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) );
 define( 'OTW_DEBUG', false );
 
 function init_open_table_widget() {
