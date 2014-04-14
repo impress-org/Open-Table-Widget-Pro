@@ -354,7 +354,7 @@ class Open_Table_License {
 	 */
 	function edd_wordimpress_register_option() {
 		// creates our settings in the options table
-		register_setting( $this->licence_key_setting, $this->licence_key_option['license_key'] );
+		register_setting( $this->licence_key_setting, $this->licence_key_option );
 		}
 
 	/**
