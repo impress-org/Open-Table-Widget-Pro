@@ -15,7 +15,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 		parent::__construct();
 
-		add_shortcode( 'open-table-widget', array( __CLASS__, 'handle_shortcode' ) );
+		add_shortcode( 'open-table-widget', array( $this, 'handle_shortcode' ) );
 
 
 	}
@@ -126,7 +126,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 		// actual shortcode handling here
 		//Using ob_start to output shortcode within content appropriately
 		ob_start();
-		parent::widget( $args, $instance );
+		$open_table_widget->widget( $args, $instance );
 		$shortcode = ob_get_contents();
 		ob_end_clean();
 
