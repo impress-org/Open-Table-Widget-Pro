@@ -58,8 +58,12 @@ class Open_Table_License {
 			if ( $status == 'invalid' || empty( $status ) ) {
 				echo '<div class="updated error"><p>';
 				parse_str( $_SERVER['QUERY_STRING'], $params ); //ensures we're not redirect for admin pages using query string; ie '?=opentablewidget'
-				printf( __( 'Please activate your license for ' . $this->item_name . ' to receive support and updates. | <a href="%1$s" rel="nofollow">Hide Notice</a>' ),
-						'?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) )
+
+				$settings_link = '<a href="options-general.php?page=opentablewidgetpro">' . __('activate your license', 'otw') . '</a>';
+				$hide_notice   = '<a href="?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) ). '" rel="nofollow"> ' . __('Hide Notice', 'otw') . '</a>';
+
+				printf(
+					__( 'Please %1$s for ' . $this->item_name . ' to receive support and updates. | %2$s' ), $settings_link, $hide_notice
 				);
 				echo "</p></div>";
 			}
@@ -94,7 +98,8 @@ class Open_Table_License {
 			wp_enqueue_script( 'wordimpress_licencing_js' );
 
 			// in javascript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
-			wp_localize_script( 'wordimpress_licencing_js', 'ajax_object',
+			wp_localize_script(
+				'wordimpress_licencing_js', 'ajax_object',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' )
 				)
@@ -143,12 +148,10 @@ class Open_Table_License {
 			// decode the license data
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-//			echo "<pre>";
-//			var_dump(add_query_arg( $api_params, $this->store_url ));
-//			echo "</pre>";
 
-			// $license_data->license will be either "active" or "inactive"
-			update_option( $this->licence_key_option,
+			// $license_data->license will be either "valid" or "inactive"
+			update_option(
+				$this->licence_key_option,
 				array(
 					'license_key'        => $license,
 					'license_item_name'  => $license_data->item_name,
@@ -230,48 +233,12 @@ class Open_Table_License {
 
 
 	/**
-	 * AJAX Register License
-	 */
-
-	function ajax_activate_license() {
-
-		$license = trim( $_POST['licence_key'] );
-
-		// data to send in our API request
-		$api_params = array(
-			'edd_action' => 'activate_license',
-			'license'    => $license,
-			'item_name'  => urlencode( $this->item_name ) // the name of our product in EDD
-		);
-
-		// Call the custom API.
-		$response = wp_remote_post( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
-
-		// make sure the response came back okay
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		// decode the license data
-		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-		// $license_data->license will be either "active" or "inactive"
-		update_option( $this->licence_key_status, $license_data->license );
-
-		wp_send_json( $license_data );
-
-		return false;
-
-	}
-
-	/**
 	 * Handles the output of the licence form in options
 	 */
 	function edd_wordimpress_license_page() {
 
 		$license = get_option( $this->licence_key_option );
-		$status  = isset( $license["license_status"] ) ? $license["license_status"] : 'invalid';
-		?>
+		$status  = isset( $license["license_status"] ) ? $license["license_status"] : 'invalid'; ?>
 
 		<div class="edd-wordimpress-license-wrap">
 			<h2><?php _e( 'Plugin License' ); ?></h2>
@@ -281,19 +248,25 @@ class Open_Table_License {
 			if ( $status !== false && $status == 'valid' ) {
 				?>
 
-				<div class="license-stats">
-					<p><strong><?php _e( 'License Status:' ); ?></strong>
+				<div class="license-stats list-group">
+					<p class="list-group-item"><strong><?php _e( 'License Status:' ); ?></strong>
 						<span style="color: #468847;"><?php echo strtoupper( $license['license_status'] ); ?></span>
 						<strong>(<?php echo $this->time_left_on_license( $license['license_expiration'] );
 							_e( ' Days Remaining' ); ?>)</strong></p>
 
-					<p><strong><?php _e( 'License Expiration:' ); ?></strong> <?php echo $license['license_expiration']; ?></p>
+					<p class="list-group-item">
+						<strong><?php _e( 'License Expiration:' ); ?></strong> <?php echo $license['license_expiration']; ?>
+					</p>
 
-					<p><strong><?php _e( 'License Owner:' ); ?></strong> <?php echo $license['license_name']; ?></p>
+					<p class="list-group-item">
+						<strong><?php _e( 'License Owner:' ); ?></strong> <?php echo $license['license_name']; ?></p>
 
-					<p><strong><?php _e( 'License Email:' ); ?></strong> <?php echo $license['license_email']; ?></p>
+					<p class="list-group-item">
+						<strong><?php _e( 'License Email:' ); ?></strong> <?php echo $license['license_email']; ?></p>
 
-					<p><strong><?php _e( 'License Payment ID:' ); ?></strong> <?php echo $license['license_payment_id']; ?></p>
+					<p class="list-group-item">
+						<strong><?php _e( 'License Payment ID:' ); ?></strong> <?php echo $license['license_payment_id']; ?>
+					</p>
 				</div>
 
 				<p class="alert alert-success license-status"><?php _e( 'Your license is active and you are receiving updates.' ); ?></p>
@@ -305,7 +278,7 @@ class Open_Table_License {
 
 				<p class="alert alert-red license-status"><?php _e( 'The license you entered has reached the activation limit. To purchase more licenses please visit WordImpress.', 'wqc' ); ?></p>
 
-			<?php } elseif ( $status == 'invalid' && $license["license_error"] == 'missing' ) { ?>
+			<?php } elseif ( $status == 'invalid' && isset( $license['license_error'] ) && $license["license_error"] == 'missing' ) { ?>
 
 				<p class="alert alert-red license-status"><?php _e( 'There was a problem with the license you entered. Please check that your license key is active and valid then reenter it below. If you are having trouble please contact support for assistance.' ); ?></p>
 
@@ -354,8 +327,8 @@ class Open_Table_License {
 	 */
 	function edd_wordimpress_register_option() {
 		// creates our settings in the options table
-		register_setting( $this->licence_key_setting, $this->licence_key_option );
-		}
+		register_setting( $this->licence_key_setting, $this->licence_key_setting );
+	}
 
 	/**
 	 * Returns Remaining Number of Days License is Active
