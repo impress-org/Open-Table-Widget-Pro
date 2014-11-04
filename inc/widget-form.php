@@ -248,7 +248,7 @@
 	<!-- Max Seats -->
 	<div class="max-seats clearfix">
 	<p>
-		<label for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'City', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<label for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'Maximum Seats Available', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'max_seats' ); ?>" name="<?php echo $this->get_field_name( 'max_seats' ); ?>" type="number" placeholder="6" value="<?php echo $maxSeats; ?>" />
 	</p>
 	</div>
