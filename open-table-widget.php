@@ -13,7 +13,7 @@ define( 'OTW_PLUGIN_NAME', 'open-table-widget' );
 define( 'OTW_PLUGIN_NAME_PLUGIN', plugin_basename( __FILE__ ) );
 define( 'OTW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'OTW_PLUGIN_URL', plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) );
-define( 'OTW_DEBUG', false );
+define( 'OTW_DEBUG', true );
 
 function init_open_table_widget() {
 
@@ -41,7 +41,7 @@ function init_open_table_widget() {
 	// Make plugin meta translatable
 	__( 'Open Table Widget', $open_table_widget->textdomain );
 	__( 'Devin Walker', $open_table_widget->textdomain );
-	__( 'otw', $open_table_widget->textdomain );
+	__( 'open-table-widget', $open_table_widget->textdomain );
 
 	//Include the widget
 	if ( ! class_exists( 'Open_Table_Widget' ) ) {

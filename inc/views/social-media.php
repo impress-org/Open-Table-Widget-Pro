@@ -1,6 +1,6 @@
 <div class="adminFacebook">
 	<p>
-		<strong><?php _e( 'Like this plugin?  Give it a like on Facebook:', 'otw' ); ?></strong>
+		<strong><?php _e( 'Like this plugin?  Give it a like on Facebook:', 'open-table-widget' ); ?></strong>
 	</p>
 
 	<div class="social-items-wrap">

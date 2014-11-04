@@ -20,7 +20,7 @@ class Open_Table_Widget extends WP_Widget {
 			'Open Table Widget', // Name
 			array(
 				'classname'   => 'open-table-widget',
-				'description' => __( 'Display an Open Table reservation form for your restaurant using an easy to use and intuitive widget', 'otw' )
+				'description' => __( 'Display an Open Table reservation form for your restaurant using an easy to use and intuitive widget', 'open-table-widget' )
 			)
 		);
 
@@ -201,6 +201,7 @@ class Open_Table_Widget extends WP_Widget {
 		$timeEnd        = empty( $instance['time_end'] ) ? '' : $instance['time_end'];
 		$timeDefault    = empty( $instance['time_default'] ) ? '' : $instance['time_default'];
 		$timeIncrement  = empty( $instance['time_increment'] ) ? '' : $instance['time_increment'];
+		$maxSeats    = empty( $instance['max_seats'] ) ? '' : $instance['max_seats'];
 
 
 		//Determine widget display option
@@ -311,6 +312,7 @@ class Open_Table_Widget extends WP_Widget {
 		$instance['time_end']        = strip_tags( $new_instance['time_end'] );
 		$instance['time_default']    = strip_tags( $new_instance['time_default'] );
 		$instance['time_increment']  = strip_tags( $new_instance['time_increment'] );
+		$instance['max_seats']  = strip_tags( $new_instance['max_seats'] );
 
 		return $instance;
 	}
@@ -343,6 +345,7 @@ class Open_Table_Widget extends WP_Widget {
 		$timeEnd        = empty( $instance['time_end'] ) ? '11:45pm' : esc_attr( $instance['time_end'] );
 		$timeDefault    = empty( $instance['time_default'] ) ? '7:00pm' : esc_attr( $instance['time_default'] );
 		$timeIncrement  = empty( $instance['time_increment'] ) ? '30' : esc_attr( $instance['time_increment'] );
+		$maxSeats  = empty( $instance['max_seats'] ) ? '30' : esc_attr( $instance['max_seats'] );
 
 
 		//Get the widget form

@@ -1,10 +1,10 @@
 <?php
+
 /**
  *  WordImpress Licensing
  *
  * @description: Handles licencing for WordImpress products.
  */
-
 class Open_Table_License {
 
 	function __construct( $licence_args ) {
@@ -59,8 +59,8 @@ class Open_Table_License {
 				echo '<div class="updated error"><p>';
 				parse_str( $_SERVER['QUERY_STRING'], $params ); //ensures we're not redirect for admin pages using query string; ie '?=opentablewidget'
 
-				$settings_link = '<a href="options-general.php?page=opentablewidgetpro">' . __('activate your license', 'otw') . '</a>';
-				$hide_notice   = '<a href="?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) ). '" rel="nofollow"> ' . __('Hide Notice', 'otw') . '</a>';
+				$settings_link = '<a href="options-general.php?page=opentablewidgetpro">' . __( 'activate your license', 'open-table-widget' ) . '</a>';
+				$hide_notice   = '<a href="?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) ) . '" rel="nofollow"> ' . __( 'Hide Notice', 'open-table-widget' ) . '</a>';
 
 				printf(
 					__( 'Please %1$s for ' . $this->item_name . ' to receive support and updates. | %2$s' ), $settings_link, $hide_notice
@@ -134,7 +134,9 @@ class Open_Table_License {
 			$api_params = array(
 				'edd_action' => 'activate_license',
 				'license'    => $license,
-				'item_name'  => urlencode( $this->item_name ) // the name of our product in EDD
+				'item_name'  => urlencode( $this->item_name ), // the name of our product in EDD
+				'url'        => home_url() // the name of our product in EDD
+
 			);
 
 			// Call the custom API.
@@ -241,7 +243,7 @@ class Open_Table_License {
 		$status  = isset( $license["license_status"] ) ? $license["license_status"] : 'invalid'; ?>
 
 		<div class="edd-wordimpress-license-wrap">
-			<h2><?php _e( 'Plugin License' ); ?></h2>
+			<h2><?php _e( 'Plugin License', 'open-table-widget' ); ?></h2>
 
 			<?php
 			//valid license
@@ -249,42 +251,42 @@ class Open_Table_License {
 				?>
 
 				<div class="license-stats list-group">
-					<p class="list-group-item"><strong><?php _e( 'License Status:' ); ?></strong>
+					<p class="list-group-item"><strong><?php _e( 'License Status:', 'open-table-widget' ); ?></strong>
 						<span style="color: #468847;"><?php echo strtoupper( $license['license_status'] ); ?></span>
 						<strong>(<?php echo $this->time_left_on_license( $license['license_expiration'] );
-							_e( ' Days Remaining' ); ?>)</strong></p>
+							_e( ' Days Remaining', 'open-table-widget' ); ?>)</strong></p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Expiration:' ); ?></strong> <?php echo $license['license_expiration']; ?>
+						<strong><?php _e( 'License Expiration:', 'open-table-widget' ); ?></strong> <?php echo $license['license_expiration']; ?>
 					</p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Owner:' ); ?></strong> <?php echo $license['license_name']; ?></p>
+						<strong><?php _e( 'License Owner:', 'open-table-widget' ); ?></strong> <?php echo $license['license_name']; ?></p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Email:' ); ?></strong> <?php echo $license['license_email']; ?></p>
+						<strong><?php _e( 'License Email:', 'open-table-widget' ); ?></strong> <?php echo $license['license_email']; ?></p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Payment ID:' ); ?></strong> <?php echo $license['license_payment_id']; ?>
+						<strong><?php _e( 'License Payment ID:', 'open-table-widget' ); ?></strong> <?php echo $license['license_payment_id']; ?>
 					</p>
 				</div>
 
-				<p class="alert alert-success license-status"><?php _e( 'Your license is active and you are receiving updates.' ); ?></p>
+				<p class="alert alert-success license-status"><?php _e( 'Your license is active and you are receiving updates.', 'open-table-widget' ); ?></p>
 
 			<?php
 			} //Reached Activation?
 			elseif ( $status == 'invalid' && isset( $license['license_error'] ) && $license['license_error'] == 'no_activations_left' ) {
 				?>
 
-				<p class="alert alert-red license-status"><?php _e( 'The license you entered has reached the activation limit. To purchase more licenses please visit WordImpress.', 'wqc' ); ?></p>
+				<p class="alert alert-red license-status"><?php _e( 'The license you entered has reached the activation limit. To purchase more licenses please visit WordImpress.', 'open-table-widget' ); ?></p>
 
 			<?php } elseif ( $status == 'invalid' && isset( $license['license_error'] ) && $license["license_error"] == 'missing' ) { ?>
 
-				<p class="alert alert-red license-status"><?php _e( 'There was a problem with the license you entered. Please check that your license key is active and valid then reenter it below. If you are having trouble please contact support for assistance.' ); ?></p>
+				<p class="alert alert-red license-status"><?php _e( 'There was a problem with the license you entered. Please check that your license key is active and valid then reenter it below. If you are having trouble please contact support for assistance.', 'open-table-widget' ); ?></p>
 
 			<?php } else { ?>
 
-				<p class="alert alert-red license-status"><?php _e( 'Activate your license to receive automatic plugin updates for the life of your license.' ); ?></p>
+				<p class="alert alert-red license-status"><?php _e( 'Activate your license to receive automatic plugin updates for the life of your license.', 'open-table-widget' ); ?></p>
 
 			<?php } ?>
 
@@ -297,19 +299,19 @@ class Open_Table_License {
 					echo $license['license_key'];
 				} ?>" autocomplete="off" />
 				<label class="description licence-label" for="<?php echo $this->licence_key_option; ?>"><?php if ( $status !== false && $status == 'valid' ) {
-						_e( 'Your licence is active and valid.' );
+						_e( 'Your licence is active and valid.', 'open-table-widget' );
 					} else {
-						_e( 'Enter your license key to receive updates and support' );
+						_e( 'Enter your license key to receive updates and support', 'open-table-widget' );
 					} ?></label>
 
 
 				<?php if ( $status !== false && $status == 'valid' ) { ?>
 					<?php wp_nonce_field( 'edd_wordimpress_nonce', 'edd_wordimpress_nonce' ); ?>
-					<input type="submit" class="button-secondary deactivate-license-btn" name="edd_license_deactivate" value="<?php _e( 'Deactivate License' ); ?>" />
+					<input type="submit" class="button-secondary deactivate-license-btn" name="edd_license_deactivate" value="<?php _e( 'Deactivate License', 'open-table-widget' ); ?>" />
 				<?php
 				} else {
 					wp_nonce_field( 'edd_wordimpress_nonce', 'edd_wordimpress_nonce' ); ?>
-					<input type="submit" class="button-secondary activate-license-btn" name="edd_license_activate" value="<?php _e( 'Activate License' ); ?>" />
+					<input type="submit" class="button-secondary activate-license-btn" name="edd_license_activate" value="<?php _e( 'Activate License', 'open-table-widget' ); ?>" />
 				<?php } ?>
 
 

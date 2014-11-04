@@ -21,7 +21,7 @@
  * ========================================================= */
  
 (function($, undefined){
- 
+
     var $window = $(window);
  
     function UTCDate(){
@@ -547,9 +547,16 @@
                 windowHeight = $window.height(),
                 scrollTop = $window.scrollTop();
  
-            var zIndex = parseInt(this.element.parents().filter(function(){
-                    return $(this).css('z-index') !== 'auto';
-                }).first().css('z-index'))+10;
+            //Original Code: Didn't calculate z-index correctly
+			// var zIndex = parseInt(this.element.parents().filter(function(){
+                    // return $(this).css('z-index') !== 'auto';
+                // }).first().css('z-index'))+10;
+			//Updated code from this committ:
+			//https://github.com/eternicode/bootstrap-datepicker/commit/50b335b71a023de24899f3fc62a1d43db219aba7
+			var parentZIndexes = this.element.parents().map(function() {
+					return parseInt($(this).css('z-index')) || 0;
+				});
+			var zIndex = Math.max.apply(Math, Array.prototype.slice.apply(parentZIndexes)) + 10;
             var offset = this.component ? this.component.parent().offset() : this.element.offset();
             var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
             var width = this.component ? this.component.outerWidth(true) : this.element.outerWidth(false);
@@ -1660,6 +1667,7 @@
             if ($this.data('datepicker'))
                 return;
             e.preventDefault();
+
             // component click requires us to explicitly show it
             $this.datepicker('show');
         }

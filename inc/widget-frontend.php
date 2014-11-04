@@ -42,14 +42,14 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 					<?php if ( $hideLabels !== '1' ) { ?>
 						<label for="restaurant-<?php echo $args["widget_id"]; ?>"><?php
 							if ( empty( $labelMultiple ) ) {
-								_e( 'Select a Restaurant', 'otw' );
+								_e( 'Select a Restaurant', 'open-table-widget' );
 							} else {
 								echo $labelMultiple;
 							}
 							?></label>
 					<?php } ?>
 					<select id="restaurant-<?php echo $args["widget_id"]; ?>" name="Restaurant" class="otw-reservation-restaurant selectpicker">
-						<option value=""><?php _e( 'Select...', 'otw' ); ?></option>
+						<option value=""><?php _e( 'Select...', 'open-table-widget' ); ?></option>
 
 						<?php foreach ( $restaurantIDs as $restaurant ) {
 							$restaurantData = explode( '|', $restaurant ); ?>
@@ -62,7 +62,7 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 
 				</div>
 			<?php } else { ?>
-				<p class="otw-error otw-alert"><?php _e( 'Error: Restaurant IDs not properly input. Please check restaurant IDs field.', 'otw' ); ?></p>
+				<p class="otw-error otw-alert"><?php _e( 'Error: Restaurant IDs not properly input. Please check restaurant IDs field.', 'open-table-widget' ); ?></p>
 			<?php } ?>
 		<?php
 		} //User Select List from City Options
@@ -88,14 +88,14 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 				<?php if ( $hideLabels !== '1' ) { ?>
 					<label for="otw-city-<?php echo $args["widget_id"]; ?>"><?php
 						if ( empty( $labelCity ) ) {
-							_e( 'Select a City', 'otw' );
+							_e( 'Select a City', 'open-table-widget' );
 						} else {
 							echo $labelCity;
 						}
 						?></label>
 				<?php } ?>
 				<select id="otw-city-<?php echo $args["widget_id"]; ?>" name="City" class="otw-reservation-city selectpicker">
-					<option value=""><?php _e( 'Select a city...', 'otw' ); ?></option>
+					<option value=""><?php _e( 'Select a city...', 'open-table-widget' ); ?></option>
 
 					<?php
 					//loop through cities and query available restaurants
@@ -113,13 +113,13 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 				<?php if ( $hideLabels !== '1' ) { ?>
 					<label for="otw-city-rest-<?php echo $args["widget_id"]; ?>"><?php
 						if ( empty( $labelCityRest ) ) {
-							_e( 'Find a Restaurant', 'otw' );
+							_e( 'Find a Restaurant', 'open-table-widget' );
 						} else {
 							echo $labelCityRest;
 						}
 						?></label>
 				<?php } ?>
-				<input type="text" name="city-restaurant" placeholder="<?php _e( 'Restaurant Name', 'otw' ); ?>" class="otw-restaurant-autocomplete" />
+				<input type="text" name="city-restaurant" placeholder="<?php _e( 'Restaurant Name', 'open-table-widget' ); ?>" class="otw-restaurant-autocomplete" />
 
 			</div>
 
@@ -128,7 +128,7 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 			<?php if ( $hideLabels !== '1' ) { ?>
 				<label for="date-<?php echo $args["widget_id"]; ?>"><?php
 					if ( empty( $labelDate ) ) {
-						_e( 'Date', 'otw' );
+						_e( 'Date', 'open-table-widget' );
 					} else {
 						echo $labelDate;
 					}
@@ -139,7 +139,7 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 		<div class="otw-time-wrap otw-input-wrap">
 			<?php if ( $hideLabels !== '1' ) { ?>
 				<label for="time-<?php echo $args["widget_id"]; ?>"><?php if ( empty( $labelTime ) ) {
-						_e( 'Time', 'otw' );
+						_e( 'Time', 'open-table-widget' );
 					} else {
 						echo $labelTime;
 					} ?></label>
@@ -158,23 +158,21 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 		<div class="otw-party-size-wrap otw-input-wrap">
 			<?php if ( $hideLabels !== '1' ) { ?>
 				<label for="party-<?php echo $args["widget_id"]; ?>"><?php if ( empty( $labelParty ) ) {
-						_e( 'Party Size', 'otw' );
+						_e( 'Party Size', 'open-table-widget' );
 					} else {
 						echo $labelParty;
 					}  ?></label>
 			<?php } ?>
+			
 			<select id="party-<?php echo $args["widget_id"]; ?>" name="partySize" class="otw-party-size-select selectpicker">
-				<option value="1">1 Person</option>
-				<option value="2" selected="selected">2 People</option>
-				<option value="3">3 People</option>
-				<option value="4">4 People</option>
-				<option value="5">5 People</option>
-				<option value="6">6 People</option>
-				<option value="7">7 People</option>
-				<option value="8">8 People</option>
-				<option value="9">9 People</option>
-				<option value="10">10 People</option>
+				<?php
+				foreach (range(1,$maxSeats) as $seat) { ?>
+					<option value="<?php echo $seat; ?>"><?php echo $seat; ?></option>
+				<?php }
+							
+			?>
 			</select>
+			<p>Max of <?php echo $maxSeats; ?> </p>
 
 		</div>
 
@@ -182,7 +180,7 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 			<input type="submit" class="<?php echo( $style == 'otw-bare-bones-style' ? 'otw-submit' : 'otw-submit-btn' ); ?>" value="<?php  if ( ! empty( $inputSubmit ) ) {
 				echo $inputSubmit;
 			} else {
-				_e( 'Find a Table', 'otw' );
+				_e( 'Find a Table', 'open-table-widget' );
 			}  ?>" />
 		</div>
 		<input type="hidden" name="RestaurantID" class="RestaurantID" value="<?php echo $restaurantID; ?>">
@@ -200,5 +198,5 @@ if ( ! empty( $postContent ) ) {
 		<?php echo wpautop( $postContent ); ?>
 	</div>
 <?php } ?>
-<div class="powered-by-open-table"><span class="powered-by-text"><?php _e( 'Powered By:', 'otw' ); ?></span></div>
+<div class="powered-by-open-table"><span class="powered-by-text"><?php _e( 'Powered By:', 'open-table-widget' ); ?></span></div>
 </div><!-- /.otw-widget-form-wrap -->
