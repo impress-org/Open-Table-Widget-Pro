@@ -7,17 +7,12 @@
  */
 
 jQuery(document).ready(function ($) {
-
-	//Datepicker
-	//@SEE: https://github.com/eternicode/bootstrap-datepicker
-	$('.otw-reservation-date').datepicker({
-		dateFormat    : $(this).attr('data-date-format'),
-		autoclose     : true,
-		startDate     : '0',
-		todayHighlight: true
+	
+	$(".otw-reservation-date").otwdatepicker({
+		autoClose: true ,
+		dateFormat: $(this).attr('data-date-format'),
+		weekStart: 0
 	});
-
-	$('.otw-reservation-date').datepicker('update', new Date());
 
 	//Selects (only if loaded)
 	if (typeof $.fn.selectpicker == 'function') {

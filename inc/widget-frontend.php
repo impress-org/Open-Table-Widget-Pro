@@ -172,7 +172,6 @@ $reservationData = $open_table_widget->open_table_get_res_data($widgetLanguage);
 							
 			?>
 			</select>
-			<p>Max of <?php echo $maxSeats; ?> </p>
 
 		</div>
 

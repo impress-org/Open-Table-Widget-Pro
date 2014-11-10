@@ -111,13 +111,13 @@ class Open_Table_Widget extends WP_Widget {
 		//Determine whether to display minified scripts/css or not (debugging true sets it)
 		if ( OTW_DEBUG == true ) {
 			$otw_css                 = plugins_url( 'assets/css/open-table-widget.css', dirname( __FILE__ ) );
-			$otw_datepicker          = plugins_url( 'assets/js/jquery.bootstrap-datepicker.js', dirname( __FILE__ ) );
+			$otw_datepicker          = plugins_url( 'assets/js/datepicker.js', dirname( __FILE__ ) );
 			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.js', dirname( __FILE__ ) );
 			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
 			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.js', dirname( __FILE__ ) );
 		} else {
 			$otw_css                 = plugins_url( 'assets/css/open-table-widget.min.css', dirname( __FILE__ ) );
-			$otw_datepicker          = plugins_url( 'assets/js/jquery.bootstrap-datepicker.min.js', dirname( __FILE__ ) );
+			$otw_datepicker          = plugins_url( 'assets/js/datepicker.min.js', dirname( __FILE__ ) );
 			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.min.js', dirname( __FILE__ ) );
 			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
 			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ) );
@@ -158,9 +158,13 @@ class Open_Table_Widget extends WP_Widget {
 		//Open Table Widget Specific Scripts
 		wp_register_script( 'otw-widget-js', $otw_widget_js, array( 'jquery' ) );
 		wp_enqueue_script( 'otw-widget-js' );
+		
+		//Widget ID
+		$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
+		
 		$jsParams = array(
 			'ajax_url'      => admin_url( 'admin-ajax.php' ),
-			'restaurant_id' => ''
+			'restaurant_id' => '',
 		);
 		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
 
