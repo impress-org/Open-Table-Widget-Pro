@@ -75,6 +75,14 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 3. A view of the widget in the WP Admin widgets view version 1.1 (it may look different depending on your version).
 
 == Changelog ==
+= 1.6.0.1 =
+* Hot Fix: Added Max Seats variable to shortcode
+
+= 1.6 =
+* Fixed: Replaced datepicker for better compatibility with jQueryUI
+* Feature Added: Added Maximum Seats option
+* Enhancement: Unified textdomain and added default English.po file
+* Enhancement: Added German language (Special thanks to Quirin Pils (http://www.pixelchiefs.de)).
 
 = 1.5.3 =
 * Fixed: Issue with activating license

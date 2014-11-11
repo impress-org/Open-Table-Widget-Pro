@@ -49,6 +49,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'time_end'        => '11:45pm',
 			'time_default'    => '7:00pm',
 			'time_increment'  => '30',
+			'max_seats'		  => '6',
 		);
 
 		//extract shortcode arguments
@@ -117,6 +118,8 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'time_end'        => empty( $atts['time_end'] ) ? $time_end : $atts['time_end'],
 			'time_default'    => empty( $atts['time_default'] ) ? $time_default : $atts['time_default'],
 			'time_increment'  => empty( $atts['time_increment'] ) ? $time_increment : $atts['time_increment'],
+			'max_seats'  	  => empty( $atts['max_seats'] ) ? $max_seats : $atts['max_seats'],
+			
 		);
 
 		//merge instance with globals
