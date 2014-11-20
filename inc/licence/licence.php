@@ -59,7 +59,7 @@ class Open_Table_License {
 				echo '<div class="updated error"><p>';
 				parse_str( $_SERVER['QUERY_STRING'], $params ); //ensures we're not redirect for admin pages using query string; ie '?=opentablewidget'
 
-				$settings_link = '<a href="options-general.php?page=opentablewidgetpro">' . __( 'activate your license', 'open-table-widget' ) . '</a>';
+				$settings_link = '<a href="options-general.php?page=opentablewidget">' . __( 'activate your license', 'open-table-widget' ) . '</a>';
 				$hide_notice   = '<a href="?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) ) . '" rel="nofollow"> ' . __( 'Hide Notice', 'open-table-widget' ) . '</a>';
 
 				printf(
@@ -78,7 +78,7 @@ class Open_Table_License {
 		global $current_user;
 		$user_id = $current_user->ID;
 		/* If user clicks to ignore the notice, add that to their user meta */
-		if ( isset( $_GET[$this->licence_key_setting . '_license_ignore_notice'] ) && $_GET[$this->licence_key_setting . '_license_ignore_notice'] == '0' ) {
+		if ( isset( $_GET[ $this->licence_key_setting . '_license_ignore_notice' ] ) && $_GET[ $this->licence_key_setting . '_license_ignore_notice' ] == '0' ) {
 			add_user_meta( $user_id, $this->licence_key_setting . '_license_ignore_notice', 'true', true );
 		}
 	}
@@ -139,8 +139,12 @@ class Open_Table_License {
 
 			);
 
-			// Call the custom API.
-			$response = wp_remote_post( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+			// Call the WordImpress EDD API.
+			$response = wp_remote_post( $this->store_url, array(
+				'timeout'   => 120,
+				'sslverify' => false,
+				'body'      => $api_params
+			) );
 
 			// make sure the response came back okay
 			if ( is_wp_error( $response ) ) {
@@ -196,8 +200,12 @@ class Open_Table_License {
 				'item_name'  => urlencode( $this->item_name ) // the name of our product in EDD
 			);
 
-			// Call the custom API.
-			$response = wp_remote_post( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+			// Call the WordImpress EDD API.
+			$response = wp_remote_post( $this->store_url, array(
+				'timeout'   => 120,
+				'sslverify' => false,
+				'body'      => $api_params
+			) );
 
 			// make sure the response came back okay
 			if ( is_wp_error( $response ) ) {
@@ -223,8 +231,8 @@ class Open_Table_License {
 	 * Returns the license if in options
 	 */
 	function get_license() {
-		if ( ! empty( $_POST[$this->licence_key_option]['license_key'] ) ) {
-			$license = ! empty( $_POST[$this->licence_key_option]['license_key'] ) ? trim( $_POST[$this->licence_key_option]['license_key'] ) : '';
+		if ( ! empty( $_POST[ $this->licence_key_option ]['license_key'] ) ) {
+			$license = ! empty( $_POST[ $this->licence_key_option ]['license_key'] ) ? trim( $_POST[ $this->licence_key_option ]['license_key'] ) : '';
 		} else {
 			$current_options = get_option( $this->licence_key_option );
 			$license         = $current_options["license_key"];
@@ -261,10 +269,12 @@ class Open_Table_License {
 					</p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Owner:', 'open-table-widget' ); ?></strong> <?php echo $license['license_name']; ?></p>
+						<strong><?php _e( 'License Owner:', 'open-table-widget' ); ?></strong> <?php echo $license['license_name']; ?>
+					</p>
 
 					<p class="list-group-item">
-						<strong><?php _e( 'License Email:', 'open-table-widget' ); ?></strong> <?php echo $license['license_email']; ?></p>
+						<strong><?php _e( 'License Email:', 'open-table-widget' ); ?></strong> <?php echo $license['license_email']; ?>
+					</p>
 
 					<p class="list-group-item">
 						<strong><?php _e( 'License Payment ID:', 'open-table-widget' ); ?></strong> <?php echo $license['license_payment_id']; ?>
@@ -368,8 +378,12 @@ class Open_Table_License {
 			'item_name'  => urlencode( $this->item_name )
 		);
 
-		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+		// Call the WordImpress EDD API.
+		$response = wp_remote_post( $this->store_url, array(
+			'timeout'   => 120,
+			'sslverify' => false,
+			'body'      => $api_params
+		) );
 
 
 		if ( is_wp_error( $response ) ) {

@@ -94,7 +94,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			//Licence Args
 			$licence_args = array(
 				'plugin_basename'     => OTW_PLUGIN_NAME_PLUGIN, //Name of License Option in DB
-				'settings_page'       => 'settings_page_opentablewidgetpro', //Name of License Option in DB
+				'settings_page'       => 'settings_page_opentablewidget', //Name of License Option in DB
 				'store_url'           => $this->store_url, //Name of License Option in DB
 				'item_name'           => $this->item_name, //Name of License Option in DB
 				'licence_key_setting' => 'otw_licence_setting', //Name of License Option in DB

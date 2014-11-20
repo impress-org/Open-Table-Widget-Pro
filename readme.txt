@@ -4,15 +4,15 @@ Donate link: http://wordimpress.com/
 Tags: open table, open table widget, open table form, open table reservations, reservations, restaurant, open table shortcode
 Requires at least: 3.6
 Tested up to: 3.9
-Stable tag: 1.5.3
+Stable tag: 1.6.0.2
 
 Open Table Widget makes it a breeze for you to add powerful Open Table reservation forms to your website via an easy to use and intuitive widget.
 
 == Description ==
 
-= Thank you for using Open Table Widget Premium Version =
+= Thank you for using Open Table Widget Pro Version =
 
-Open Table Widget Pro is a significant upgrade to Open Table Widget that adds many features to the plugin. Upgrade today and save 10% using coupon code `otwupgrade` at checkout. Here is a preview of features included in the Pro version:
+Open Table Widget Pro is a significant upgrade to Open Table Widget that adds many features to the plugin.
 
 [youtube http://www.youtube.com/watch?v=kWAVSxuNCl0]
 
@@ -75,6 +75,10 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 3. A view of the widget in the WP Admin widgets view version 1.1 (it may look different depending on your version).
 
 == Changelog ==
+= 1.6.0.2 =
+* Update: Renamed the plugin slug back to "Open Table Widget" to ensure update process from the free version to pro version doesn't drop user's options.
+* Update: Fixed issue with WP Engine caching and occasional issues with cached license activation responses
+
 = 1.6.0.1 =
 * Hot Fix: Added Max Seats variable to shortcode
 
