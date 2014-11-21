@@ -1,4 +1,4 @@
-=== Open Table Widget ===
+=== Open Table Widget Pro ===
 Contributors: dlocc
 Donate link: http://wordimpress.com/
 Tags: open table, open table widget, open table form, open table reservations, reservations, restaurant, open table shortcode
@@ -76,8 +76,9 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 
 == Changelog ==
 = 1.6.0.2 =
-* Update: Renamed the plugin slug back to "Open Table Widget" to ensure update process from the free version to pro version doesn't drop user's options.
+* Update: Ensure update process from the free version to pro version doesn't drop user's options or kick user back to free version if license isn't activated.
 * Update: Fixed issue with WP Engine caching and occasional issues with cached license activation responses
+* Update: EDD_SL_Plugin_Updater.php to v1.5
 
 = 1.6.0.1 =
 * Hot Fix: Added Max Seats variable to shortcode
