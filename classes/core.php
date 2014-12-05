@@ -75,7 +75,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			$this->meta = get_plugin_data( $this->file, false );
 			// Init plugin data
 			$this->basename   = plugin_basename( $this->file );
-			$this->slug       = sanitize_key( $this->meta['Name'] );
+			$this->slug       = 'opentablewidgetpro';
 			$this->version    = sanitize_text_field( $this->meta['Version'] );
 			$this->textdomain = sanitize_html_class( $this->meta['TextDomain'] );
 			$this->name       = $this->meta['Name'];
