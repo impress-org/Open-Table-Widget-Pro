@@ -157,7 +157,8 @@
 
 			</div>
 			<div class="otw-party-size-wrap otw-input-wrap">
-				<?php if ( $hideLabels !== '1' ) { ?>
+				<?php
+				if ( $hideLabels !== '1' ) { ?>
 					<label for="party-<?php echo $args["widget_id"]; ?>"><?php if ( empty( $labelParty ) ) {
 							_e( 'Party Size', 'open-table-widget' );
 						} else {

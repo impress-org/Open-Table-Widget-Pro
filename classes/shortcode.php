@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Class Open_Table_Widget_Shortcode
  *
  * @description: Open Table Shortcode Class
  * @since      : 1.0
  */
-
 class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 	/**
@@ -49,7 +49,8 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'time_end'        => '11:45pm',
 			'time_default'    => '7:00pm',
 			'time_increment'  => '30',
-			'max_seats'		  => '6',
+			'party_size'      => '4',
+			'max_seats'       => '12',
 		);
 
 		//extract shortcode arguments
@@ -99,7 +100,8 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 
 		//Global Options (non-dependant on display_option)
 		$globals = array(
-			'display_option'  => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'], //default is 0
+			'display_option'  => empty( $atts['display_option'] ) ? $display_option : $atts['display_option'],
+			//default is 0
 			'title'           => empty( $atts['title'] ) ? $title : $atts['title'],
 			'align'           => empty( $atts['align'] ) ? $align : $atts['align'],
 			'max_width'       => empty( $atts['max_width'] ) ? $max_width : $atts['max_width'],
@@ -118,8 +120,9 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 			'time_end'        => empty( $atts['time_end'] ) ? $time_end : $atts['time_end'],
 			'time_default'    => empty( $atts['time_default'] ) ? $time_default : $atts['time_default'],
 			'time_increment'  => empty( $atts['time_increment'] ) ? $time_increment : $atts['time_increment'],
-			'max_seats'  	  => empty( $atts['max_seats'] ) ? $max_seats : $atts['max_seats'],
-			
+			'party_size'      => empty( $atts['party_size'] ) ? $party_size : $atts['party_size'],
+			'max_seats'       => empty( $atts['max_seats'] ) ? $max_seats : $atts['max_seats'],
+
 		);
 
 		//merge instance with globals

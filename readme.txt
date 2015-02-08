@@ -77,9 +77,10 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 == Changelog ==
 
 = 1.6.1 =
-* New: Set your default party size to any number you recommend
+* New: Set your default party size to any number you prefer; works with shortcode and widget
 * Update: Minor style updates to admin widget form
 * Update: Text domain to 'open-table-widget' rather than the old 'otw'
+* Update: Increased shortcode's default max_seats variable to 12 by default
 
 = 1.6.0.3 =
 * Fix: Issue with the plugin settings page CSS 404 - it should look much better now!
