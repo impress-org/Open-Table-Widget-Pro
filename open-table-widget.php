@@ -6,7 +6,7 @@ Description: <strong>Pro Version:</strong> Thank you for upgrading to Open Table
 Version: 1.6.1
 Author: Devin Walker
 Author URI: http://imdev.in/
-Text Domain: otw
+Text Domain: open-table-widget
 */
 
 define( 'OTW_PLUGIN_NAME', 'open-table-widget' );

@@ -3,8 +3,8 @@ Contributors: dlocc
 Donate link: http://wordimpress.com/
 Tags: open table, open table widget, open table form, open table reservations, reservations, restaurant, open table shortcode
 Requires at least: 3.6
-Tested up to: 4.0.1
-Stable tag: 1.6.0.3
+Tested up to: 4.1
+Stable tag: 1.6.1
 
 Open Table Widget makes it a breeze for you to add powerful Open Table reservation forms to your website via an easy to use and intuitive widget.
 
@@ -79,6 +79,7 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 = 1.6.1 =
 * New: Set your default party size to any number you recommend
 * Update: Minor style updates to admin widget form
+* Update: Text domain to 'open-table-widget' rather than the old 'otw'
 
 = 1.6.0.3 =
 * Fix: Issue with the plugin settings page CSS 404 - it should look much better now!
