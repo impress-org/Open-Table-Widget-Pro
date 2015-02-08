@@ -76,6 +76,10 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 
 == Changelog ==
 
+= 1.6.1 =
+* New: Set your default party size to any number you recommend
+* Update: Minor style updates to admin widget form
+
 = 1.6.0.3 =
 * Fix: Issue with the plugin settings page CSS 404 - it should look much better now!
 

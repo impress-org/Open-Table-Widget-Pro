@@ -19,15 +19,15 @@
 
     <span class="otw-method-span single-option-wrap">
         <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-0" value="0" <?php checked( '0', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Single Restaurant Reservation', 'open-table-widget' ); ?>
-				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will only allow reservations for a single selected restaurant.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
+		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will only allow reservations for a single selected restaurant.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span><br />
     <span class="otw-method-span multiple-option-wrap">
     <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-1" value="1" <?php checked( '1', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Predefined Restaurants', 'open-table-widget' ); ?>
-				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow reservations for multiple predefined restaurants.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
+		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow reservations for multiple predefined restaurants.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span><br />
     <span class="otw-method-span user-option-wrap">
         <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-2" value="2" <?php checked( '2', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'User Lookup Reservations', 'open-table-widget' ); ?>
-				<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow the user to select a city and then lookup restaurants for reservations within their chosen city.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
+		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow the user to select a city and then lookup restaurants for reservations within their chosen city.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
     </span>
 </p>
 
@@ -152,106 +152,128 @@
 
 	<div class="time-range-wrap clearfix">
 		<div class="time-range-left">
-			<label for="<?php echo $this->get_field_id( 'time_start' ); ?>"><?php _e( 'Time Start', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select start value. Please ensure this value is before the Time End value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-			<?php
-			//Time loop
-			$start = '12AM';
-			$end = '11:45PM';
-
-			//Get language set in widget and in global options
-			$language = 'us';
-			if ( ! empty( $widgetLanguage ) ) {
-				$language = $widgetLanguage;
-			} elseif ( ! empty( $this->options['default-location'] ) ) {
-				$language = $this->options['default-location'];
-			}
-			$reservationData = $this->open_table_get_res_data( $language );
-
-			//Set Time Format according to options
-			$timeFormat = $timeFormatVal = 'g:ia';
-			if ( ! empty( $reservationData['time_format'] ) ) {
-				$timeFormat = $reservationData['time_format'];
-			}
-			if ( ! empty( $reservationData['time_format_val'] ) ) {
-				$timeFormat = $reservationData['time_format_val'];
-			}
-			//Output time select
-			?>
-			<select name="<?php echo $this->get_field_name( 'time_start' ); ?>" class="widefat profield">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'time_start' ); ?>"><?php _e( 'Time Start', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select start value. Please ensure this value is before the Time End value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 				<?php
-				$this->open_table_reservaton_times( $start, $end, $timeStart, $timeFormat, $timeFormatVal, $timeIncrement );
+				//Time loop
+				$start = '12AM';
+				$end   = '11:45PM';
+
+				//Get language set in widget and in global options
+				$language = 'us';
+				if ( ! empty( $widgetLanguage ) ) {
+					$language = $widgetLanguage;
+				} elseif ( ! empty( $this->options['default-location'] ) ) {
+					$language = $this->options['default-location'];
+				}
+				$reservationData = $this->open_table_get_res_data( $language );
+
+				//Set Time Format according to options
+				$timeFormat = $timeFormatVal = 'g:ia';
+				if ( ! empty( $reservationData['time_format'] ) ) {
+					$timeFormat = $reservationData['time_format'];
+				}
+				if ( ! empty( $reservationData['time_format_val'] ) ) {
+					$timeFormat = $reservationData['time_format_val'];
+				}
+				//Output time select
 				?>
-			</select>
+				<select name="<?php echo $this->get_field_name( 'time_start' ); ?>" class="widefat profield">
+					<?php
+					$this->open_table_reservaton_times( $start, $end, $timeStart, $timeFormat, $timeFormatVal, $timeIncrement );
+					?>
+				</select></p>
 		</div>
 
 		<div class="time-range-right">
-			<label for="<?php echo $this->get_field_id( 'time_end' ); ?>"><?php _e( 'Time End', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select end value. Please ensure this value is after the Time Start value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-			<?php
-			//Time loop
-			$start = !empty($timeStart) ? $timeStart : '12AM';
-			$end = '11:00PM';
-
-			?>
-			<select name="<?php echo $this->get_field_name( 'time_end' ); ?>" class="widefat profield">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'time_end' ); ?>"><?php _e( 'Time End', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select end value. Please ensure this value is after the Time Start value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 				<?php
-				$this->open_table_reservaton_times( $start, $end, $timeEnd, $timeFormat, $timeFormatVal, $timeIncrement );
+				//Time loop
+				$start = ! empty( $timeStart ) ? $timeStart : '12AM';
+				$end   = '11:00PM';
+
 				?>
-			</select>
+				<select name="<?php echo $this->get_field_name( 'time_end' ); ?>" class="widefat profield">
+					<?php
+					$this->open_table_reservaton_times( $start, $end, $timeEnd, $timeFormat, $timeFormatVal, $timeIncrement );
+					?>
+				</select></p>
 		</div>
 	</div>
 
 	<!-- Time Range 2 -->
 	<div class="time-range-wrap clearfix">
-		<div class="time-range-left">
-			<label for="<?php echo $this->get_field_id( 'time_default' ); ?>"><?php _e( 'Default Time', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is the default reservation time selected.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-			<?php
-			//Time loop
-			$start = ! empty( $timeStart ) ? $timeStart : '12AM';
-			$end = ! empty( $timeEnd ) ? $timeEnd : '11:59PM';
-			//Output time select
-			?>
-			<select name="<?php echo $this->get_field_name( 'time_default' ); ?>" class="widefat profield">
+		<div class="time-range-left field-left">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'time_default' ); ?>"><?php _e( 'Default Time', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is the default reservation time selected.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 				<?php
-				$this->open_table_reservaton_times( $start, $end, $timeDefault, $timeFormat, $timeFormatVal, $timeIncrement );
+				//Time loop
+				$start = ! empty( $timeStart ) ? $timeStart : '12AM';
+				$end   = ! empty( $timeEnd ) ? $timeEnd : '11:59PM';
+				//Output time select
 				?>
-			</select>
+				<select name="<?php echo $this->get_field_name( 'time_default' ); ?>" class="widefat profield">
+					<?php
+					$this->open_table_reservaton_times( $start, $end, $timeDefault, $timeFormat, $timeFormatVal, $timeIncrement );
+					?>
+				</select></p>
 		</div>
 
-		<div class="time-range-right">
-			<label for="<?php echo $this->get_field_id( 'time_increment' ); ?>"><?php _e( 'Time Increment', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option effects many reservations per hour are displayed within the reservation time select.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<div class="time-range-right field-right">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'time_increment' ); ?>"><?php _e( 'Time Increment', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option effects many reservations per hour are displayed within the reservation time select.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 
-			<select name="<?php echo $this->get_field_name( 'time_increment' ); ?>" class="widefat profield">
-				<?php
-				$options = array(
-					array(
-						__( '15', 'open-table-widget' ),
-						__( '15 Minutes', 'open-table-widget' ),
-					),
-					array(
-						__( '30', 'open-table-widget' ),
-						__( '30 Minutes', 'open-table-widget' ),
-					),
-					array(
-						__( '60', 'open-table-widget' ),
-						__( '1 Hour', 'open-table-widget' ),
-					),
-				);
-				foreach ( $options as $option ) {
-					echo '<option value="' . $option[0] . '" id="' . $option[0] . '"', $timeIncrement == $option[0] ? ' selected="selected"' : '', '>', $option[1], '</option>';
-				}
-				?>
-			</select>
+				<select name="<?php echo $this->get_field_name( 'time_increment' ); ?>" class="widefat profield">
+					<?php
+					$options = array(
+						array(
+							__( '15', 'open-table-widget' ),
+							__( '15 Minutes', 'open-table-widget' ),
+						),
+						array(
+							__( '30', 'open-table-widget' ),
+							__( '30 Minutes', 'open-table-widget' ),
+						),
+						array(
+							__( '60', 'open-table-widget' ),
+							__( '1 Hour', 'open-table-widget' ),
+						),
+					);
+					foreach ( $options as $option ) {
+						echo '<option value="' . $option[0] . '" id="' . $option[0] . '"', $timeIncrement == $option[0] ? ' selected="selected"' : '', '>', $option[1], '</option>';
+					}
+					?>
+				</select></p>
 
 		</div>
 	</div>
-	
-	<!-- Max Seats -->
-	<div class="max-seats clearfix">
-	<p>
-		<label for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'Maximum Seats Available', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'max_seats' ); ?>" name="<?php echo $this->get_field_name( 'max_seats' ); ?>" type="number" placeholder="6" value="<?php echo $maxSeats; ?>" />
-	</p>
+
+	<!-- Default Party Size -->
+	<div class="part-size clearfix">
+
+		<div class="default-party-size field-left">
+			<p>
+				<label for="<?php echo $this->get_field_id( 'party_size' ); ?>"><?php _e( 'Default Party Size', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Set the default party size for this reservation widget.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+
+				<input class="widefat" id="<?php echo $this->get_field_id( 'party_size' ); ?>" name="<?php echo $this->get_field_name( 'party_size' ); ?>" type="number" placeholder="4" value="<?php echo $partySize; ?>" />
+			</p>
+
+		</div>
+
+
+		<!-- Max Seats -->
+		<div class="max-seats field-right">
+
+			<p>
+				<label for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'Max Seats Avail.', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'max_seats' ); ?>" name="<?php echo $this->get_field_name( 'max_seats' ); ?>" type="number" placeholder="6" value="<?php echo $maxSeats; ?>" />
+			</p>
+
+		</div>
+
 	</div>
+
 
 	<!-- Hide Form Labels -->
 	<p>
