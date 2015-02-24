@@ -92,7 +92,7 @@ class Open_Table_License {
 	 */
 	function register_licence_assets( $hook ) {
 
-		if ( $hook == $this->settings_page ) {
+		if ( $hook == 'settings_page_opentablewidgetpro' ) {
 			//JS for AJAX Activation
 			wp_register_script( 'wordimpress_licencing_js', OTW_PLUGIN_URL . '/inc/licence/assets/js/licence.js' );
 			wp_enqueue_script( 'wordimpress_licencing_js' );

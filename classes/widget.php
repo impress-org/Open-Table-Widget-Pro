@@ -37,7 +37,7 @@ class Open_Table_Widget extends WP_Widget {
 
 		if ( $hook == 'widgets.php' ) {
 
-			$suffix = defined( 'OTW_DEBUG' ) && OTW_DEBUG ? '' : '.min';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			//Enqueue
 			wp_enqueue_script( 'jquery-ui-core' );
@@ -45,7 +45,10 @@ class Open_Table_Widget extends WP_Widget {
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
 
-			wp_enqueue_script( 'otw_widget_admin_scripts', plugins_url( 'assets/js/admin-widget' . $suffix . '.js', dirname( __FILE__ ) ), array( 'jquery' ) );
+			wp_enqueue_script( 'otw_widget_admin_scripts', plugins_url( 'assets/js/admin-widget' . $suffix . '.js', dirname( __FILE__ ) ), array(
+				'jquery',
+				'jquery-ui-autocomplete'
+			) );
 
 			// in javascript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
 			wp_localize_script( 'otw_widget_admin_scripts', 'ajax_object',
@@ -54,16 +57,15 @@ class Open_Table_Widget extends WP_Widget {
 			wp_enqueue_style( 'otw_widget_admin_css', plugins_url( 'assets/css/admin-widget' . $suffix . '.css', dirname( __FILE__ ) ) );
 			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom' . $suffix . '.css', dirname( __FILE__ ) ) );
 
-		} else {
-			return;
 		}
+
 	}
 
 	function otw_get_cities() {
 		// Get any existing copy of our transient data
 		$open_table_cities = get_transient( 'open_table_cities' );
 
-		if ( $open_table_cities === false ) {
+		if ( $open_table_cities === false || $open_table_cities['response'] === 500 ) {
 			// It wasn't there, so regenerate the data and save the transient
 			$open_table_cities = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
 			set_transient( 'open_table_cities', $open_table_cities, 12 * 12 * HOUR_IN_SECONDS );
@@ -108,8 +110,10 @@ class Open_Table_Widget extends WP_Widget {
 
 	function add_otw_widget_scripts() {
 
+		$script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+
 		//Determine whether to display minified scripts/css or not (debugging true sets it)
-		if ( OTW_DEBUG == true ) {
+		if ( $script_debug == true ) {
 			$otw_css                 = plugins_url( 'assets/css/open-table-widget.css', dirname( __FILE__ ) );
 			$otw_datepicker          = plugins_url( 'assets/js/datepicker.js', dirname( __FILE__ ) );
 			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.js', dirname( __FILE__ ) );
