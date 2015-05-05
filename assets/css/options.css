@@ -19,10 +19,10 @@ Custom OTW Option Styles
 .open-table-about-wrap {
 	position: relative;
 	background: url('../images/open-table-logo-transparent-150.png') no-repeat left center transparent;
-	height: 51px;
-	margin: 6px 0 0;
+	height: 40px;
+	margin: 13px 0 0;
 	float: left;
-	width: 180px;
+	width: 140px;
 }
 
 #sunrise-plugin-settings .hndle:hover, #sunrise-plugin-settings h3:hover {

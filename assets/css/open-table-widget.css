@@ -24,12 +24,12 @@
 }
 
 .otw-widget-align-left {
-	float:left;
+	float: left;
 	margin: 0 30px 30px 0;
 }
 
 .otw-widget-align-right {
-	float:right;
+	float: right;
 	margin: 0 0 30px 30px;
 }
 
@@ -37,14 +37,14 @@
 Bootstrap Necessities
 ------------------------------------------*/
 
-.selectpicker {
+.otw-selectpicker {
 	width: 100%;
 	border: 1px solid #CCC;
 	background-color: #FFF;
 	line-height: 30px;
 }
 
-.caret {
+.open-table-widget .caret {
 	display: inline-block;
 	width: 0;
 	height: 0;
@@ -54,18 +54,19 @@ Bootstrap Necessities
 	border-right: 4px solid transparent;
 	border-left: 4px solid transparent;
 	border-bottom: 0 dotted;
+	opacity: 0.3;
 	content: "";
 }
 
-.dropdown {
+.otw-wrapper .dropdown {
 	position: relative;
 }
 
-.dropdown-toggle:focus {
+.otw-wrapper .dropdown-toggle:focus {
 	outline: 0;
 }
 
-.dropdown-menu {
+.otw-wrapper .dropdown-menu {
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -202,18 +203,18 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn:focus, input.otw-submit-btn:focus {
+.otw-wrapper .btn:focus, input.otw-submit-btn:focus {
 	outline: thin dotted #333;
 	outline: 5px auto -webkit-focus-ring-color;
 	outline-offset: -2px;
 }
 
-.btn:hover, .btn:focus, input.otw-submit-btn:focus, input.otw-submit-btn:hover {
+.otw-wrapper .btn:hover, .open-table-widget .btn:focus, input.otw-submit-btn:focus, input.otw-submit-btn:hover {
 	color: #333333;
 	text-decoration: none;
 }
 
-.btn:hover, .btn:focus, input.otw-submit-btn:hover, input.otw-submit-btn:focus {
+.open-table-widget .btn:hover, .open-table-widget .btn:focus, input.otw-submit-btn:hover, input.otw-submit-btn:focus {
 	color: #333;
 	text-decoration: none;
 	background-position: 0 -15px;
@@ -223,14 +224,14 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	transition: background-position 0.1s linear;
 }
 
-.btn:active, .btn.active, input.otw-submit-btn:active {
+.open-table-widget .btn:active, .open-table-widget .btn.active, input.otw-submit-btn:active {
 	outline: 0;
 	background-image: none;
 	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
-.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+.open-table-widget .btn.disabled, .open-table-widget .btn[disabled], .open-table-widget fieldset[disabled] .btn {
 	cursor: not-allowed;
 	pointer-events: none;
 	opacity: 0.65;
@@ -239,28 +240,28 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	box-shadow: none;
 }
 
-.btn-default {
+.open-table-widget .btn-default {
 	color: #333333;
 	background-color: #ffffff;
 	border-color: #cccccc;
 }
 
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+.open-table-widget .btn-default:hover, .open-table-widget .btn-default:focus, .open-table-widget .btn-default:active, .open-table-widget .btn-default.active, .open .dropdown-toggle.btn-default {
 	color: #333333;
 	background-color: #E6E6E6;
 	border-color: #adadad;
 }
 
-.btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+.open-table-widget .btn-default:active, .open-table-widget .btn-default.active, .open .dropdown-toggle.btn-default {
 	background-image: none;
 }
 
-.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active {
+.open-table-widget .btn-default.disabled, .open-table-widget .btn-default[disabled], fieldset[disabled] .btn-default, .open-table-widget .btn-default.disabled:hover, .open-table-widget .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .open-table-widget .btn-default.disabled:focus, .open-table-widget .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .open-table-widget .btn-default.disabled:active, .open-table-widget .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .open-table-widget .btn-default.disabled.active, .open-table-widget .btn-default[disabled].active, fieldset[disabled] .btn-default.active {
 	background-color: #ffffff;
 	border-color: #cccccc;
 }
 
-.btn-primary, input.otw-submit-btn {
+.open-table-widget .btn-primary, input.otw-submit-btn {
 	color: #ffffff;
 	background-color: #428bca;
 	border-color: #357ebd;
@@ -268,69 +269,69 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	text-shadow: none;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, input.otw-submit-btn:hover, input.otw-submit-btn:focus {
+.open-table-widget .btn-primary:hover, .open-table-widget .btn-primary:focus, .open-table-widget .btn-primary:active, .open-table-widget .btn-primary.active, .open-table-widget .open .dropdown-toggle.btn-primary, .open-table-widget input.otw-submit-btn:hover, .open-table-widget input.otw-submit-btn:focus {
 	color: #ffffff;
 	background: #3276b1;
 	border-color: #285e8e;
 }
 
-.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+.open-table-widget .btn-primary:active, .open-table-widget .btn-primary.active, .open-table-widget .open .dropdown-toggle.btn-primary {
 	background-image: none;
 }
 
-.btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active, .otw-submit-btn[disabled] {
+.open-table-widget .btn-primary.disabled, .open-table-widget .btn-primary[disabled], fieldset[disabled] .btn-primary, .open-table-widget .btn-primary.disabled:hover, .open-table-widget .btn-primary[disabled]:hover, .open-table-widget fieldset[disabled] .btn-primary:hover, .open-table-widget .open-table-widget .btn-primary.disabled:focus, .open-table-widget .btn-primary[disabled]:focus, .open-table-widget fieldset[disabled] .btn-primary:focus, .open-table-widget .open-table-widget .btn-primary.disabled:active, .open-table-widget .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .open-table-widget .open-table-widget .btn-primary.disabled.active, .open-table-widget .btn-primary[disabled].active, .open-table-widget fieldset[disabled] .btn-primary.active, .otw-submit-btn[disabled] {
 	background-color: #428bca;
 	border-color: #357ebd;
 }
 
-.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+.open-table-widget .btn-success:active, .open-table-widget .btn-success.active, .open-table-widget .open .dropdown-toggle.btn-success {
 	background-image: none;
 }
 
-.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
+.open-table-widget .btn-success.disabled, .open-table-widget .btn-success[disabled], fieldset[disabled] .btn-success, .open-table-widget .btn-success.disabled:hover, .open-table-widget .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .open-table-widget .btn-success.disabled:focus, .open-table-widget .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .open-table-widget .btn-success.disabled:active, .open-table-widget .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .open-table-widget .btn-success.disabled.active, .open-table-widget .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
 	background-color: #5cb85c;
 	border-color: #4cae4c;
 }
 
-.btn-info {
+.open-table-widget .btn-info {
 	color: #ffffff;
 	background-color: #5bc0de;
 	border-color: #46b8da;
 }
 
-.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+.open-table-widget .btn-info:hover, .open-table-widget .btn-info:focus, .open-table-widget .btn-info:active, .open-table-widget .btn-info.active, .open-table-widget .open .dropdown-toggle.btn-info {
 	color: #ffffff;
 	background-color: #39b3d7;
 	border-color: #269abc;
 }
 
-.btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+.open-table-widget .btn-info:active, .open-table-widget .btn-info.active, .open-table-widget .open .dropdown-toggle.btn-info {
 	background-image: none;
 }
 
-.btn-info.disabled, .btn-info[disabled], fieldset[disabled] .btn-info, .btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus, .btn-info.disabled:active, .btn-info[disabled]:active, fieldset[disabled] .btn-info:active, .btn-info.disabled.active, .btn-info[disabled].active, fieldset[disabled] .btn-info.active {
+.open-table-widget .btn-info.disabled, .open-table-widget .btn-info[disabled], .open-table-widget fieldset[disabled] .btn-info, .open-table-widget .btn-info.disabled:hover, .open-table-widget .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .open-table-widget .btn-info.disabled:focus, .open-table-widget .btn-info[disabled]:focus, .open-table-widget fieldset[disabled] .btn-info:focus, .open-table-widget .btn-info.disabled:active, .open-table-widget .btn-info[disabled]:active, fieldset[disabled] .btn-info:active, .open-table-widget .btn-info.disabled.active, .open-table-widget .btn-info[disabled].active, fieldset[disabled] .btn-info.active {
 	background-color: #5bc0de;
 	border-color: #46b8da;
 }
 
-.btn-link {
+.open-table-widget .btn-link {
 	color: #428bca;
 	font-weight: normal;
 	cursor: pointer;
 	border-radius: 0;
 }
 
-.btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+.open-table-widget .btn-link, .open-table-widget .btn-link:active, .open-table-widget .btn-link[disabled], .open-table-widget fieldset[disabled] .btn-link {
 	background-color: transparent;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
-.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+.open-table-widget .btn-link, .open-table-widget .btn-link:hover, .open-table-widget .btn-link:focus, .open-table-widget .btn-link:active {
 	border-color: transparent;
 }
 
-.btn-link:hover, .btn-link:focus {
+.open-table-widget .btn-link:hover, .open-table-widget .btn-link:focus {
 	color: #2a6496;
 	text-decoration: underline;
 	background-color: transparent;
@@ -423,7 +424,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 
 .open-table-widget .bootstrap-select {
 	/*width: 220px\9; IE8 and below*/
-	width: 220 px\0; /*IE9 and below*/
+	width: 220px \0; /*IE9 and below*/
 }
 
 .open-table-widget .bootstrap-select > .btn {
@@ -439,17 +440,17 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	z-index: 2000;
 }
 
-.bootstrap-select.show-menu-arrow.open > .btn {
+.open-table-widget .bootstrap-select.show-menu-arrow.open > .btn {
 	z-index: 2051;
 }
 
-.bootstrap-select .btn:focus {
+.open-table-widget .bootstrap-select .btn:focus {
 	outline: thin dotted #333333 !important;
 	outline: 5px auto -webkit-focus-ring-color !important;
 	outline-offset: -2px;
 }
 
-.bootstrap-select.btn-group .btn .filter-option {
+.open-table-widget .bootstrap-select.btn-group .btn .filter-option {
 	overflow: hidden;
 	position: absolute;
 	left: 12px;
@@ -457,7 +458,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	text-align: left;
 }
 
-.bootstrap-select.btn-group .btn .caret {
+.open-table-widget .bootstrap-select.btn-group .btn .caret {
 	position: absolute;
 	top: 50%;
 	right: 12px;
@@ -465,26 +466,26 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	vertical-align: middle;
 }
 
-.bootstrap-select.btn-group > .disabled, .bootstrap-select.btn-group .dropdown-menu li.disabled > a {
+.open-table-widget .bootstrap-select.btn-group > .disabled, .open-table-widget .bootstrap-select.btn-group .dropdown-menu li.disabled > a {
 	cursor: not-allowed;
 }
 
-.bootstrap-select.btn-group > .disabled:focus {
+.open-table-widget .bootstrap-select.btn-group > .disabled:focus {
 	outline: none !important;
 }
 
-.bootstrap-select.btn-group[class*="span"] .btn {
+.open-table-widget .bootstrap-select.btn-group[class*="span"] .btn {
 	width: 100%;
 }
 
-.bootstrap-select.btn-group .dropdown-menu {
+.open-table-widget .bootstrap-select.btn-group .dropdown-menu {
 	min-width: 100%;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-.bootstrap-select.btn-group .dropdown-menu.inner {
+.open-table-widget .bootstrap-select.btn-group .dropdown-menu.inner {
 	position: static;
 	border: 0;
 	padding: 0;
@@ -497,7 +498,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	box-shadow: none;
 }
 
-.bootstrap-select.btn-group .dropdown-menu dt {
+.open-table-widget .bootstrap-select.btn-group .dropdown-menu dt {
 	display: block;
 	padding: 3px 20px;
 	cursor: default;
@@ -611,7 +612,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	display: block;
 }
 
-.mobile-device {
+.open-table-widget .mobile-device {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -635,14 +636,13 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	margin-top: -1px;
 }
 
-.control-group.error .bootstrap-select .dropdown-toggle {
+.open-table-widget .control-group.error .bootstrap-select .dropdown-toggle {
 	border-color: #b94a48;
 }
 
 .open-table-widget .bootstrap-select-searchbox {
 	padding: 4px 8px;
 }
-
 
 /*!
  * Datepicker v0.1.0
@@ -652,135 +652,135 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
  * Released under the MIT license
  */
 
-.datepicker-container {
-    position: absolute;
-    z-index: 201312;
-    float: left;
-    font-family: arial, helvetica, sans-serif;
-    font-size: 12px;
-    line-height: 30px;
+.open-table-widget-datepicker {
+	position: absolute;
+	z-index: 201312;
+	float: left;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 30px;
 }
 
-.datepicker-arrow,
-.datepicker-arrow:after {
-    display: block;
-    width: 0;
-    height: 0;
-    border: 5px solid transparent;
+.open-table-widget .datepicker-arrow,
+.open-table-widget .datepicker-arrow:after {
+	display: block;
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
 }
 
-.datepicker-arrow {
-    position: relative;
-    margin: 0 10px;
-    border-bottom-color: #9cf;
+.open-table-widget .datepicker-arrow {
+	position: relative;
+	margin: 0 10px;
+	border-bottom-color: #9cf;
 }
 
-.datepicker-arrow:after {
-    position: absolute;
-    top: -4px;
-    left: -5px;
-    content: " ";
-    border-bottom-color: #fff;
+.open-table-widget .datepicker-arrow:after {
+	position: absolute;
+	top: -4px;
+	left: -5px;
+	content: " ";
+	border-bottom-color: #fff;
 }
 
-.datepicker-content {
-    width: 210px;
-    -webkit-box-sizing: content-box;
-            box-sizing: content-box;
-    border: 1px solid #ccc;
-    border-top-color: #9cf;
-    -webkit-box-shadow: 0 0 3px #ccc;
-            box-shadow: 0 0 3px #ccc;
+.open-table-widget .datepicker-content {
+	width: 210px;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	border: 1px solid #ccc;
+	border-top-color: #9cf;
+	-webkit-box-shadow: 0 0 3px #ccc;
+	box-shadow: 0 0 3px #ccc;
 }
 
-.datepicker-prev,
-.datepicker-next {
-    font-size: 18px;
+.open-table-widget .datepicker-prev,
+.open-table-widget .datepicker-next {
+	font-size: 18px;
 }
 
-.datepicker-content ul:before,
-.datepicker-content ul:after {
-    display: table;
-    content: "";
+.open-table-widget .datepicker-content ul:before,
+.open-table-widget .datepicker-content ul:after {
+	display: table;
+	content: "";
 }
 
-.datepicker-content ul:after {
-    clear: both;
+.open-table-widget .datepicker-content ul:after {
+	clear: both;
 }
 
-.datepicker-content ul {
-    width: 102%;
-    padding: 0;
-    margin: 0;
+.open-table-widget .datepicker-content ul {
+	width: 102%;
+	padding: 0;
+	margin: 0;
 
-    *zoom: 1;
+	*zoom: 1;
 }
 
-.datepicker-content li {
-    float: left;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    list-style: none;
-    cursor: pointer;
-    background-color: #fff;
+.open-table-widget .datepicker-content li {
+	float: left;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	list-style: none;
+	cursor: pointer;
+	background-color: #fff;
 }
 
-.datepicker-content .col-1 {
-    width: 30px;
+.open-table-widget .datepicker-content .col-1 {
+	width: 30px;
 }
 
-.datepicker-content .col-2 {
-    width: 60px;
+.open-table-widget .datepicker-content .col-2 {
+	width: 60px;
 }
 
-.datepicker-content .col-3 {
-    width: 90px;
+.open-table-widget .datepicker-content .col-3 {
+	width: 90px;
 }
 
-.datepicker-content .col-4 {
-    width: 120px;
+.open-table-widget .datepicker-content .col-4 {
+	width: 120px;
 }
 
-.datepicker-content .col-5 {
-    width: 150px;
+.open-table-widget .datepicker-content .col-5 {
+	width: 150px;
 }
 
-.datepicker-content .col-6 {
-    width: 180px;
+.open-table-widget .datepicker-content .col-6 {
+	width: 180px;
 }
 
-.datepicker-content .col-7 {
-    width: 210px;
+.open-table-widget .datepicker-content .col-7 {
+	width: 210px;
 }
 
-.datepicker-content li:hover {
-    background-color: #eee;
+.open-table-widget .datepicker-content li:hover {
+	background-color: #eee;
 }
 
-.datepicker-content .selected,
-.datepicker-content .selected:hover {
-    color: #36f;
+.open-table-widget .datepicker-content .selected,
+.open-table-widget .datepicker-content .selected:hover {
+	color: #36f;
 }
 
-.datepicker-content .disabled,
-.datepicker-content .disabled:hover {
-    color: #ccc;
+.open-table-widget .datepicker-content .disabled,
+.open-table-widget .datepicker-content .disabled:hover {
+	color: #ccc;
 }
 
-.datepicker-years li,
-.datepicker-months li {
-    width: 52.5px;
-    height: 52.5px;
-    line-height: 52.5px;
+.open-table-widget .datepicker-years li,
+.open-table-widget .datepicker-months li {
+	width: 52.5px;
+	height: 52.5px;
+	line-height: 52.5px;
 }
 
-.datepicker-week li,
-.datepicker-week li:hover {
-    cursor: default;
-    background-color: #fff;
+.open-table-widget .datepicker-week li,
+.open-table-widget .datepicker-week li:hover {
+	cursor: default;
+	background-color: #fff;
 }
 
 /*--------------------------------
@@ -796,7 +796,7 @@ Basic Form Styles
 .otw-widget-form-wrap input[type="text"], .otw-widget-form-wrap select {
 	margin: 0;
 	width: 100%;
-	display: -webkit-box-sizing : border-box; /* Safari/Chrome, other WebKit */
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box; /* Firefox, other Gecko */
 	box-sizing: border-box; /* Opera/IE 8+ */;
 }
@@ -969,6 +969,10 @@ OTW Shadow Themes
 .otw-shadow-dark-style .otw-widget-title, .otw-inset-dark-style .otw-widget-title {
 	border: none;
 	box-shadow: none;
+}
+
+.otw-minimal-dark-style .powered-by-open-table, .otw-shadow-dark-style .powered-by-open-table, .otw-inset-dark-style .powered-by-open-table {
+	background: url('../images/open-table-logo-transparent-white-150.png') no-repeat center bottom rgba(0, 0, 0, 0);
 }
 
 /*--------------------------------

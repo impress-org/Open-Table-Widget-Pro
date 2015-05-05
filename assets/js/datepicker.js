@@ -666,6 +666,7 @@
         selectedClass: "selected",
         showMonthAfterYear: false,
         template: [
+            '<div class="open-table-widget open-table-widget-datepicker">',
             '<div class="datepicker-container" data-type="datepicker">',
                 '<div class="datepicker-arrow"></div>',
                 '<div class="datepicker-content">',
@@ -694,6 +695,7 @@
                         '<ul class="datepicker-week" data-type="week"></ul>',
                         '<ul class="datepicker-days" data-type="days"></ul>',
                     '</div>',
+                '</div>',
                 '</div>',
             '</div>'
         ].join(""),

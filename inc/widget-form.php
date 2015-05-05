@@ -400,3 +400,8 @@
 
 </div>
 
+
+<div class="powered-by">
+	<p><?php _e( 'Powered by:', 'otw' ); ?></p>
+	<img src="<?php echo OTW_PLUGIN_URL; ?>/assets/images/open-table-logo-transparent-150.png" alt="Powered by Open Table" />
+</div>

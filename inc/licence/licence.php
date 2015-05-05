@@ -59,7 +59,7 @@ class Open_Table_License {
 				echo '<div class="updated error"><p>';
 				parse_str( $_SERVER['QUERY_STRING'], $params ); //ensures we're not redirect for admin pages using query string; ie '?=opentablewidget'
 
-				$settings_link = '<a href="options-general.php?page=opentablewidget">' . __( 'activate your license', 'open-table-widget' ) . '</a>';
+				$settings_link = '<a href="options-general.php?page=opentablewidgetpro">' . __( 'activate your license', 'open-table-widget' ) . '</a>';
 				$hide_notice   = '<a href="?' . http_build_query( array_merge( $params, array( $this->licence_key_setting . '_license_ignore_notice' => '0' ) ) ) . '" rel="nofollow"> ' . __( 'Hide Notice', 'open-table-widget' ) . '</a>';
 
 				printf(

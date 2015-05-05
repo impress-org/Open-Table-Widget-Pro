@@ -76,6 +76,15 @@ Yes, there are three basic themes included in the free version of the plugin. Th
 
 == Changelog ==
 
+= 1.7 =
+* New: Updated Open Table branding to their new logo
+* Fix: Fixed broked "activate your license" link in license notice
+* Update: Prefixed the "dropdown" class usage to help out theme authors
+* Update: Prefixed the "bootstrap-success" class usage to help out theme authors
+* Update: Prefixed the "btn-"* class usage to help out theme authors
+* Update: Prefixed the "selectpicker" class usage to help out theme authors
+* Update: Prefixed the "datepicker-"* class usage and revised js script to help out theme authors
+
 = 1.6.2 =
 * Improved: Debugging now works from SCRIPT_DEBUG rather than plugin specific constant
 * Improved: The datepicker now does not allow a past date to be selected

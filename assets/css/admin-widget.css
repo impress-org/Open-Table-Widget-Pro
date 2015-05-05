@@ -735,3 +735,23 @@ Tipsy
 	border-top-color: transparent;
 	border-bottom-color: transparent;
 }
+
+/* Powered by */
+
+.powered-by {
+	overflow: hidden;
+	text-align: center;
+}
+
+.powered-by p {
+	display: inline;
+	font-style: italic;
+	font-size: 12px;
+	position: relative;
+	top: -12px;
+	margin-right: 8px;
+}
+
+.powered-by img {
+	display:inline;
+}
