@@ -22,9 +22,9 @@ jQuery( document ).ready( function ( $ ) {
 
 
 	//Select default date
-	$(window ).on('load', function(){
+	$( window ).on( 'load', function () {
 
-		$('.datepicker-days .selected' ).trigger('click');
+		$( '.datepicker-days .selected' ).trigger( 'click' );
 
 	} );
 
@@ -140,6 +140,7 @@ function otw_frontend_api_restaurant_autocomplete( request, response, city ) {
 		if ( jsonResponse !== null ) {
 			//Consume Multidemensional Array in Object
 			//@see: http://stackoverflow.com/questions/5181493/how-to-find-a-value-in-a-multidimensional-object-array-in-javascript
+			console.log(jsonResponse);
 			jsonResponse.restaurants.filter( function ( restaurant ) {
 
 				restaurantsNameArray.push( {
