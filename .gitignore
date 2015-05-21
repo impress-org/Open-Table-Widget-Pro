@@ -4,3 +4,4 @@ node_modules
 package.json
 Gruntfile.js
 .idea
+*.zip
