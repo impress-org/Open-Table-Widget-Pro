@@ -29,6 +29,7 @@ class Open_Table_Widget extends WP_Widget {
 		add_action( 'wp_enqueue_scripts', array( $this, 'add_otw_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_otw_admin_widget_scripts' ) );
 		add_action( 'wp_ajax_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
+		add_action( 'wp_ajax_nopriv_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
 
 	}
 
