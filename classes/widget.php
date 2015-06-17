@@ -64,9 +64,7 @@ class Open_Table_Widget extends WP_Widget {
 
 	function otw_get_cities() {
 		// Get any existing copy of our transient data
-		$open_table_cities = get_transient( 'open_table_cities' );
-
-		if ( $open_table_cities === false || $open_table_cities['response'] === 500 ) {
+		if ( false === ( $open_table_cities = get_transient( 'open_table_cities' ) ) || ( isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) ) {
 			// It wasn't there, so regenerate the data and save the transient
 			$open_table_cities = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
 			set_transient( 'open_table_cities', $open_table_cities, 12 * 12 * HOUR_IN_SECONDS );
