@@ -14,6 +14,18 @@ define( 'OTW_PLUGIN_NAME_PLUGIN', plugin_basename( __FILE__ ) );
 define( 'OTW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'OTW_PLUGIN_URL', plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) );
 
+
+//Load Localized Translations if available
+add_action( 'init', 'otw_load_textdomain' );
+
+function otw_load_textdomain() {
+    $domain = 'open-table-widget';
+	$mo_file = WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . get_locale() . '.mo';
+
+	load_textdomain( $domain, $mo_file );
+	load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+}
+
 function init_open_table_widget() {
 
 	// Include Core Framework class
