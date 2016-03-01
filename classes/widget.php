@@ -26,15 +26,20 @@ class Open_Table_Widget extends WP_Widget {
 
 		$this->options = get_option( 'opentablewidgetpro_options' );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'add_otw_widget_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'add_otw_admin_widget_scripts' ) );
+		//Scripts
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_widget_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_widget_scripts' ) );
 		add_action( 'wp_ajax_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
 		add_action( 'wp_ajax_nopriv_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
 
 	}
 
-	//Load Widget JS Script ONLY on Widget page
-	function add_otw_admin_widget_scripts( $hook ) {
+	/**
+	 * Load Widget JS Script ONLY on Widget page
+	 *
+	 * @param $hook
+	 */
+	function admin_widget_scripts( $hook ) {
 
 		if ( $hook == 'widgets.php' ) {
 
@@ -53,7 +58,7 @@ class Open_Table_Widget extends WP_Widget {
 
 			// in javascript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
 			wp_localize_script( 'otw_widget_admin_scripts', 'ajax_object',
-				array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'city_array' => $this->otw_get_cities() ) );
+				array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'city_array' => $this->get_cities() ) );
 
 			wp_enqueue_style( 'otw_widget_admin_css', plugins_url( 'assets/css/admin-widget' . $suffix . '.css', dirname( __FILE__ ) ) );
 			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom' . $suffix . '.css', dirname( __FILE__ ) ) );
@@ -62,7 +67,13 @@ class Open_Table_Widget extends WP_Widget {
 
 	}
 
-	function otw_get_cities() {
+	/**
+	 * Get Cities
+	 *
+	 * @return array|mixed|WP_Error
+	 */
+	function get_cities() {
+
 		// Get any existing copy of our transient data
 		if ( false === ( $open_table_cities = get_transient( 'open_table_cities' ) ) || ( isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) ) {
 			// It wasn't there, so regenerate the data and save the transient
@@ -104,10 +115,11 @@ class Open_Table_Widget extends WP_Widget {
 
 
 	/**
-	 * Adds Open Table Widget Stylesheets
+	 * Frontend Scripts
+	 *
+	 * @description: Adds Open Table Widget Stylesheets
 	 */
-
-	function add_otw_widget_scripts() {
+	public function frontend_widget_scripts() {
 
 		$script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
