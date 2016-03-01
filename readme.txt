@@ -1,9 +1,9 @@
 === Open Table Widget Pro ===
-Contributors: dlocc, wordimpress, webdevmattcrom
+Contributors: wordimpress
 Donate link: http://wordimpress.com/
 Tags: open table, open table widget, open table form, open table reservations, reservations, restaurant, open table shortcode
 Requires at least: 4.1
-Tested up to: 4.2.2
+Tested up to: 4.4.2
 Stable tag: 1.7.3
 
 Open Table Widget makes it a breeze for you to add powerful Open Table reservation forms to your website via an easy to use and intuitive widget.
