@@ -4,8 +4,6 @@
  *  Open Table Widget
  *
  * @description: The Open Table Widget
- * @since      : 1.0
- * @created    : 8/28/13
  */
 class Open_Table_Widget extends WP_Widget {
 
@@ -29,8 +27,8 @@ class Open_Table_Widget extends WP_Widget {
 		//Scripts
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_widget_scripts' ) );
-		add_action( 'wp_ajax_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
-		add_action( 'wp_ajax_nopriv_open_table_api_action', array( $this, 'otw_widget_request_open_table_api' ) );
+		add_action( 'wp_ajax_open_table_api_action', array( $this, 'request_open_table_api' ) );
+		add_action( 'wp_ajax_nopriv_open_table_api_action', array( $this, 'request_open_table_api' ) );
 
 	}
 
@@ -74,38 +72,53 @@ class Open_Table_Widget extends WP_Widget {
 	 */
 	function get_cities() {
 
+		$open_table_cities = get_transient( 'open_table_cities' );
+
 		// Get any existing copy of our transient data
-		if ( false === ( $open_table_cities = get_transient( 'open_table_cities' ) ) || ( isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) ) {
+		if ( false === $open_table_cities || isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) {
 			// It wasn't there, so regenerate the data and save the transient
-			$open_table_cities = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
-			set_transient( 'open_table_cities', $open_table_cities, 12 * 12 * HOUR_IN_SECONDS );
+			$response = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
+			//Proper error checking
+			if ( is_wp_error( $response ) ) {
+				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $response->get_error_message();
+			}
+			set_transient( 'open_table_cities', $response, 12 * 12 * HOUR_IN_SECONDS );
+
 		}
 
-		return $open_table_cities;
+		return apply_filters( 'otw_get_cities_response', $open_table_cities );
 
 	}
 
-	function otw_widget_request_open_table_api() {
+	/**
+	 * Open Table API Request
+	 */
+	public function request_open_table_api() {
 
 		//get restaurant name
 		$restaurant = empty( $_POST['restaurant'] ) ? '' : stripslashes( htmlentities( $_POST['restaurant'], ENT_QUOTES ) );
 		$city       = empty( $_POST['city'] ) ? '' : stripslashes( htmlentities( $_POST['city'], ENT_QUOTES ) );
 
-
 		if ( $_POST['restaurant'] && empty( $city ) ) {
 			// Send API Call using WP's HTTP API
 			$data = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?name=' . $restaurant );
-
+			//Proper error checking
+			if ( is_wp_error( $data ) ) {
+				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $data->get_error_message();
+			}
 			// Handle OTW response data
-			echo $data["body"];
+			echo $data['body'];
 
 		} elseif ( $_POST['city'] ) {
 
 			// Send API Call using WP's HTTP API
 			$data = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?city=' . $city . '&name=' . $restaurant );
-
+			//Proper error checking
+			if ( is_wp_error( $data ) ) {
+				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $data->get_error_message();
+			}
 			// Handle OTW response data
-			echo $data["body"];
+			echo $data['body'];
 
 		}
 
@@ -141,7 +154,7 @@ class Open_Table_Widget extends WP_Widget {
 		/**
 		 * CSS
 		 */
-		if ( $this->options["disable_css"] !== "on" ) {
+		if ( $this->options['disable_css'] !== 'on' ) {
 			wp_register_style( 'otw_widget', $otw_css );
 			wp_enqueue_style( 'otw_widget' );
 		}
@@ -164,7 +177,7 @@ class Open_Table_Widget extends WP_Widget {
 		}
 
 		//bootstrap dropdowns
-		if ( $this->options["disable_bootstrap_dropdown"] !== "on" && $this->options["disable_bootstrap_select"] !== "on" ) {
+		if ( $this->options['disable_bootstrap_dropdown'] !== 'on' && $this->options['disable_bootstrap_select'] !== 'on' ) {
 			wp_register_script( 'otw_dropdown_js', $otw_bootstrap_dropdowns );
 			wp_enqueue_script( 'otw_dropdown_js' );
 		}
@@ -236,7 +249,6 @@ class Open_Table_Widget extends WP_Widget {
 		 */
 		//Widget Style
 		$style = "otw-" . sanitize_title( $widgetStyle ) . "-style";
-
 
 		/* Add the width from $widget_width to the class from the $before widget
 		http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
@@ -407,8 +419,14 @@ class Open_Table_Widget extends WP_Widget {
 
 	}
 
-
-	function open_table_get_res_data( $widgetLanguage ) {
+	/**
+	 * Get Restaurant Data
+	 *
+	 * @param $widgetLanguage
+	 *
+	 * @return array
+	 */
+	function get_restaurant_data( $widgetLanguage ) {
 
 		$action = $dateFormat = $timeFormat = $timeFormatVal = '';
 
@@ -465,12 +483,12 @@ class Open_Table_Widget extends WP_Widget {
 				$timeFormatVal = 'g:ia';
 		}
 
-		return array(
+		return apply_filters( 'open_table_restaurant_data', array(
 			'action'          => $action,
 			'date_format'     => $dateFormat,
 			'time_format'     => $timeFormat,
 			'time_format_val' => $timeFormatVal
-		);
+		) );
 
 	}
 

@@ -166,7 +166,7 @@
 				} elseif ( ! empty( $this->options['default-location'] ) ) {
 					$language = $this->options['default-location'];
 				}
-				$reservationData = $this->open_table_get_res_data( $language );
+				$reservationData = $this->get_restaurant_data( $language );
 
 				//Set Time Format according to options
 				$timeFormat = $timeFormatVal = 'g:ia';

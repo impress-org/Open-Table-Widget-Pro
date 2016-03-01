@@ -23,7 +23,7 @@
 	$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
 
 	//Get Widget Res Data
-	$reservationData = $open_table_widget->open_table_get_res_data( $widgetLanguage ); ?>
+	$reservationData = $open_table_widget->get_restaurant_data( $widgetLanguage ); ?>
 
 	<form method="get" class="otw-widget-form" action="<?php echo $reservationData['action']; ?>" target="_blank">
 		<div class="otw-wrapper">
