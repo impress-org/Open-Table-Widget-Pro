@@ -23,7 +23,7 @@ class Open_Table_Widget_Shortcode extends Open_Table_Widget {
 	function handle_shortcode( $atts ) {
 		$open_table_widget = new Open_Table_Widget();
 		//Only Load scripts when widget or shortcode is active
-		$open_table_widget->add_otw_widget_scripts();
+		$open_table_widget->frontend_widget_scripts();
 
 		//Defaults shortcode vals
 		$defaults = array(
