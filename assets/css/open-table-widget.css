@@ -652,6 +652,14 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
  * Released under the MIT license
  *
  * Date: 2016-01-11T04:07:30.531Z
+ *
+ * OTWP Notes
+ * We namespace the picker under `.open-table-widget-datepicker`, which
+ * is added to the template when we create the widget. However, most of
+ * the datepicker plugin’s default styles are scoped to the parent of
+ * the datepicker. If the datepicker plugin’s style changes, just be
+ * aware of which elements need to be scoped as children of the custom
+ * namespace class, and which need to be scoped alongside it.
  */
 .open-table-widget-datepicker.datepicker-container {
 	font-size: 12px;
@@ -771,6 +779,9 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	left: auto;
 }
 
+/*!
+ * Panels are always children of the datepicker.
+ */
 .open-table-widget-datepicker .datepicker-panel > ul:before,
 .open-table-widget-datepicker .datepicker-panel > ul:after {
 	display: table;
@@ -857,6 +868,10 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	background-color: #fff;
 }
 
+/*!
+ * `.datepicker.hide` is used on both the main element and children elements,
+ * hence the need to be scoped to the namespace twice.
+ */
 .open-table-widget-datepicker.datepicker-hide,
 .open-table-widget-datepicker .datepicker-hide {
 	display: none;
