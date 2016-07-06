@@ -16,7 +16,7 @@ jQuery( document ).ready( function ( $ ) {
 		format: $( this ).attr( 'data-date-format' ),
 		weekStart : 0,
 		filter: function ( date ) {
-			return date.valueOf() < now ? false : true;
+			return date.valueOf() >= now;
 		},
 		template: (
 			'<div class="open-table-widget-datepicker datepicker-container">' +
