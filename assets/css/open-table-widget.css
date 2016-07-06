@@ -645,14 +645,6 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 }
 
 /*!
- * Datepicker v0.1.0
- * https://github.com/fengyuanchen/datepicker
- *
- * Copyright 2014 Fengyuan Chen
- * Released under the MIT license
- */
-
-/*!
  * Datepicker v0.3.1
  * https://github.com/fengyuanchen/datepicker
  *
@@ -661,7 +653,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
  *
  * Date: 2016-01-11T04:07:30.531Z
  */
-.datepicker-container {
+.open-table-widget-datepicker .datepicker-container {
 	font-size: 12px;
 	line-height: 30px;
 
@@ -686,8 +678,8 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	-webkit-touch-callout: none;
 }
 
-.datepicker-container:before,
-.datepicker-container:after {
+.open-table-widget-datepicker .datepicker-container:before,
+.open-table-widget-datepicker .datepicker-container:after {
 	position: absolute;
 
 	display: block;
@@ -700,7 +692,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	border: 5px solid transparent;
 }
 
-.datepicker-dropdown {
+.open-table-widget-datepicker .datepicker-dropdown {
 	position: absolute;
 	z-index: 1;
 
@@ -713,90 +705,90 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	box-shadow: 0 3px 6px #ccc;
 }
 
-.datepicker-inline {
+.open-table-widget-datepicker .datepicker-inline {
 	position: static;
 }
 
-.datepicker-top-left,
-.datepicker-top-right {
+.open-table-widget-datepicker .datepicker-top-left,
+.open-table-widget-datepicker .datepicker-top-right {
 	border-top-color: #39f;
 }
 
-.datepicker-top-left:before,
-.datepicker-top-left:after,
-.datepicker-top-right:before,
-.datepicker-top-right:after {
+.open-table-widget-datepicker .datepicker-top-left:before,
+.open-table-widget-datepicker .datepicker-top-left:after,
+.open-table-widget-datepicker .datepicker-top-right:before,
+.open-table-widget-datepicker .datepicker-top-right:after {
 	top: -5px;
 	left: 10px;
 
 	border-top: 0;
 }
 
-.datepicker-top-left:before,
-.datepicker-top-right:before {
+.open-table-widget-datepicker .datepicker-top-left:before,
+.open-table-widget-datepicker .datepicker-top-right:before {
 	border-bottom-color: #39f;
 }
 
-.datepicker-top-left:after,
-.datepicker-top-right:after {
+.open-table-widget-datepicker .datepicker-top-left:after,
+.open-table-widget-datepicker .datepicker-top-right:after {
 	top: -4px;
 
 	border-bottom-color: #fff;
 }
 
-.datepicker-bottom-left,
-.datepicker-bottom-right {
+.open-table-widget-datepicker .datepicker-bottom-left,
+.open-table-widget-datepicker .datepicker-bottom-right {
 	border-bottom-color: #39f;
 }
 
-.datepicker-bottom-left:before,
-.datepicker-bottom-left:after,
-.datepicker-bottom-right:before,
-.datepicker-bottom-right:after {
+.open-table-widget-datepicker .datepicker-bottom-left:before,
+.open-table-widget-datepicker .datepicker-bottom-left:after,
+.open-table-widget-datepicker .datepicker-bottom-right:before,
+.open-table-widget-datepicker .datepicker-bottom-right:after {
 	bottom: -5px;
 	left: 10px;
 
 	border-bottom: 0;
 }
 
-.datepicker-bottom-left:before,
-.datepicker-bottom-right:before {
+.open-table-widget-datepicker .datepicker-bottom-left:before,
+.open-table-widget-datepicker .datepicker-bottom-right:before {
 	border-top-color: #39f;
 }
 
-.datepicker-bottom-left:after,
-.datepicker-bottom-right:after {
+.open-table-widget-datepicker .datepicker-bottom-left:after,
+.open-table-widget-datepicker .datepicker-bottom-right:after {
 	bottom: -4px;
 
 	border-top-color: #fff;
 }
 
-.datepicker-top-right:before,
-.datepicker-top-right:after,
-.datepicker-bottom-right:before,
-.datepicker-bottom-right:after {
+.open-table-widget-datepicker .datepicker-top-right:before,
+.open-table-widget-datepicker .datepicker-top-right:after,
+.open-table-widget-datepicker .datepicker-bottom-right:before,
+.open-table-widget-datepicker .datepicker-bottom-right:after {
 	right: 10px;
 	left: auto;
 }
 
-.datepicker-panel > ul:before,
-.datepicker-panel > ul:after {
+.open-table-widget-datepicker .datepicker-panel > ul:before,
+.open-table-widget-datepicker .datepicker-panel > ul:after {
 	display: table;
 
 	content: ' ';
 }
 
-.datepicker-panel > ul:after {
+.open-table-widget-datepicker .datepicker-panel > ul:after {
 	clear: both;
 }
 
-.datepicker-panel > ul {
+.open-table-widget-datepicker .datepicker-panel > ul {
 	width: 102%;
 	margin: 0;
 	padding: 0;
 }
 
-.datepicker-panel > ul > li {
+.open-table-widget-datepicker .datepicker-panel > ul > li {
 	float: left;
 
 	width: 30px;
@@ -812,60 +804,60 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	background-color: #fff;
 }
 
-.datepicker-panel > ul > li:hover {
+.open-table-widget-datepicker .datepicker-panel > ul > li:hover {
 	background-color: #eee;
 }
 
-.datepicker-panel > ul > li.muted,
-.datepicker-panel > ul > li.muted:hover {
+.open-table-widget-datepicker .datepicker-panel > ul > li.muted,
+.open-table-widget-datepicker .datepicker-panel > ul > li.muted:hover {
 	color: #999;
 }
 
-.datepicker-panel > ul > li.picked,
-.datepicker-panel > ul > li.picked:hover {
+.open-table-widget-datepicker .datepicker-panel > ul > li.picked,
+.open-table-widget-datepicker .datepicker-panel > ul > li.picked:hover {
 	color: #39f;
 }
 
-.datepicker-panel > ul > li.disabled,
-.datepicker-panel > ul > li.disabled:hover {
+.open-table-widget-datepicker .datepicker-panel > ul > li.disabled,
+.open-table-widget-datepicker .datepicker-panel > ul > li.disabled:hover {
 	cursor: default;
 
 	color: #ccc;
 	background-color: #fff;
 }
 
-.datepicker-panel > ul > li[data-view='years prev'],
-.datepicker-panel > ul > li[data-view='year prev'],
-.datepicker-panel > ul > li[data-view='month prev'],
-.datepicker-panel > ul > li[data-view='years next'],
-.datepicker-panel > ul > li[data-view='year next'],
-.datepicker-panel > ul > li[data-view='month next'],
-.datepicker-panel > ul > li[data-view='next'] {
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='years prev'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='year prev'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='month prev'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='years next'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='year next'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='month next'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='next'] {
 	font-size: 18px;
 }
 
-.datepicker-panel > ul > li[data-view='years current'],
-.datepicker-panel > ul > li[data-view='year current'],
-.datepicker-panel > ul > li[data-view='month current'] {
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='years current'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='year current'],
+.open-table-widget-datepicker .datepicker-panel > ul > li[data-view='month current'] {
 	width: 150px;
 }
 
-.datepicker-panel > ul[data-view='years'] > li,
-.datepicker-panel > ul[data-view='months'] > li {
+.open-table-widget-datepicker .datepicker-panel > ul[data-view='years'] > li,
+.open-table-widget-datepicker .datepicker-panel > ul[data-view='months'] > li {
 	line-height: 52.5px;
 
 	width: 52.5px;
 	height: 52.5px;
 }
 
-.datepicker-panel > ul[data-view='week'] > li,
-.datepicker-panel > ul[data-view='week'] > li:hover {
+.open-table-widget-datepicker .datepicker-panel > ul[data-view='week'] > li,
+.open-table-widget-datepicker .datepicker-panel > ul[data-view='week'] > li:hover {
 	cursor: default;
 
 	background-color: #fff;
 }
 
-.datepicker-hide {
+.open-table-widget-datepicker .datepicker-hide {
 	display: none;
 }
 
