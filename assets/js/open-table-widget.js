@@ -16,7 +16,7 @@ jQuery( document ).ready( function ( $ ) {
 		format: $( this ).attr( 'data-date-format' ),
 		weekStart : 0,
 		filter: function ( date ) {
-			return date.valueOf() < now ? true : false;
+			return date.valueOf() < now ? false : true;
 		}
 	} );
 
