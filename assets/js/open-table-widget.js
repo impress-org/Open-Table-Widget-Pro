@@ -12,10 +12,10 @@ jQuery( document ).ready( function ( $ ) {
 	var now = (Date.now() - 86400000); //allow today to be selected
 
 	otw_datepicker.datepicker( {
-		autoClose : true,
-		dateFormat: $( this ).attr( 'data-date-format' ),
+		autohide : true,
+		format: $( this ).attr( 'data-date-format' ),
 		weekStart : 0,
-		isDisabled: function ( date ) {
+		filter: function ( date ) {
 			return date.valueOf() < now ? true : false;
 		}
 	} );
