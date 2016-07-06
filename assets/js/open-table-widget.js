@@ -19,8 +19,7 @@ jQuery( document ).ready( function ( $ ) {
 			return date.valueOf() < now ? false : true;
 		},
 		template: (
-			'<div class="open-table-widget open-table-widget-datepicker">' +
-			'<div class="datepicker-container">' +
+			'<div class="open-table-widget-datepicker datepicker-container">' +
 			'<div class="datepicker-panel" data-view="years picker">' +
 			'<ul>' +
 			'<li data-view="years prev">&lsaquo;</li>' +
@@ -45,7 +44,6 @@ jQuery( document ).ready( function ( $ ) {
 			'</ul>' +
 			'<ul data-view="week"></ul>' +
 			'<ul data-view="days"></ul>' +
-			'</div>' +
 			'</div>' +
 			'</div>'
 		)

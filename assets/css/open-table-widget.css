@@ -653,7 +653,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
  *
  * Date: 2016-01-11T04:07:30.531Z
  */
-.open-table-widget-datepicker .datepicker-container {
+.open-table-widget-datepicker.datepicker-container {
 	font-size: 12px;
 	line-height: 30px;
 
@@ -678,8 +678,8 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	-webkit-touch-callout: none;
 }
 
-.open-table-widget-datepicker .datepicker-container:before,
-.open-table-widget-datepicker .datepicker-container:after {
+.open-table-widget-datepicker.datepicker-container:before,
+.open-table-widget-datepicker.datepicker-container:after {
 	position: absolute;
 
 	display: block;
@@ -692,7 +692,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	border: 5px solid transparent;
 }
 
-.open-table-widget-datepicker .datepicker-dropdown {
+.open-table-widget-datepicker.datepicker-dropdown {
 	position: absolute;
 	z-index: 1;
 
@@ -705,68 +705,68 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	box-shadow: 0 3px 6px #ccc;
 }
 
-.open-table-widget-datepicker .datepicker-inline {
+.open-table-widget-datepicker.datepicker-inline {
 	position: static;
 }
 
-.open-table-widget-datepicker .datepicker-top-left,
-.open-table-widget-datepicker .datepicker-top-right {
+.open-table-widget-datepicker.datepicker-top-left,
+.open-table-widget-datepicker.datepicker-top-right {
 	border-top-color: #39f;
 }
 
-.open-table-widget-datepicker .datepicker-top-left:before,
-.open-table-widget-datepicker .datepicker-top-left:after,
-.open-table-widget-datepicker .datepicker-top-right:before,
-.open-table-widget-datepicker .datepicker-top-right:after {
+.open-table-widget-datepicker.datepicker-top-left:before,
+.open-table-widget-datepicker.datepicker-top-left:after,
+.open-table-widget-datepicker.datepicker-top-right:before,
+.open-table-widget-datepicker.datepicker-top-right:after {
 	top: -5px;
 	left: 10px;
 
 	border-top: 0;
 }
 
-.open-table-widget-datepicker .datepicker-top-left:before,
-.open-table-widget-datepicker .datepicker-top-right:before {
+.open-table-widget-datepicker.datepicker-top-left:before,
+.open-table-widget-datepicker.datepicker-top-right:before {
 	border-bottom-color: #39f;
 }
 
-.open-table-widget-datepicker .datepicker-top-left:after,
-.open-table-widget-datepicker .datepicker-top-right:after {
+.open-table-widget-datepicker.datepicker-top-left:after,
+.open-table-widget-datepicker.datepicker-top-right:after {
 	top: -4px;
 
 	border-bottom-color: #fff;
 }
 
-.open-table-widget-datepicker .datepicker-bottom-left,
-.open-table-widget-datepicker .datepicker-bottom-right {
+.open-table-widget-datepicker.datepicker-bottom-left,
+.open-table-widget-datepicker.datepicker-bottom-right {
 	border-bottom-color: #39f;
 }
 
-.open-table-widget-datepicker .datepicker-bottom-left:before,
-.open-table-widget-datepicker .datepicker-bottom-left:after,
-.open-table-widget-datepicker .datepicker-bottom-right:before,
-.open-table-widget-datepicker .datepicker-bottom-right:after {
+.open-table-widget-datepicker.datepicker-bottom-left:before,
+.open-table-widget-datepicker.datepicker-bottom-left:after,
+.open-table-widget-datepicker.datepicker-bottom-right:before,
+.open-table-widget-datepicker.datepicker-bottom-right:after {
 	bottom: -5px;
 	left: 10px;
 
 	border-bottom: 0;
 }
 
-.open-table-widget-datepicker .datepicker-bottom-left:before,
-.open-table-widget-datepicker .datepicker-bottom-right:before {
+.open-table-widget-datepicker.datepicker-bottom-left:before,
+.open-table-widget-datepicker.datepicker-bottom-right:before {
 	border-top-color: #39f;
 }
 
-.open-table-widget-datepicker .datepicker-bottom-left:after,
-.open-table-widget-datepicker .datepicker-bottom-right:after {
+.open-table-widget-datepicker.datepicker-bottom-left:after,
+.open-table-widget-datepicker.datepicker-bottom-right:after {
 	bottom: -4px;
 
 	border-top-color: #fff;
 }
 
-.open-table-widget-datepicker .datepicker-top-right:before,
-.open-table-widget-datepicker .datepicker-top-right:after,
-.open-table-widget-datepicker .datepicker-bottom-right:before,
-.open-table-widget-datepicker .datepicker-bottom-right:after {
+.open-table-widget-datepicker.datepicker-top-right:before,
+.open-table-widget-datepicker.datepicker-top-right:after,
+.open-table-widget-datepicker.datepicker-bottom-right:before,
+.open-table-widget-datepicker.datepicker-bottom-right:after {
 	right: 10px;
 	left: auto;
 }
@@ -857,6 +857,7 @@ body .open-table-widget .ui-state-focus, body .open-table-widget .ui-widget-cont
 	background-color: #fff;
 }
 
+.open-table-widget-datepicker.datepicker-hide,
 .open-table-widget-datepicker .datepicker-hide {
 	display: none;
 }
