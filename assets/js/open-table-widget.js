@@ -11,7 +11,7 @@ jQuery( document ).ready( function ( $ ) {
 	var otw_datepicker = $( '.otw-reservation-date' );
 	var now = (Date.now() - 86400000); //allow today to be selected
 
-	otw_datepicker.otwdatepicker( {
+	otw_datepicker.datepicker( {
 		autoClose : true,
 		dateFormat: $( this ).attr( 'data-date-format' ),
 		weekStart : 0,
@@ -19,6 +19,8 @@ jQuery( document ).ready( function ( $ ) {
 			return date.valueOf() < now ? true : false;
 		}
 	} );
+
+	$.fn.datepicker.noConflict();
 
 
 	//Select default date
