@@ -13,6 +13,7 @@ jQuery( document ).ready( function ( $ ) {
 
 	otw_datepicker.datepicker( {
 		autohide : true,
+		autopick : true,
 		format: $( this ).attr( 'data-date-format' ),
 		weekStart : 0,
 		filter: function ( date ) {

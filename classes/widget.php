@@ -134,18 +134,16 @@ class Open_Table_Widget extends WP_Widget {
 	 */
 	public function frontend_widget_scripts() {
 
-		$script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
-
 		//Determine whether to display minified scripts/css or not (debugging true sets it)
-		$debug = ('WP_DEBUG' == 'true') ? '.min' : '';
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG == false ? '' : '.min';
 		
-		$otw_css 		= plugins_url( 'assets/css/open-table-widget' . $debug . '.css', dirname( __FILE__ ) );
-		$otw_select_css 		= plugins_url( 'assets/css/selectric' . $debug . '.css', dirname( __FILE__ ) );
-		$otw_datepicker_css 		= plugins_url( 'assets/css/otw-datepicker' . $debug . '.css', dirname( __FILE__ ) );
+		$otw_css 		= plugins_url( 'assets/css/open-table-widget' . $suffix . '.css', dirname( __FILE__ ) );
+		$otw_select_css 		= plugins_url( 'assets/css/selectric' . $suffix . '.css', dirname( __FILE__ ) );
+		$otw_datepicker_css 		= plugins_url( 'assets/css/otw-datepicker' . $suffix . '.css', dirname( __FILE__ ) );
 		
-		$otw_datepicker = plugins_url( 'assets/js/datepicker' . $debug . '.js', dirname( __FILE__ ) );
-		$otw_select_js  = plugins_url( 'assets/js/jquery.selectric' . $debug . '.js', dirname( __FILE__ ) );
-		$otw_widget_js  = plugins_url( 'assets/js/open-table-widget' . $debug . '.js', dirname( __FILE__ ) );
+		$otw_datepicker = plugins_url( 'assets/js/datepicker' . $suffix . '.js', dirname( __FILE__ ) );
+		$otw_select_js  = plugins_url( 'assets/js/jquery.selectric' . $suffix . '.js', dirname( __FILE__ ) );
+		$otw_widget_js  = plugins_url( 'assets/js/open-table-widget' . $suffix . '.js', dirname( __FILE__ ) );
 
 		/**
 		 *   Register all Styles/Scripts for later use
