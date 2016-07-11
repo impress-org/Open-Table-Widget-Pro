@@ -137,64 +137,26 @@ class Open_Table_Widget extends WP_Widget {
 		$script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
 		//Determine whether to display minified scripts/css or not (debugging true sets it)
-		if ( $script_debug == true ) {
-			$otw_css                 = plugins_url( 'assets/css/open-table-widget.css', dirname( __FILE__ ) );
-			$otw_datepicker          = plugins_url( 'assets/js/datepicker.js', dirname( __FILE__ ) );
-			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.js', dirname( __FILE__ ) );
-			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
-			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.js', dirname( __FILE__ ) );
-		} else {
-			$otw_css                 = plugins_url( 'assets/css/open-table-widget.min.css', dirname( __FILE__ ) );
-			$otw_datepicker          = plugins_url( 'assets/js/datepicker.min.js', dirname( __FILE__ ) );
-			$otw_select_js           = plugins_url( 'assets/js/jquery.bootstrap-select.min.js', dirname( __FILE__ ) );
-			$otw_bootstrap_dropdowns = plugins_url( 'assets/js/jquery.bootstrap-dropdown.min.js', dirname( __FILE__ ) );
-			$otw_widget_js           = plugins_url( 'assets/js/open-table-widget.min.js', dirname( __FILE__ ) );
-		}
+		$debug = ('WP_DEBUG' == 'true') ? '.min' : '';
+		
+		$otw_css 		= plugins_url( 'assets/css/open-table-widget' . $debug . '.css', dirname( __FILE__ ) );
+		$otw_select_css 		= plugins_url( 'assets/css/selectric' . $debug . '.css', dirname( __FILE__ ) );
+		$otw_datepicker_css 		= plugins_url( 'assets/css/otw-datepicker' . $debug . '.css', dirname( __FILE__ ) );
+		
+		$otw_datepicker = plugins_url( 'assets/js/datepicker' . $debug . '.js', dirname( __FILE__ ) );
+		$otw_select_js  = plugins_url( 'assets/js/jquery.selectric' . $debug . '.js', dirname( __FILE__ ) );
+		$otw_widget_js  = plugins_url( 'assets/js/open-table-widget' . $debug . '.js', dirname( __FILE__ ) );
 
 		/**
-		 * CSS
+		 *   Register all Styles/Scripts for later use
 		 */
-		if ( $this->options['disable_css'] !== 'on' ) {
-			wp_register_style( 'otw_widget', $otw_css );
-			wp_enqueue_style( 'otw_widget' );
-		}
-		/**
-		 * JS
-		 */
-		wp_enqueue_script( 'jquery' );
+		wp_register_style( 'otw_widget', $otw_css, null, OTW_PLUGIN_VERSION, 'screen' );
+		wp_register_style( 'otw_select_css', $otw_select_css, null, OTW_PLUGIN_VERSION, 'screen' );
+		wp_register_style( 'otw_datepicker_css', $otw_datepicker_css, null, OTW_PLUGIN_VERSION, 'screen' );
 
-		//Datepicker
-		wp_register_script( 'otw_datepicker_js', $otw_datepicker, array( 'jquery' ) );
-		wp_enqueue_script( 'otw_datepicker_js' );
-
-
-		//Select Menus
-		if ( $this->options["disable_bootstrap_select"] !== "on" ) {
-
-			wp_register_script( 'otw_select_js', $otw_select_js, array( 'jquery' ) );
-			wp_enqueue_script( 'otw_select_js' );
-
-		}
-
-		//bootstrap dropdowns
-		if ( $this->options['disable_bootstrap_dropdown'] !== 'on' && $this->options['disable_bootstrap_select'] !== 'on' ) {
-			wp_register_script( 'otw_dropdown_js', $otw_bootstrap_dropdowns );
-			wp_enqueue_script( 'otw_dropdown_js' );
-		}
-
-
-		//Open Table Widget Specific Scripts
-		wp_register_script( 'otw-widget-js', $otw_widget_js, array( 'jquery' ) );
-		wp_enqueue_script( 'otw-widget-js' );
-
-		//Widget ID
-		$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
-
-		$jsParams = array(
-			'ajax_url'      => admin_url( 'admin-ajax.php' ),
-			'restaurant_id' => '',
-		);
-		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
+		wp_register_script( 'otw-widget-js', $otw_widget_js, array( 'jquery' ), OTW_PLUGIN_VERSION );
+		wp_register_script( 'otw_datepicker_js', $otw_datepicker, array( 'jquery', 'otw-widget-js' ), OTW_PLUGIN_VERSION );
+		wp_register_script( 'otw_select_js', $otw_select_js, array( 'jquery' ) );
 
 	}
 
@@ -236,7 +198,41 @@ class Open_Table_Widget extends WP_Widget {
 		$partySize      = empty( $instance['party_size'] ) ? '' : $instance['party_size'];
 		$maxSeats       = empty( $instance['max_seats'] ) ? '' : $instance['max_seats'];
 
+		//CSS
+		if ( $this->options['disable_css'] !== 'on' ) {
+			wp_enqueue_style( 'otw_widget' );
+		}
 
+		//Datepicker
+		wp_enqueue_script( 'otw_datepicker_js' );
+		wp_enqueue_style('otw_datepicker_css');
+
+		// Only enqueue the selectric dropdown if the setting is NOT "on"
+		$selectric = $this->options["disable_bootstrap_select"];
+
+		if ( $selectric !== "on") {
+			wp_enqueue_script('otw_select_js');
+			wp_enqueue_style('otw_select_css'); ?>
+
+			<script>
+				jQuery(function($){
+					$('.otw-wrapper select').selectric();
+				});
+			</script>
+		<?php }
+
+		//Open Table Widget Specific Scripts
+		wp_enqueue_script( 'otw-widget-js' );
+
+		//Widget ID
+		$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
+
+		$jsParams = array(
+			'ajax_url'      => admin_url( 'admin-ajax.php' ),
+			'restaurant_id' => '',
+		);
+		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
+		
 		//Determine widget display option
 		if ( $displayOption == '2' ) {
 			//widget needs autocomplete scripts

@@ -45,18 +45,10 @@ $open_table_widget_options = array(
         'label' => __('Yes', $open_table_widget->textdomain)
     ),
     array(
-        'name' => __('Disable Bootstrap select fields', $open_table_widget->textdomain),
-        'desc' => __('The select fields will be replaced by standard HTML select fields rather than the Twitter Bootstrap ones. For more information about the bootstrap dropdowns.', $open_table_widget->textdomain),
+        'name' => __('Disable Selectric.js select fields', $open_table_widget->textdomain),
+        'desc' => __('The select fields will be replaced by standard HTML select fields rather than the Selectric.js ones.', $open_table_widget->textdomain),
         'std' => '',
         'id' => 'disable_bootstrap_select',
-        'type' => 'checkbox',
-        'label' => __('Yes', $open_table_widget->textdomain)
-    ),
-    array(
-        'name' => __('Disable Bootstrap dropdown JS', $open_table_widget->textdomain),
-        'desc' => __('Themes built with Twitter Bootstrap will already have support for the Bootstrap dropdowns. If this is your case, check this to remove the dropdown script from being output.', $open_table_widget->textdomain),
-        'std' => '',
-        'id' => 'disable_bootstrap_dropdown',
         'type' => 'checkbox',
         'label' => __('Yes', $open_table_widget->textdomain)
     ),
