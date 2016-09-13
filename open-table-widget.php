@@ -19,7 +19,7 @@ define( 'OTW_PLUGIN_VERSION', '1.8' );
 add_action( 'init', 'otw_load_textdomain' );
 
 function otw_load_textdomain() {
-    $domain = 'open-table-widget';
+	$domain  = 'open-table-widget';
 	$mo_file = WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . get_locale() . '.mo';
 
 	load_textdomain( $domain, $mo_file );
