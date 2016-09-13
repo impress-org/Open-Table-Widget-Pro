@@ -74,14 +74,28 @@ class Open_Table_Widget extends WP_Widget {
 
 		$open_table_cities = get_transient( 'open_table_cities' );
 
+		//Error check for transient.
+		if ( is_wp_error( $open_table_cities ) ) {
+			echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $open_table_cities->get_error_message();
+			delete_transient( 'open_table_cities' );
+
+			return false;
+		}
+
 		// Get any existing copy of our transient data
 		if ( false === $open_table_cities || isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) {
 			// It wasn't there, so regenerate the data and save the transient
 			$response = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
-			//Proper error checking
+
+			//Proper error checking.
 			if ( is_wp_error( $response ) ) {
 				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $response->get_error_message();
+				delete_transient( 'open_table_cities' );
+
+				return false;
 			}
+
+			//Set transient if no a error.
 			set_transient( 'open_table_cities', $response, 12 * 12 * HOUR_IN_SECONDS );
 
 		}
@@ -116,6 +130,8 @@ class Open_Table_Widget extends WP_Widget {
 			//Proper error checking
 			if ( is_wp_error( $data ) ) {
 				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $data->get_error_message();
+
+				return false;
 			}
 			// Handle OTW response data
 			echo $data['body'];
@@ -128,19 +144,19 @@ class Open_Table_Widget extends WP_Widget {
 
 
 	/**
-	 * Frontend Scripts
+	 * Frontend Scripts.
 	 *
-	 * @description: Adds Open Table Widget Stylesheets
+	 * Adds Open Table Widget Stylesheets.
 	 */
 	public function frontend_widget_scripts() {
 
 		//Determine whether to display minified scripts/css or not (debugging true sets it)
-		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG == false ? '' : '.min';
-		
-		$otw_css 		= plugins_url( 'assets/css/open-table-widget' . $suffix . '.css', dirname( __FILE__ ) );
-		$otw_select_css 		= plugins_url( 'assets/css/selectric' . $suffix . '.css', dirname( __FILE__ ) );
-		$otw_datepicker_css 		= plugins_url( 'assets/css/otw-datepicker' . $suffix . '.css', dirname( __FILE__ ) );
-		
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG == false ? '' : '.min';
+
+		$otw_css            = plugins_url( 'assets/css/open-table-widget' . $suffix . '.css', dirname( __FILE__ ) );
+		$otw_select_css     = plugins_url( 'assets/css/selectric' . $suffix . '.css', dirname( __FILE__ ) );
+		$otw_datepicker_css = plugins_url( 'assets/css/otw-datepicker' . $suffix . '.css', dirname( __FILE__ ) );
+
 		$otw_datepicker = plugins_url( 'assets/js/datepicker' . $suffix . '.js', dirname( __FILE__ ) );
 		$otw_select_js  = plugins_url( 'assets/js/jquery.selectric' . $suffix . '.js', dirname( __FILE__ ) );
 		$otw_widget_js  = plugins_url( 'assets/js/open-table-widget' . $suffix . '.js', dirname( __FILE__ ) );
@@ -153,7 +169,10 @@ class Open_Table_Widget extends WP_Widget {
 		wp_register_style( 'otw_datepicker_css', $otw_datepicker_css, null, OTW_PLUGIN_VERSION, 'screen' );
 
 		wp_register_script( 'otw-widget-js', $otw_widget_js, array( 'jquery' ), OTW_PLUGIN_VERSION );
-		wp_register_script( 'otw_datepicker_js', $otw_datepicker, array( 'jquery', 'otw-widget-js' ), OTW_PLUGIN_VERSION );
+		wp_register_script( 'otw_datepicker_js', $otw_datepicker, array(
+			'jquery',
+			'otw-widget-js'
+		), OTW_PLUGIN_VERSION );
 		wp_register_script( 'otw_select_js', $otw_select_js, array( 'jquery' ) );
 
 	}
@@ -163,7 +182,7 @@ class Open_Table_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
-	 * @param array $args     Widget arguments.
+	 * @param array $args Widget arguments.
 	 * @param array $instance Saved values from database.
 	 */
 	function widget( $args, $instance ) {
@@ -203,17 +222,17 @@ class Open_Table_Widget extends WP_Widget {
 
 		//Datepicker
 		wp_enqueue_script( 'otw_datepicker_js' );
-		wp_enqueue_style('otw_datepicker_css');
+		wp_enqueue_style( 'otw_datepicker_css' );
 
 		// Only enqueue the selectric dropdown if the setting is NOT "on"
 		$selectric = $this->options["disable_bootstrap_select"];
 
-		if ( $selectric !== "on") {
-			wp_enqueue_script('otw_select_js');
-			wp_enqueue_style('otw_select_css'); ?>
+		if ( $selectric !== "on" ) {
+			wp_enqueue_script( 'otw_select_js' );
+			wp_enqueue_style( 'otw_select_css' ); ?>
 
 			<script>
-				jQuery(function($){
+				jQuery(function ($) {
 					$('.otw-wrapper select').selectric();
 				});
 			</script>
@@ -230,7 +249,7 @@ class Open_Table_Widget extends WP_Widget {
 			'restaurant_id' => '',
 		);
 		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
-		
+
 		//Determine widget display option
 		if ( $displayOption == '2' ) {
 			//widget needs autocomplete scripts
