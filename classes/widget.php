@@ -1,13 +1,20 @@
 <?php
 
 /**
+ * Class Open_Table_Widget
+ *
  *  Open Table Widget
  *
- * @description: The Open Table Widget
+ *  The Open Table Widget
  */
 class Open_Table_Widget extends WP_Widget {
 
-	var $options; //Plugin Options from Options Panel
+	/**
+	 * Plugin Options from Options Panel.
+	 *
+	 * @var mixed|void
+	 */
+	var $options;
 
 	/**
 	 * Register widget with WordPress.
@@ -33,7 +40,7 @@ class Open_Table_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Load Widget JS Script ONLY on Widget page
+	 * Load Widget JS Script ONLY on Widget page.
 	 *
 	 * @param $hook
 	 */
@@ -54,7 +61,8 @@ class Open_Table_Widget extends WP_Widget {
 				'jquery-ui-autocomplete'
 			) );
 
-			// in javascript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
+			// In javascript, object properties are
+			// accessed as ajax_object.ajax_url, ajax_object.we_value
 			wp_localize_script( 'otw_widget_admin_scripts', 'ajax_object',
 				array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'city_array' => $this->get_cities() ) );
 
@@ -66,7 +74,7 @@ class Open_Table_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Get Cities
+	 * Get Cities.
 	 *
 	 * @return array|mixed|WP_Error
 	 */
@@ -105,40 +113,40 @@ class Open_Table_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Open Table API Request
+	 * Open Table API Request.
 	 */
 	public function request_open_table_api() {
 
-		//get restaurant name
+		//Get restaurant name.
 		$restaurant = empty( $_POST['restaurant'] ) ? '' : stripslashes( htmlentities( $_POST['restaurant'], ENT_QUOTES ) );
 		$city       = empty( $_POST['city'] ) ? '' : stripslashes( htmlentities( $_POST['city'], ENT_QUOTES ) );
 
 		if ( $_POST['restaurant'] && empty( $city ) ) {
-			// Send API Call using WP's HTTP API
+			// Send API Call using WP's HTTP API.
 			$data = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?name=' . $restaurant );
-			//Proper error checking
+			//Proper error checking.
 			if ( is_wp_error( $data ) ) {
 				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $data->get_error_message();
 			}
-			// Handle OTW response data
+			// Handle OTW response data.
 			echo $data['body'];
 
 		} elseif ( $_POST['city'] ) {
 
-			// Send API Call using WP's HTTP API
+			// Send API Call using WP's HTTP API.
 			$data = wp_remote_get( 'http://opentable.herokuapp.com/api/restaurants?city=' . $city . '&name=' . $restaurant );
-			//Proper error checking
+			//Proper error checking.
 			if ( is_wp_error( $data ) ) {
 				echo esc_html__( 'Open Table API Error', 'open-table-widget' ) . ': ' . $data->get_error_message();
 
 				return false;
 			}
-			// Handle OTW response data
+			// Handle OTW response data.
 			echo $data['body'];
 
 		}
 
-		die(); // this is required to return a proper result
+		die(); // this is required to return a proper result.
 
 	}
 
@@ -289,7 +297,7 @@ class Open_Table_Widget extends WP_Widget {
 			$before_widget = str_replace( '">', '" style="max-width:' . $maxWidth . ';">', $before_widget );
 		}
 
-		/* Before widget */
+		// Before widget
 		echo $before_widget;
 
 		// if the title is set & the user hasn't disabled title output
@@ -329,8 +337,12 @@ class Open_Table_Widget extends WP_Widget {
 
 
 	/**
-	 * @DESC: Saves the widget options
-	 * @SEE WP_Widget::update
+	 * Saves the widget options.
+	 *
+	 * @param array $new_instance
+	 * @param array $old_instance
+	 *
+	 * @return array
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance                    = $old_instance;
@@ -366,7 +378,8 @@ class Open_Table_Widget extends WP_Widget {
 
 	/**
 	 * Back-end widget form.
-	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance
 	 */
 	function form( $instance ) {
 		$title          = empty( $instance['title'] ) ? '' : esc_attr( $instance['title'] );
@@ -395,23 +408,32 @@ class Open_Table_Widget extends WP_Widget {
 		$maxSeats       = empty( $instance['max_seats'] ) ? '30' : esc_attr( $instance['max_seats'] );
 
 
-		//Get the widget form
+		//Get the widget form.
 		$widgetPath = OTW_PLUGIN_PATH . '/inc/widget-form.php';
 		if ( file_exists( $widgetPath ) ) {
 			include( $widgetPath );
 		}
 
 
-	} //end form function
+	}
 
 
 	/**
-	 * Time Function
+	 * Time Function.
+	 *
+	 * @param $start
+	 * @param $end
+	 * @param $defaultTime
+	 * @param $timeFormat
+	 * @param $timeFormatVal
+	 * @param $increment
 	 */
 	function open_table_reservaton_times( $start, $end, $defaultTime, $timeFormat, $timeFormatVal, $increment ) {
 
-		//Time Loop
-		//@SEE: http://stackoverflow.com/questions/6530836/php-time-loop-time-one-and-half-of-hour
+		/**
+		 * Time Loop
+		 * @see: http://stackoverflow.com/questions/6530836/php-time-loop-time-one-and-half-of-hour
+		 */
 		$inc   = ! empty( $increment ) ? intval( $increment ) * 60 : 15 * 60;
 		$start = ! empty( $start ) ? strtotime( $start ) : ( strtotime( '12AM' ) ); // 6  AM
 		$end   = ! empty( $end ) ? strtotime( $end ) : ( strtotime( '11:59PM' ) ); // 10 PM
@@ -433,7 +455,7 @@ class Open_Table_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Get Restaurant Data
+	 * Get Restaurant Data.
 	 *
 	 * @param $widgetLanguage
 	 *
@@ -505,5 +527,4 @@ class Open_Table_Widget extends WP_Widget {
 
 	}
 
-
-} //end Open_Table_Widget Class
+}
