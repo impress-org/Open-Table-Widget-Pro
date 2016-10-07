@@ -2,32 +2,50 @@
 /*
  * Open Table Widget Admin Form
  *
- * @description: Widget form options in WP-Admin
+ * Widget form options in WP-Admin
  */
-
 ?>
 
 <!-- Title -->
 <p>
-	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Widget Title', 'open-table-widget' ); ?>:</label>
-	<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
+	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Widget Title', 'open-table-widget' ); ?>
+		:</label>
+	<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
+	       name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
 </p>
 
 <!-- Listing Options -->
 <p class="widget-api-option">
-	<label for="<?php echo $this->get_field_id( 'display_option' ); ?>"><?php _e( 'Display Option', 'open-table-widget' ); ?>:</label><br />
+	<label
+		for="<?php echo $this->get_field_id( 'display_option' ); ?>"><?php _e( 'Display Option', 'open-table-widget' ); ?>
+		:</label><br/>
 
-    <span class="otw-method-span single-option-wrap">
-        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-0" value="0" <?php checked( '0', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Single Restaurant Reservation', 'open-table-widget' ); ?>
-		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will only allow reservations for a single selected restaurant.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
-    </span><br />
-    <span class="otw-method-span multiple-option-wrap">
-    <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-1" value="1" <?php checked( '1', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'Predefined Restaurants', 'open-table-widget' ); ?>
-		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow reservations for multiple predefined restaurants.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
-    </span><br />
-    <span class="otw-method-span user-option-wrap">
-        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>" class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-2" value="2" <?php checked( '2', $displayOption ); ?>><span class="otw-method-label"><?php _e( 'User Lookup Reservations', 'open-table-widget' ); ?>
-		    <img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option will allow the user to select a city and then lookup restaurants for reservations within their chosen city.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></span>
+	<span class="otw-method-span single-option-wrap">
+        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>"
+               class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-0"
+               value="0" <?php checked( '0', $displayOption ); ?>><span
+			class="otw-method-label"><?php _e( 'Single Restaurant Reservation', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'This option will only allow reservations for a single selected restaurant.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></span>
+    </span><br/>
+	<span class="otw-method-span multiple-option-wrap">
+    <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>"
+           class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-1"
+           value="1" <?php checked( '1', $displayOption ); ?>><span
+			class="otw-method-label"><?php _e( 'Predefined Restaurants', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'This option will allow reservations for multiple predefined restaurants.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></span>
+    </span><br/>
+	<span class="otw-method-span user-option-wrap">
+        <input type="radio" name="<?php echo $this->get_field_name( 'display_option' ); ?>"
+               class="<?php echo $this->get_field_id( 'display_option' ); ?> display-option-2"
+               value="2" <?php checked( '2', $displayOption ); ?>><span
+			class="otw-method-label"><?php _e( 'User Lookup Reservations', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'This option will allow the user to select a city and then lookup restaurants for reservations within their chosen city.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></span>
     </span>
 </p>
 
@@ -38,19 +56,31 @@
 
 	<p class="otw-usage-description"><?php _e( '<span>Usage Description: </span>Select a single restaurant for reservations.', 'open-table-widget' ); ?></p>
 
-
 	<!-- Restaurant Name -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'restaurant_name' ); ?>"><?php _e( 'Restaurant Name', 'open-table-widget' ); ?>:</label>
-		<input class="widefat otw-auto-complete-1" id="<?php echo $this->get_field_id( 'restaurant_name' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_name' ); ?>" type="text" placeholder="<?php _e( 'Type Restaurant Name', 'open-table-widget' ); ?>" value="<?php echo $restaurantName; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'restaurant_name' ); ?>"><?php _e( 'Restaurant Name', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat otw-auto-complete-1" id="<?php echo $this->get_field_id( 'restaurant_name' ); ?>"
+		       name="<?php echo $this->get_field_name( 'restaurant_name' ); ?>" type="text"
+		       placeholder="<?php _e( 'Type Restaurant Name', 'open-table-widget' ); ?>"
+		       value="<?php echo $restaurantName; ?>"/>
 	</p>
 
 	<!-- Restaurant ID -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'restaurant_id' ); ?>"><?php _e( 'Open Table Restaurant ID:', 'open-table-widget' ); ?>
-			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is your Open Table Restaurant ID used for reservations. Use the search field above to locate your restaurant.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-		<input class="widefat restaurant-id" id="<?php echo $this->get_field_id( 'restaurant_id' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_id' ); ?>" type="text" value="<?php echo $restaurantID; ?>" />
-		<span class="otw-small-descption"><a href="https://wordimpress.com/documentation/open-table-widget/finding-your-open-table-restaurant-id/" target="_blank" title="View tutorial" class="new-window">Need help finding your restaurant ID?</a></span>
+		<label
+			for="<?php echo $this->get_field_id( 'restaurant_id' ); ?>"><?php _e( 'Open Table Restaurant ID:', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'This is your Open Table Restaurant ID used for reservations. Use the search field above to locate your restaurant.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></label>
+		<input class="widefat restaurant-id" id="<?php echo $this->get_field_id( 'restaurant_id' ); ?>"
+		       name="<?php echo $this->get_field_name( 'restaurant_id' ); ?>" type="text"
+		       value="<?php echo $restaurantID; ?>"/>
+		<span class="otw-small-descption"><a
+				href="https://wordimpress.com/documentation/open-table-widget/finding-your-open-table-restaurant-id/"
+				target="_blank" title="View tutorial"
+				class="new-window">Need help finding your restaurant ID?</a></span>
 	</p>
 
 </div>
@@ -64,19 +94,30 @@
 
 	<!-- Restaurant Names -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'restaurant_names' ); ?>"><?php _e( 'Add Restaurant', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Lookup a Restaurant by their ID to add to the list of available restaurants below.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-		<input class="widefat otw-auto-complete-2" id="<?php echo $this->get_field_id( 'restaurant_names' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_names' ); ?>" type="text" placeholder="<?php _e( 'Type Restaurant Name', 'open-table-widget' ); ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'restaurant_names' ); ?>"><?php _e( 'Add Restaurant', 'open-table-widget' ); ?>
+			:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			      title="<?php _e( 'Lookup a Restaurant by their ID to add to the list of available restaurants below.', 'open-table-widget' ); ?>"
+			      class="tooltip-info" width="16" height="16"/></label>
+		<input class="widefat otw-auto-complete-2" id="<?php echo $this->get_field_id( 'restaurant_names' ); ?>"
+		       name="<?php echo $this->get_field_name( 'restaurant_names' ); ?>" type="text"
+		       placeholder="<?php _e( 'Type Restaurant Name', 'open-table-widget' ); ?>"/>
 	</p>
 
 	<!-- Restaurant IDs -->
 	<p style="margin:0;padding:0;">
-		<label for="<?php echo $this->get_field_id( 'restaurant_ids' ); ?>"><?php _e( 'Open Table Restaurants:', 'open-table-widget' ); ?>
-			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Use the Restaurant ID lookup field above to find restaurants and their corresponding IDs. Drag-and-drop the restaurants below to order how they appear in the widget select. Use this field to fine tune as needed.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<label
+			for="<?php echo $this->get_field_id( 'restaurant_ids' ); ?>"><?php _e( 'Open Table Restaurants:', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'Use the Restaurant ID lookup field above to find restaurants and their corresponding IDs. Drag-and-drop the restaurants below to order how they appear in the widget select. Use this field to fine tune as needed.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></label>
 	</p>
 
 
 	<div class="sortable-wrap restaurant-ids-wrap">
-		<input class="widefat restaurant-ids-hidden" id="<?php echo $this->get_field_id( 'restaurant_ids' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_ids' ); ?>" type="text" value="<?php echo $restaurantIDs; ?>" />
+		<input class="widefat restaurant-ids-hidden" id="<?php echo $this->get_field_id( 'restaurant_ids' ); ?>"
+		       name="<?php echo $this->get_field_name( 'restaurant_ids' ); ?>" type="text"
+		       value="<?php echo $restaurantIDs; ?>"/>
 
 
 		<ul class="sortable">
@@ -88,7 +129,8 @@
 				if ( ! empty( $restaurantData[0] ) ) {
 					?>
 
-					<li class="ui-state-default" id="<?php echo $restaurantData[0]; ?>|<?php echo $restaurantData[1]; ?>">
+					<li class="ui-state-default"
+					    id="<?php echo $restaurantData[0]; ?>|<?php echo $restaurantData[1]; ?>">
 						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?php echo $restaurantData[0]; ?>
 						<span class="ui-icon ui-icon-close"></span></li>
 
@@ -110,8 +152,13 @@
 
 	<!-- Lookup City -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'lookup_city' ); ?>"><?php _e( 'City', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Add a user restaurant lookup based on Open Table restaurant cities. Type the name of the cities you wish to display below separated by commas.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-		<input class="widefat otw-auto-complete-3" id="<?php echo $this->get_field_id( 'lookup_city' ); ?>" name="<?php echo $this->get_field_name( 'lookup_city' ); ?>" type="text" placeholder="<?php _e( 'Type City Name', 'open-table-widget' ); ?>" value="<?php echo $lookupCity; ?>" />
+		<label for="<?php echo $this->get_field_id( 'lookup_city' ); ?>"><?php _e( 'City', 'open-table-widget' ); ?>
+			:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			      title="<?php _e( 'Add a user restaurant lookup based on Open Table restaurant cities. Type the name of the cities you wish to display below separated by commas.', 'open-table-widget' ); ?>"
+			      class="tooltip-info" width="16" height="16"/></label>
+		<input class="widefat otw-auto-complete-3" id="<?php echo $this->get_field_id( 'lookup_city' ); ?>"
+		       name="<?php echo $this->get_field_name( 'lookup_city' ); ?>" type="text"
+		       placeholder="<?php _e( 'Type City Name', 'open-table-widget' ); ?>" value="<?php echo $lookupCity; ?>"/>
 	</p>
 
 
@@ -125,7 +172,9 @@
 
 	<!-- Widget Theme -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'widget_style' ); ?>"><?php _e( 'Widget Theme', 'open-table-widget' ); ?>:</label>
+		<label
+			for="<?php echo $this->get_field_id( 'widget_style' ); ?>"><?php _e( 'Widget Theme', 'open-table-widget' ); ?>
+			:</label>
 		<select name="<?php echo $this->get_field_name( 'widget_style' ); ?>" class="widefat profield">
 			<?php
 			$options = array(
@@ -153,7 +202,11 @@
 	<div class="time-range-wrap clearfix">
 		<div class="time-range-left">
 			<p>
-				<label for="<?php echo $this->get_field_id( 'time_start' ); ?>"><?php _e( 'Time Start', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select start value. Please ensure this value is before the Time End value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<label
+					for="<?php echo $this->get_field_id( 'time_start' ); ?>"><?php _e( 'Time Start', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'The reservation time select start value. Please ensure this value is before the Time End value.', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
 				<?php
 				//Time loop
 				$start = '12AM';
@@ -187,7 +240,11 @@
 
 		<div class="time-range-right">
 			<p>
-				<label for="<?php echo $this->get_field_id( 'time_end' ); ?>"><?php _e( 'Time End', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The reservation time select end value. Please ensure this value is after the Time Start value.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<label
+					for="<?php echo $this->get_field_id( 'time_end' ); ?>"><?php _e( 'Time End', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'The reservation time select end value. Please ensure this value is after the Time Start value.', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
 				<?php
 				//Time loop
 				$start = ! empty( $timeStart ) ? $timeStart : '12AM';
@@ -206,7 +263,11 @@
 	<div class="time-range-wrap clearfix">
 		<div class="time-range-left field-left">
 			<p>
-				<label for="<?php echo $this->get_field_id( 'time_default' ); ?>"><?php _e( 'Default Time', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is the default reservation time selected.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<label
+					for="<?php echo $this->get_field_id( 'time_default' ); ?>"><?php _e( 'Default Time', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'This is the default reservation time selected.', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
 				<?php
 				//Time loop
 				$start = ! empty( $timeStart ) ? $timeStart : '12AM';
@@ -222,7 +283,11 @@
 
 		<div class="time-range-right field-right">
 			<p>
-				<label for="<?php echo $this->get_field_id( 'time_increment' ); ?>"><?php _e( 'Time Increment', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This option effects many reservations per hour are displayed within the reservation time select.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<label
+					for="<?php echo $this->get_field_id( 'time_increment' ); ?>"><?php _e( 'Time Increment', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'This option effects many reservations per hour are displayed within the reservation time select.', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
 
 				<select name="<?php echo $this->get_field_name( 'time_increment' ); ?>" class="widefat profield">
 					<?php
@@ -254,9 +319,15 @@
 
 		<div class="default-party-size field-left">
 			<p>
-				<label for="<?php echo $this->get_field_id( 'party_size' ); ?>"><?php _e( 'Default Party Size', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Set the default party size for this reservation widget.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+				<label
+					for="<?php echo $this->get_field_id( 'party_size' ); ?>"><?php _e( 'Default Party Size', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'Set the default party size for this reservation widget.', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
 
-				<input class="widefat" id="<?php echo $this->get_field_id( 'party_size' ); ?>" name="<?php echo $this->get_field_name( 'party_size' ); ?>" type="number" placeholder="4" value="<?php echo $partySize; ?>" />
+				<input class="widefat" id="<?php echo $this->get_field_id( 'party_size' ); ?>"
+				       name="<?php echo $this->get_field_name( 'party_size' ); ?>" type="number" placeholder="4"
+				       value="<?php echo $partySize; ?>"/>
 			</p>
 
 		</div>
@@ -266,8 +337,14 @@
 		<div class="max-seats field-right">
 
 			<p>
-				<label for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'Max Seats Avail.', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-				<input class="widefat" id="<?php echo $this->get_field_id( 'max_seats' ); ?>" name="<?php echo $this->get_field_name( 'max_seats' ); ?>" type="number" placeholder="6" value="<?php echo $maxSeats; ?>" />
+				<label
+					for="<?php echo $this->get_field_id( 'max_seats' ); ?>"><?php _e( 'Max Seats Avail.', 'open-table-widget' ); ?>
+					:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+					      title="<?php _e( 'Here you can set the maximum number of seats you have available at your restaurant', 'open-table-widget' ); ?>"
+					      class="tooltip-info" width="16" height="16"/></label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'max_seats' ); ?>"
+				       name="<?php echo $this->get_field_name( 'max_seats' ); ?>" type="number" placeholder="6"
+				       value="<?php echo $maxSeats; ?>"/>
 			</p>
 
 		</div>
@@ -277,9 +354,14 @@
 
 	<!-- Hide Form Labels -->
 	<p>
-		<input id="<?php echo $this->get_field_id( 'hide_labels' ); ?>" class="reviews-toggle" name="<?php echo $this->get_field_name( 'hide_labels' ); ?>" type="checkbox" value="1" <?php checked( '1', $hideLabels ); ?>/>
-		<label for="<?php echo $this->get_field_id( 'hide_labels' ); ?>"><?php _e( 'Hide Form Labels', 'open-table-widget' ); ?>
-			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'The labels appear above the reservation form inputs. Check this option if you would like to hide the labels.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<input id="<?php echo $this->get_field_id( 'hide_labels' ); ?>" class="reviews-toggle"
+		       name="<?php echo $this->get_field_name( 'hide_labels' ); ?>" type="checkbox"
+		       value="1" <?php checked( '1', $hideLabels ); ?>/>
+		<label
+			for="<?php echo $this->get_field_id( 'hide_labels' ); ?>"><?php _e( 'Hide Form Labels', 'open-table-widget' ); ?>
+			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			     title="<?php _e( 'The labels appear above the reservation form inputs. Check this option if you would like to hide the labels.', 'open-table-widget' ); ?>"
+			     class="tooltip-info" width="16" height="16"/></label>
 	</p>
 
 
@@ -291,7 +373,11 @@
 
 	<!-- Widget Language -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'widget_language' ); ?>"><?php _e( 'Location and Language', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Provide the location and language of the restaurant(s) to send users on Open Table. The restaurant(s) you select must be within the location provided or the reservation link will not work. Be sure to test thoroughly.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<label
+			for="<?php echo $this->get_field_id( 'widget_language' ); ?>"><?php _e( 'Location and Language', 'open-table-widget' ); ?>
+			:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			      title="<?php _e( 'Provide the location and language of the restaurant(s) to send users on Open Table. The restaurant(s) you select must be within the location provided or the reservation link will not work. Be sure to test thoroughly.', 'open-table-widget' ); ?>"
+			      class="tooltip-info" width="16" height="16"/></label>
 
 		<select name="<?php echo $this->get_field_name( 'widget_language' ); ?>" id="#" class="widefat profield">
 			<?php
@@ -353,49 +439,82 @@
 	</p>
 	<!-- Select Predefined Restaurants Label -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'label_multiple' ); ?>"><?php _e( 'Predefined Restaurants Label', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Only displays when Predefined Restaurants display option is selected.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'label_multiple' ); ?>" name="<?php echo $this->get_field_name( 'label_multiple' ); ?>" type="text" placeholder="<?php _e( 'Select a Restaurant', 'open-table-widget' ); ?>" value="<?php echo $labelMultiple; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'label_multiple' ); ?>"><?php _e( 'Predefined Restaurants Label', 'open-table-widget' ); ?>
+			:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>"
+			      title="<?php _e( 'Only displays when Predefined Restaurants display option is selected.', 'open-table-widget' ); ?>"
+			      class="tooltip-info" width="16" height="16"/></label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'label_multiple' ); ?>"
+		       name="<?php echo $this->get_field_name( 'label_multiple' ); ?>" type="text"
+		       placeholder="<?php _e( 'Select a Restaurant', 'open-table-widget' ); ?>"
+		       value="<?php echo $labelMultiple; ?>"/>
 	</p>
 	<!-- Select Cities Label -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'label_city' ); ?>"><?php _e( 'User Lookup Cities Label', 'open-table-widget' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'label_city' ); ?>" name="<?php echo $this->get_field_name( 'label_city' ); ?>" type="text" placeholder="<?php _e( 'Select a City', 'open-table-widget' ); ?>" value="<?php echo $labelCity; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'label_city' ); ?>"><?php _e( 'User Lookup Cities Label', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'label_city' ); ?>"
+		       name="<?php echo $this->get_field_name( 'label_city' ); ?>" type="text"
+		       placeholder="<?php _e( 'Select a City', 'open-table-widget' ); ?>" value="<?php echo $labelCity; ?>"/>
 	</p>
 
 	<!-- Date Label -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'label_date' ); ?>"><?php _e( 'Custom Date Label', 'open-table-widget' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'label_date' ); ?>" name="<?php echo $this->get_field_name( 'label_date' ); ?>" type="text" placeholder="<?php _e( 'Date', 'open-table-widget' ); ?>" value="<?php echo $labelDate; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'label_date' ); ?>"><?php _e( 'Custom Date Label', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'label_date' ); ?>"
+		       name="<?php echo $this->get_field_name( 'label_date' ); ?>" type="text"
+		       placeholder="<?php _e( 'Date', 'open-table-widget' ); ?>" value="<?php echo $labelDate; ?>"/>
 	</p>
 
 	<!-- Time Label -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'label_time' ); ?>"><?php _e( 'Custom Time Label', 'open-table-widget' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'label_time' ); ?>" name="<?php echo $this->get_field_name( 'label_time' ); ?>" type="text" placeholder="<?php _e( 'Time', 'open-table-widget' ); ?>" value="<?php echo $labelTime; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'label_time' ); ?>"><?php _e( 'Custom Time Label', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'label_time' ); ?>"
+		       name="<?php echo $this->get_field_name( 'label_time' ); ?>" type="text"
+		       placeholder="<?php _e( 'Time', 'open-table-widget' ); ?>" value="<?php echo $labelTime; ?>"/>
 	</p>
 	<!-- Party Size Label -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'label_party' ); ?>"><?php _e( 'Custom Party Size Label', 'open-table-widget' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'label_party' ); ?>" name="<?php echo $this->get_field_name( 'label_party' ); ?>" type="text" placeholder="<?php _e( 'Party Size', 'open-table-widget' ); ?>" value="<?php echo $labelParty; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'label_party' ); ?>"><?php _e( 'Custom Party Size Label', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'label_party' ); ?>"
+		       name="<?php echo $this->get_field_name( 'label_party' ); ?>" type="text"
+		       placeholder="<?php _e( 'Party Size', 'open-table-widget' ); ?>" value="<?php echo $labelParty; ?>"/>
 	</p>
 
 	<!-- Submit Button Text -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'input_submit' ); ?>"><?php _e( 'Submit Button Text', 'open-table-widget' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'input_submit' ); ?>" name="<?php echo $this->get_field_name( 'input_submit' ); ?>" type="text" placeholder="<?php _e( 'Find a Table', 'open-table-widget' ); ?>" value="<?php echo $inputSubmit; ?>" />
+		<label
+			for="<?php echo $this->get_field_id( 'input_submit' ); ?>"><?php _e( 'Submit Button Text', 'open-table-widget' ); ?>
+			:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'input_submit' ); ?>"
+		       name="<?php echo $this->get_field_name( 'input_submit' ); ?>" type="text"
+		       placeholder="<?php _e( 'Find a Table', 'open-table-widget' ); ?>" value="<?php echo $inputSubmit; ?>"/>
 	</p>
 
 
 	<!-- Pre Widget Content -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'pre_content' ); ?>"><?php _e( 'Pre Form Content', 'open-table-widget' ); ?>:</label>
-		<textarea class="widefat" id="#" name="<?php echo $this->get_field_name( 'pre_content' ); ?>" rows="3" cols="25"><?php echo $preContent; ?></textarea>
+		<label
+			for="<?php echo $this->get_field_id( 'pre_content' ); ?>"><?php _e( 'Pre Form Content', 'open-table-widget' ); ?>
+			:</label>
+		<textarea class="widefat" id="#" name="<?php echo $this->get_field_name( 'pre_content' ); ?>" rows="3"
+		          cols="25"><?php echo $preContent; ?></textarea>
 	</p>
 
 	<!-- Post Widget Content -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'post_content' ); ?>"><?php _e( 'Post Form Content', 'open-table-widget' ); ?>:</label>
-		<textarea class="widefat" id="#" name="<?php echo $this->get_field_name( 'post_content' ); ?>" rows="3" cols="25"><?php echo $postContent; ?></textarea>
+		<label
+			for="<?php echo $this->get_field_id( 'post_content' ); ?>"><?php _e( 'Post Form Content', 'open-table-widget' ); ?>
+			:</label>
+		<textarea class="widefat" id="#" name="<?php echo $this->get_field_name( 'post_content' ); ?>" rows="3"
+		          cols="25"><?php echo $postContent; ?></textarea>
 	</p>
 
 </div>
@@ -403,5 +522,6 @@
 
 <div class="powered-by">
 	<p><?php _e( 'Powered by:', 'otw' ); ?></p>
-	<img src="<?php echo OTW_PLUGIN_URL; ?>/assets/images/open-table-logo-transparent-150.png" alt="Powered by Open Table" />
+	<img src="<?php echo OTW_PLUGIN_URL; ?>/assets/images/open-table-logo-transparent-150.png"
+	     alt="Powered by Open Table"/>
 </div>
