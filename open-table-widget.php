@@ -41,7 +41,7 @@ add_action( 'init', 'otw_load_textdomain' );
 /**
  * Initialize OTW.
  *
- * @return Open_Table_Widget|WordImpress_Plugin_Framework
+ * @return Open_Table_Widget|OTW_Plugin_Framework
  */
 function init_open_table_widget() {
 
@@ -58,7 +58,7 @@ function init_open_table_widget() {
 
 	global $open_table_widget;
 	// Create plugin instance.
-	$open_table_widget = new WordImpress_Plugin_Framework( __FILE__ );
+	$open_table_widget = new OTW_Plugin_Framework( __FILE__ );
 
 	// Include options set.
 	include_once 'inc/options.php';
@@ -88,14 +88,14 @@ add_action( 'widgets_init', create_function( '', 'register_widget( "Open_Table_W
 
 /**
  * Custom CSS for Options Page.
+ *
+ * @param $hook
  */
-add_action( 'admin_enqueue_scripts', 'otw_options_scripts' );
-
 function otw_options_scripts( $hook ) {
-
 	if ( $hook === 'settings_page_opentablewidgetpro' ) {
 		wp_register_style( 'otw_custom_options_styles', plugin_dir_url( __FILE__ ) . '/assets/css/options.css' );
 		wp_enqueue_style( 'otw_custom_options_styles' );
 	}
-
 }
+
+add_action( 'admin_enqueue_scripts', 'otw_options_scripts' );
