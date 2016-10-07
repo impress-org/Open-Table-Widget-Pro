@@ -50,7 +50,7 @@
 		<label for="<?php echo $this->get_field_id( 'restaurant_id' ); ?>"><?php _e( 'Open Table Restaurant ID:', 'open-table-widget' ); ?>
 			<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'This is your Open Table Restaurant ID used for reservations. Use the search field above to locate your restaurant.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 		<input class="widefat restaurant-id" id="<?php echo $this->get_field_id( 'restaurant_id' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_id' ); ?>" type="text" value="<?php echo $restaurantID; ?>" />
-		<span class="otw-small-descption"><a href="http://wordimpress.com/docs/open-table-widget/#finding-your-open-table-restaurant-id" target="_blank" title="View tutorial" class="new-window">Need help finding your restaurant ID?</a></span>
+		<span class="otw-small-descption"><a href="https://wordimpress.com/documentation/open-table-widget/finding-your-open-table-restaurant-id/" target="_blank" title="View tutorial" class="new-window">Need help finding your restaurant ID?</a></span>
 	</p>
 
 </div>
