@@ -1,12 +1,15 @@
 <?php
+/**
+ * Plugin Co
+ */
 
 // Check that class doesn't exists.
-if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
+if ( ! class_exists( 'OTW_Plugin_Framework' ) ) {
 
 	/**
-	 * Plugin Framework Class
+	 * Class OTW_Plugin_Framework
 	 */
-	class WordImpress_Plugin_Framework {
+	class OTW_Plugin_Framework {
 
 		/** @var string Plugin meta */
 		var $meta;
