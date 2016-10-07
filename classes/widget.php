@@ -3,9 +3,7 @@
 /**
  * Class Open_Table_Widget
  *
- *  Open Table Widget
- *
- *  The Open Table Widget
+ * The Open Table Widget.
  */
 class Open_Table_Widget extends WP_Widget {
 
@@ -90,8 +88,9 @@ class Open_Table_Widget extends WP_Widget {
 			return false;
 		}
 
-		// Get any existing copy of our transient data
+		// Set new transient data is not set already or 500 response from API
 		if ( false === $open_table_cities || isset( $open_table_cities['response'] ) && $open_table_cities['response'] === 500 ) {
+
 			// It wasn't there, so regenerate the data and save the transient
 			$response = wp_remote_get( 'http://opentable.herokuapp.com/api/cities' );
 

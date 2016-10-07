@@ -14,7 +14,7 @@
 		<div class="otw-pre-form-content">
 			<?php echo wpautop( $preContent ); ?>
 		</div>
-	<?php
+		<?php
 	}
 	$open_table_widget = new Open_Table_Widget();
 	//Widget ID
@@ -22,8 +22,8 @@
 
 	//Get Widget Res Data
 	$reservationData = $open_table_widget->get_restaurant_data( $widgetLanguage );
-	$getaction = $reservationData['action'];
-	$action = preg_replace('#^http?:#', '', $getaction);
+	$getaction       = $reservationData['action'];
+	$action          = preg_replace( '#^http?:#', '', $getaction );
 	// Remove the http protocol
 
 	?>
@@ -52,13 +52,15 @@
 								}
 								?></label>
 						<?php } ?>
-						<select id="restaurant-<?php echo $args["widget_id"]; ?>" name="Restaurant" class="otw-reservation-restaurant selectpicker">
+						<select id="restaurant-<?php echo $args["widget_id"]; ?>" name="Restaurant"
+						        class="otw-reservation-restaurant selectpicker">
 							<option value=""><?php _e( 'Select...', 'open-table-widget' ); ?></option>
 
 							<?php foreach ( $restaurantIDs as $restaurant ) {
 								$restaurantData = explode( '|', $restaurant ); ?>
 
-								<option value="<?php echo $restaurantData[1]; ?>"><?php echo $restaurantData[0]; ?></option>
+								<option
+									value="<?php echo $restaurantData[1]; ?>"><?php echo $restaurantData[0]; ?></option>
 
 							<?php } ?>
 
@@ -68,7 +70,7 @@
 				<?php } else { ?>
 					<p class="otw-error otw-alert"><?php _e( 'Error: Restaurant IDs not properly input. Please check restaurant IDs field.', 'open-table-widget' ); ?></p>
 				<?php } ?>
-			<?php
+				<?php
 			} //User Select List from City Options
 			elseif ( $displayOption === '2' ) {
 
@@ -98,7 +100,8 @@
 							}
 							?></label>
 					<?php } ?>
-					<select id="otw-city-<?php echo $args["widget_id"]; ?>" name="City" class="otw-reservation-city selectpicker">
+					<select id="otw-city-<?php echo $args["widget_id"]; ?>" name="City"
+					        class="otw-reservation-city selectpicker">
 						<option value=""><?php _e( 'Select a city...', 'open-table-widget' ); ?></option>
 
 						<?php
@@ -123,7 +126,9 @@
 							}
 							?></label>
 					<?php } ?>
-					<input type="text" name="city-restaurant" placeholder="<?php _e( 'Restaurant Name', 'open-table-widget' ); ?>" class="otw-restaurant-autocomplete" />
+					<input type="text" name="city-restaurant"
+					       placeholder="<?php _e( 'Restaurant Name', 'open-table-widget' ); ?>"
+					       class="otw-restaurant-autocomplete"/>
 
 				</div>
 
@@ -138,7 +143,9 @@
 						}
 						?></label>
 				<?php } ?>
-				<input id="date-<?php echo $args["widget_id"]; ?>" name="startDate" class="otw-reservation-date" type="text" value="" autocomplete="off" data-date-format="<?php echo $reservationData['date_format']; ?>" readonly="readonly">
+				<input id="date-<?php echo $args["widget_id"]; ?>" name="startDate" class="otw-reservation-date"
+				       type="text" value="" autocomplete="off"
+				       data-date-format="<?php echo $reservationData['date_format']; ?>" readonly="readonly">
 			</div>
 			<div class="otw-time-wrap otw-input-wrap">
 				<?php if ( $hideLabels !== '1' ) { ?>
@@ -150,9 +157,10 @@
 				<?php } ?>
 				<?php
 				//Time Select
-				$timeDefault = ! empty( $timeDefault ) ? $timeDefault : '7:00PM';    ?>
+				$timeDefault = ! empty( $timeDefault ) ? $timeDefault : '7:00PM'; ?>
 
-				<select id="time-<?php echo $args["widget_id"]; ?>" name="ResTime" class="otw-reservation-time selectpicker">
+				<select id="time-<?php echo $args["widget_id"]; ?>" name="ResTime"
+				        class="otw-reservation-time selectpicker">
 					<?php
 					//Time Options output
 					$open_table_widget->open_table_reservaton_times( $timeStart, $timeEnd, $timeDefault, $reservationData['time_format'], $reservationData['time_format_val'], $timeIncrement ); ?>
@@ -166,10 +174,11 @@
 							_e( 'Party Size', 'open-table-widget' );
 						} else {
 							echo $labelParty;
-						}  ?></label>
+						} ?></label>
 				<?php } ?>
 
-				<select id="party-<?php echo $args["widget_id"]; ?>" name="partySize" class="otw-party-size-select selectpicker">
+				<select id="party-<?php echo $args["widget_id"]; ?>" name="partySize"
+				        class="otw-party-size-select selectpicker">
 					<?php
 					foreach ( range( 1, $maxSeats ) as $seat ) {
 
@@ -178,7 +187,7 @@
 							<?php if ( $partySize == $seat ) {
 								echo 'selected="selected"';
 							} ?>><?php echo $seat; ?></option>
-					<?php
+						<?php
 					}
 
 					?>
@@ -187,17 +196,21 @@
 			</div>
 
 			<div class="otw-button-wrap">
-				<input type="submit" class="<?php echo( $style == 'otw-bare-bones-style' ? 'otw-submit' : 'otw-submit-btn' ); ?>" value="<?php  if ( ! empty( $inputSubmit ) ) {
-					echo $inputSubmit;
-				} else {
-					_e( 'Find a Table', 'open-table-widget' );
-				}  ?>" />
+				<input type="submit"
+				       class="<?php echo( $style == 'otw-bare-bones-style' ? 'otw-submit' : 'otw-submit-btn' ); ?>"
+				       value="<?php if ( ! empty( $inputSubmit ) ) {
+					       echo $inputSubmit;
+				       } else {
+					       _e( 'Find a Table', 'open-table-widget' );
+				       } ?>"/>
 			</div>
 			<input type="hidden" name="RestaurantID" class="RestaurantID" value="<?php echo $restaurantID; ?>">
 			<input type="hidden" name="rid" class="rid" value="<?php echo $restaurantID; ?>">
 			<input type="hidden" name="GeoID" class="GeoID" value="0">
-			<input type="hidden" name="txtDateFormat" class="txtDateFormat" value="<?php echo $reservationData['date_format']; ?>">
-			<input type="hidden" name="RestaurantReferralID" class="RestaurantReferralID" value="<?php echo $restaurantID; ?>">
+			<input type="hidden" name="txtDateFormat" class="txtDateFormat"
+			       value="<?php echo $reservationData['date_format']; ?>">
+			<input type="hidden" name="RestaurantReferralID" class="RestaurantReferralID"
+			       value="<?php echo $restaurantID; ?>">
 		</div>
 	</form>
 	<?php
