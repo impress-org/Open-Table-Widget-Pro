@@ -1,13 +1,10 @@
 <?php
 
-// Check that class doesn't exists
+// Check that class doesn't exists.
 if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 
 	/**
-	 * Sunrise Plugin Framework Class
-	 *
-	 * @author  Vladimir Anokhin <ano.vladimir@gmail.com>
-	 * @link    http://gndev.info/sunrise/
+	 * Plugin Framework Class
 	 */
 	class WordImpress_Plugin_Framework {
 
@@ -57,7 +54,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		 * Constructor
 		 *
 		 * @param        $file
-		 * @param array  $args
+		 * @param array $args
 		 */
 		function __construct( $file, $args = array() ) {
 			// Default args
@@ -65,11 +62,11 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			// Prepare initial data
 			$this->file = $file;
 			$this->args = wp_parse_args( $args, $defaults );
-			// Check that function get_plugin_data exists
+
+			// Check that function get_plugin_data exists.
 			if ( ! function_exists( 'get_plugin_data' ) ) {
 				require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			}
-
 
 			// Read plugin meta
 			$this->meta = get_plugin_data( $this->file, false );
@@ -102,10 +99,10 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				'licence_key_status'  => 'edd_open_table_license_status', //Name of License Option in DB
 			);
 
-			$current_options = get_option( $licence_args['licence_key_option'] );
+			$current_options   = get_option( $licence_args['licence_key_option'] );
 			$this->licence_key = ! empty( $current_options ) ? trim( $current_options['license_key'] ) : '';
 
-			$this->licencing   = new Open_Table_License( $licence_args );
+			$this->licencing = new Open_Table_License( $licence_args );
 			add_action( 'admin_init', array( $this, 'edd_sl_wordimpress_updater' ) );
 
 
@@ -162,8 +159,16 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			foreach ( array( 'thickbox', 'farbtastic', 'core-plugin-framework' ) as $style ) {
 				wp_enqueue_style( $style );
 			}
-			foreach ( array( 'jquery', 'media-upload', 'thickbox', 'farbtastic', 'core-plugin-framework-form',
-									'core-plugin-framework' ) as $script ) {
+			foreach (
+				array(
+					'jquery',
+					'media-upload',
+					'thickbox',
+					'farbtastic',
+					'core-plugin-framework-form',
+					'core-plugin-framework'
+				) as $script
+			) {
 				wp_enqueue_script( $script );
 			}
 		}
@@ -172,8 +177,12 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		 * Helper function to get assets url by type
 		 */
 		function assets( $type = 'css', $file = 'core.css' ) {
-			return implode( '/', array_filter( array( trim( $this->url, '/' ), trim( $this->assets, '/' ),
-				trim( $type, '/' ), trim( $file, '/' ) ) ) );
+			return implode( '/', array_filter( array(
+				trim( $this->url, '/' ),
+				trim( $this->assets, '/' ),
+				trim( $type, '/' ),
+				trim( $file, '/' )
+			) ) );
 		}
 
 		/**
@@ -186,7 +195,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				$defaults = array();
 				// Loop through available options
 				foreach ( (array) $this->options as $value ) {
-					$defaults[$value['id']] = empty( $value['std'] ) ? '' : $value['std'];
+					$defaults[ $value['id'] ] = empty( $value['std'] ) ? '' : $value['std'];
 				}
 				// Insert default options
 				update_option( $this->option, $defaults );
@@ -204,7 +213,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			// Get options from database
 			$options = get_option( $this->option );
 			// Check option is specified
-			$value = ( $option ) ? $options[$option] : $options;
+			$value = ( $option ) ? $options[ $option ] : $options;
 
 			// Return result
 			return ( is_array( $value ) ) ? array_filter( $value, 'esc_attr' ) : esc_attr( stripslashes( $value ) );
@@ -213,7 +222,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		/**
 		 * Update single option value
 		 *
-		 * @param mixed $key   Option ID to update
+		 * @param mixed $key Option ID to update
 		 * @param mixed $value New value
 		 *
 		 * @return mixed $option Returns option by specified key
@@ -224,7 +233,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			$new_settings = array();
 			// Prepare data
 			foreach ( $settings as $id => $val ) {
-				$new_settings[$id] = ( $id == $key ) ? $value : $val;
+				$new_settings[ $id ] = ( $id == $key ) ? $value : $val;
 			}
 
 			// Update option and return operation result
@@ -245,7 +254,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				$new_options = array();
 				// Prepare data
 				foreach ( $this->options as $value ) {
-					$new_options[$value['id']] = $value['std'];
+					$new_options[ $value['id'] ] = $value['std'];
 				}
 				// Save new options
 				if ( update_option( $this->option, $new_options ) ) {
@@ -264,8 +273,8 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 				$new_options = array();
 				// Prepare data
 				foreach ( $this->options as $value ) {
-					$new_options[$value['id']] = ( is_array( $_POST[$value['id']] ) ) ? $_POST[$value['id']]
-							: htmlspecialchars( $_POST[$value['id']] );
+					$new_options[ $value['id'] ] = ( is_array( $_POST[ $value['id'] ] ) ) ? $_POST[ $value['id'] ]
+						: htmlspecialchars( $_POST[ $value['id'] ] );
 				}
 				// Save new options
 				if ( update_option( $this->option, $new_options ) ) {
@@ -284,15 +293,20 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		/**
 		 * Register options page
 		 *
-		 * @param array $args    Options page config
+		 * @param array $args Options page config
 		 * @param array $options Set of fields for options page
 		 */
 		function add_options_page( $args, $options = array() ) {
 			// Save options
 			$this->options = $options;
 			// Prepare defaults
-			$defaults = array( 'parent'     => 'options-general.php', 'menu_title' => 'Open Table Widget',
-												 'page_title' => $this->name, 'capability' => 'manage_options', 'link' => true );
+			$defaults = array(
+				'parent'     => 'options-general.php',
+				'menu_title' => 'Open Table Widget',
+				'page_title' => $this->name,
+				'capability' => 'manage_options',
+				'link'       => true
+			);
 			// Parse args
 			$this->settings = wp_parse_args( $args, $defaults );
 			// Define admin url
@@ -308,8 +322,10 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			add_action( 'admin_menu', array( &$this, 'options_page' ) );
 			// Add settings link to plugins dashboard
 			if ( $this->settings['link'] ) {
-				add_filter( 'plugin_action_links_' . $this->basename, array( &$this,
-						'add_settings_link' ) );
+				add_filter( 'plugin_action_links_' . $this->basename, array(
+					&$this,
+					'add_settings_link'
+				) );
 			}
 		}
 
@@ -317,8 +333,10 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 		 * Register settings page
 		 */
 		function options_page() {
-			add_submenu_page( $this->settings['parent'], __( $this->settings['page_title'], $this->textdomain ), __( $this->settings['menu_title'], $this->textdomain ), $this->settings['capability'], $this->slug, array( &$this,
-				'render_options_page' ) );
+			add_submenu_page( $this->settings['parent'], __( $this->settings['page_title'], $this->textdomain ), __( $this->settings['menu_title'], $this->textdomain ), $this->settings['capability'], $this->slug, array(
+				&$this,
+				'render_options_page'
+			) );
 		}
 
 		/**
@@ -366,7 +384,7 @@ if ( ! class_exists( 'WordImpress_Plugin_Framework' ) ) {
 			foreach ( $this->options as $option ) {
 				if ( $option['type'] == 'opentab' ) {
 					$active = ( isset( $active ) ) ? ' sunrise-plugin-tab-inactive'
-							: ' nav-tab-active sunrise-plugin-tab-active';
+						: ' nav-tab-active sunrise-plugin-tab-active';
 					echo '<span class="nav-tab' . $active . '">' . $option['name'] . '</span>';
 				}
 			}
