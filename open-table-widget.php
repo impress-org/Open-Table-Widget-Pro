@@ -9,15 +9,24 @@
  * Text Domain: open-table-widget
  */
 
-
-define( 'OTW_PLUGIN_VERSION', '1.8' );
-define( 'OTW_PLUGIN_NAME', 'open-table-widget' );
-define( 'OTW_PLUGIN_NAME_PLUGIN', plugin_basename( __FILE__ ) );
-define( 'OTW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-define( 'OTW_PLUGIN_URL', plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) );
+if ( ! defined( 'OTW_PLUGIN_VERSION' ) ) {
+	define( 'OTW_PLUGIN_VERSION', '1.8.1' );
+}
+if ( ! defined( 'OTW_PLUGIN_NAME' ) ) {
+	define( 'OTW_PLUGIN_NAME', 'open-table-widget' );
+}
+if ( ! defined( 'OTW_PLUGIN_NAME_PLUGIN' ) ) {
+	define( 'OTW_PLUGIN_NAME_PLUGIN', plugin_basename( __FILE__ ) );
+}
+if ( ! defined( 'OTW_PLUGIN_PATH' ) ) {
+	define( 'OTW_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+}
+if ( ! defined( OTW_PLUGIN_URL ) ) {
+	define( 'OTW_PLUGIN_URL', plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) );
+}
 
 /**
- * Load Localized Translations if available
+ * Load Localized Translations if available.
  */
 function otw_load_textdomain() {
 	$domain  = 'open-table-widget';
