@@ -34,8 +34,7 @@
 			<?php
 
 			/**
-			 * Display Multiple Restaurants in Select
-			 * if option set in widget
+			 * Display Multiple Restaurants in Select if option set in widget.
 			 */
 			if ( $displayOption === '1' ) {
 
