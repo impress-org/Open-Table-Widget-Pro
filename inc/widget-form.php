@@ -129,13 +129,13 @@
 		<select name="<?php echo $this->get_field_name( 'widget_style' ); ?>" class="widefat profield">
 			<?php
 			$options = array(
-				__( 'Bare Bones', 'open-table-widget' ),
-				__( 'Minimal Light', 'open-table-widget' ),
-				__( 'Minimal Dark', 'open-table-widget' ),
-				__( 'Shadow Light', 'open-table-widget' ),
-				__( 'Shadow Dark', 'open-table-widget' ),
-				__( 'Inset Light', 'open-table-widget' ),
-				__( 'Inset Dark', 'open-table-widget' )
+				'Bare Bones',
+				'Minimal Light',
+				'Minimal Dark',
+				'Shadow Light',
+				'Shadow Dark',
+				'Inset Light',
+				'Inset Dark'
 			);
 			//Counter for Option Values
 			$counter = 0;
@@ -297,39 +297,39 @@
 			<?php
 			$options = array(
 				array(
-					__( 'ca-eng', 'open-table-widget' ),
+					'ca-eng',
 					__( 'Canada - English', 'open-table-widget' )
 				),
 				array(
-					__( 'ger-eng', 'open-table-widget' ),
+					'ger-eng',
 					__( 'Germany - English', 'open-table-widget' )
 				),
 				array(
-					__( 'ger-ger', 'open-table-widget' ),
+					'ger-ger',
 					__( 'Germany - German', 'open-table-widget' )
 				),
 				array(
-					__( 'uk', 'open-table-widget' ),
+					'uk',
 					__( 'United Kingdom', 'open-table-widget' )
 				),
 				array(
-					__( 'us', 'open-table-widget' ),
+					'us',
 					__( 'United States', 'open-table-widget' )
 				),
 				array(
-					__( 'jp-eng', 'open-table-widget' ),
+					'jp-eng',
 					__( 'Japan - English', 'open-table-widget' )
 				),
 				array(
-					__( 'jp-jp', 'open-table-widget' ),
+					'jp-jp',
 					__( 'Japan - Japanese', 'open-table-widget' )
 				),
 				array(
-					__( 'mx-eng', 'open-table-widget' ),
+					'mx-eng',
 					__( 'Mexico - English', 'open-table-widget' )
 				),
 				array(
-					__( 'mx-eng', 'open-table-widget' ),
+					'mx-eng',
 					__( 'Mexico - Spanish', 'open-table-widget' )
 				),
 

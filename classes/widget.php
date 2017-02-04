@@ -473,12 +473,14 @@ class Open_Table_Widget extends WP_Widget {
 				$timeFormatVal = 'g:ia';
 				break;
 			case 'ger-eng':
+			case 'de-eng' :
 				$action        = 'http://www.opentable.de/en-GB/restaurant-search.aspx';
 				$dateFormat    = 'mm/dd/yyyy';
 				$timeFormat    = 'g:i a';
 				$timeFormatVal = 'g:ia';
 				break;
 			case 'ger-ger':
+			case 'de-de' :
 				$action     = 'http://www.opentable.de/restaurant-search.aspx';
 				$dateFormat = 'dd.mm.yyyy';
 				$timeFormat = $timeFormatVal = 'G:i';
