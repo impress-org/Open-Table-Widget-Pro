@@ -229,110 +229,113 @@ class Open_Table_Widget extends WP_Widget {
 		}
 
 		//Datepicker
-		wp_enqueue_script( 'otw_datepicker_js' );
-		wp_enqueue_style( 'otw_datepicker_css' );
+		if ( ! is_admin() ) {
+            wp_enqueue_script( 'otw_datepicker_js' );
+            wp_enqueue_style( 'otw_datepicker_css' );
 
-		// Only enqueue the selectric dropdown if the setting is NOT "on"
-		$selectric = $this->options["disable_bootstrap_select"];
+            // Only enqueue the selectric dropdown if the setting is NOT "on"
+            $selectric = $this->options["disable_bootstrap_select"];
 
-		if ( $selectric !== "on" ) {
-			wp_enqueue_script( 'otw_select_js' );
-			wp_enqueue_style( 'otw_select_css' ); ?>
+            if ( $selectric !== "on" ) {
+                wp_enqueue_script( 'otw_select_js' );
+                wp_enqueue_style( 'otw_select_css' ); ?>
 
-			<script>
-				jQuery(function ($) {
-					$('.otw-wrapper select').selectric();
-				});
-			</script>
-		<?php }
+                <script>
+                    jQuery(function ($) {
+                        $('.otw-wrapper select').selectric();
+                    });
+                </script>
+            <?php }
 
-		//Open Table Widget Specific Scripts
-		wp_enqueue_script( 'otw-widget-js' );
+		    //Open Table Widget Specific Scripts
 
-		//Widget ID
-		$args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
-
-		$jsParams = array(
-			'ajax_url'      => admin_url( 'admin-ajax.php' ),
-			'restaurant_id' => '',
-		);
-		wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
-
-		//Determine widget display option
-		if ( $displayOption == '2' ) {
-			//widget needs autocomplete scripts
-			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom.min.css', dirname( __FILE__ ) ) );
-
-		}
-		/*
-		 * Output Widget Content
-		 */
-		//Widget Style
-		$style = "otw-" . sanitize_title( $widgetStyle ) . "-style";
-
-		/* Add the width from $widget_width to the class from the $before widget
-		http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
-		*/
-
-		// no 'class' attribute - add one with the value of width
-		if ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) === false ) {
-			$before_widget = str_replace( '>', 'class="' . $style . '"', $before_widget );
-		} // there is 'class' attribute - append width value to it
-		elseif ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) !== false ) {
-			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
-		} //no 'before_widget' at all so wrap widget with div
-		else {
-			$before_widget = '<div class="open-table-widget">';
-			$before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
-		}
+	        wp_enqueue_script( 'otw-widget-js' );
 
 
-		/* Alignment (adds class) */
-		if ( ! empty( $align ) ) {
-			$before_widget = str_replace( 'class="', 'class="otw-widget-align-' . $align . ' ', $before_widget );
-		}
-		/* Max Width (adds inline style) */
-		if ( ! empty( $maxWidth ) ) {
-			$before_widget = str_replace( '">', '" style="max-width:' . $maxWidth . ';">', $before_widget );
-		}
+	        //Widget ID
+	        $args['widget_id'] = empty( $args['widget_id'] ) ? rand( 1, 9999 ) : $args['widget_id'];
 
-		// Before widget
-		echo $before_widget;
+	        $jsParams = array(
+		        'ajax_url'      => admin_url( 'admin-ajax.php' ),
+		        'restaurant_id' => '',
+	        );
+	        wp_localize_script( 'otw-widget-js', 'otwParams', $jsParams );
 
-		// if the title is set & the user hasn't disabled title output
-		if ( ! empty( $title ) ) {
-			/* Add class to before_widget from within a custom widget
-		 http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
-		 */
-			// no 'class' attribute - add one with the value of width
-			if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
-				$before_title = str_replace( '>', ' class="otw-widget-title">', $before_title );
-			} //widget title has 'class' attribute
-			elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
-				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
-			} //no 'title' at all so wrap widget with div
-			else {
-				$before_title = '<h3 class="">';
-				$before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
-			}
-			$after_title = empty( $after_title ) ? '</h3>' : $after_title;
+	        //Determine widget display option
+	        if ( $displayOption == '2' ) {
+		        //widget needs autocomplete scripts
+		        wp_enqueue_script( 'jquery-ui-autocomplete' );
+		        wp_enqueue_style( 'otw_widget_jqueryui_css', plugins_url( 'assets/css/jquery-ui-custom.min.css', dirname( __FILE__ ) ) );
 
-			echo $before_title . $title . $after_title;
-		}
+	        }
+	        /*
+			 * Output Widget Content
+			 */
+	        //Widget Style
+	        $style = "otw-" . sanitize_title( $widgetStyle ) . "-style";
 
-		?>
+	        /* Add the width from $widget_width to the class from the $before widget
+			http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
+			*/
 
-		<div class="otw-<?php echo sanitize_title( $widgetStyle ); ?>">
+	        // no 'class' attribute - add one with the value of width
+	        if ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) === false ) {
+		        $before_widget = str_replace( '>', 'class="' . $style . '"', $before_widget );
+	        } // there is 'class' attribute - append width value to it
+            elseif ( ! empty( $before_widget ) && strpos( $before_widget, 'class' ) !== false ) {
+		        $before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
+	        } //no 'before_widget' at all so wrap widget with div
+	        else {
+		        $before_widget = '<div class="open-table-widget">';
+		        $before_widget = str_replace( 'class="', 'class="' . $style . ' ', $before_widget );
+	        }
 
-			<?php include( OTW_PLUGIN_PATH . '/inc/widget-frontend.php' ); ?>
 
-		</div>
-		<?php
+	        /* Alignment (adds class) */
+	        if ( ! empty( $align ) ) {
+		        $before_widget = str_replace( 'class="', 'class="otw-widget-align-' . $align . ' ', $before_widget );
+	        }
+	        /* Max Width (adds inline style) */
+	        if ( ! empty( $maxWidth ) ) {
+		        $before_widget = str_replace( '">', '" style="max-width:' . $maxWidth . ';">', $before_widget );
+	        }
 
-		//after widget
-		echo ! empty( $after_widget ) ? $after_widget : '</div>';
+	        // Before widget
+	        echo $before_widget;
 
+	        // if the title is set & the user hasn't disabled title output
+	        if ( ! empty( $title ) ) {
+		        /* Add class to before_widget from within a custom widget
+			 http://wordpress.stackexchange.com/questions/18942/add-class-to-before-widget-from-within-a-custom-widget
+			 */
+		        // no 'class' attribute - add one with the value of width
+		        if ( ! empty( $before_title ) && strpos( $before_title, 'class' ) === false ) {
+			        $before_title = str_replace( '>', ' class="otw-widget-title">', $before_title );
+		        } //widget title has 'class' attribute
+                elseif ( ! empty( $before_title ) && strpos( $before_title, 'class' ) !== false ) {
+			        $before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
+		        } //no 'title' at all so wrap widget with div
+		        else {
+			        $before_title = '<h3 class="">';
+			        $before_title = str_replace( 'class="', 'class="otw-widget-title ', $before_title );
+		        }
+		        $after_title = empty( $after_title ) ? '</h3>' : $after_title;
+
+		        echo $before_title . $title . $after_title;
+	        }
+
+	        ?>
+
+            <div class="otw-<?php echo sanitize_title( $widgetStyle ); ?>">
+
+		        <?php include( OTW_PLUGIN_PATH . '/inc/widget-frontend.php' ); ?>
+
+            </div>
+	        <?php
+
+	        //after widget
+	        echo ! empty( $after_widget ) ? $after_widget : '</div>';
+        } // end if ( ! is_admin() );
 	}
 
 
