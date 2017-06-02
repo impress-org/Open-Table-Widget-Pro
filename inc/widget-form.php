@@ -64,7 +64,7 @@
 
 	<!-- Restaurant Names -->
 	<p>
-		<label for="<?php echo $this->get_field_id( 'restaurant_names' ); ?>"><?php _e( 'Add Restaurant', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Lookup a Restaurant by their ID to add to the list of available restaurants below.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
+		<label for="<?php echo $this->get_field_id( 'restaurant_names' ); ?>"><?php _e( 'Add Restaurant', 'open-table-widget' ); ?>:<img src="<?php echo OTW_PLUGIN_URL . '/assets/images/help.png' ?>" title="<?php _e( 'Lookup a Restaurant by its name to add to the list of available restaurants below.', 'open-table-widget' ); ?>" class="tooltip-info" width="16" height="16" /></label>
 		<input class="widefat otw-auto-complete-2" id="<?php echo $this->get_field_id( 'restaurant_names' ); ?>" name="<?php echo $this->get_field_name( 'restaurant_names' ); ?>" type="text" placeholder="<?php _e( 'Type Restaurant Name', 'open-table-widget' ); ?>" />
 	</p>
 
