@@ -1,6 +1,4 @@
 Open Table Widget Pro
 ===================
 
-Open Table Widget makes it a breeze for you to add powerful Open Table reservation forms to your website via an easy to use and intuitive widget.
-
-Copyright 2016 WordImpress. Licensed under the terms of the GNU GPL v2.
+Open Table Widget Pro has been retired. Please see our [announcement post](https://impress.org/rebrand-press-release/) about our rebranding and efforts to focus on "[Democratizing Generosity](https://givewp.com)" and "[Code for Good](https://impress.org)".
